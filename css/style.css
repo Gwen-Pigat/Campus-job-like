@@ -1,0 +1,458 @@
+body{
+	margin: 0;
+	/*background: url(../img/babysitter.jpg) no-repeat;*/
+	font-weight: 700;
+	font-family: "Montserrat";
+}
+
+.header{
+  height: auto;
+  padding: 1% 0% 15% 0%;
+  margin: 0px;
+  background: url('../img/babysitter.jpg');
+}
+
+.step-section{
+	margin-top: 2%;
+	padding-top: 1%;
+	color: black;
+	z-index: 10;
+	background-color: white;
+}
+
+.step-section .step{width: 80%; margin: auto; text-align: center}
+
+.main{
+	margin-bottom: 0%;
+	margin-top: 0;
+	font-size: 40px; 
+	color: white;
+	margin-top: 5%;
+	font-family: 'Inconsolata';
+}
+
+.tarifs{
+	margin-top: 5%;
+	text-decoration: none; 
+	color: white;
+}
+
+.tarifs:hover{
+	color: white; 
+	cursor: pointer;
+}
+
+.main-description{
+	margin-top: 0;
+	font-size: 30px; 
+	color: white;
+	margin-top: 0%;
+	font-family: 'Inconsolata';
+}
+
+.btn-custom{
+	background-color: #1c94a3;
+	color: white;
+	padding: 0.5%;
+	font-size: 24px;
+	margin-top: 5%;
+	/*width: 36%;*/
+	border: 1px #1c94a3 solid;
+	font-family: 'Inconsolata';
+}
+
+.btn-login{
+	background-color: #1c94a3;
+	color: white;
+	padding: 0.6%;
+	font-size: 16px;
+	border: 5px #1c94a3 solid;
+	width: 11%;
+}
+
+.btn-login:hover{
+	background-color: rgba(28, 148, 163, 0);
+	color: #1c94a3;
+	padding: 0.6%;
+	font-size: 16px;
+	border: 5px #1c94a3 solid;
+	transition: 0.4s;
+	width: 11%;
+}
+
+.btn-custom:hover{
+	background-color: white;
+	border : 1px #1c94a3 solid;
+	color: #1c94a3; 
+	transition: 0.4s;
+}
+
+.btn-etudiant, .btn-employeur{
+	background-color: rgba(239, 239, 206, 0);
+	border: 5px #fff solid;
+	color: #fff;
+	padding: 0.6%;
+	width: 11%;
+	font-size: 16px;
+}
+
+.btn-etudiant:hover, .btn-employeur:hover{
+	background-color: #CCCCCC;
+	border: 5px #CCCCCC solid;
+	color: white;
+	padding: 0.6%;
+	transition: 0.4s;
+	width: 11%;
+	font-size: 16px;
+}
+
+.categorie{
+	text-align: right; 
+	margin: 1% 1% 0% 0%;
+}
+
+.logo{
+	margin-top: -3%;
+	color: white;
+	font-family: 'Inconsolata';
+}
+
+.title{text-align: center; color: white;}
+
+.social-media{
+	margin: 0% 0% 0% 2%;
+	position: absolute;
+}
+
+.social-media .fa{
+	color: white;
+}
+
+.social-media .fa:hover{
+	color: #0088CC; 
+	transition: 0.4s;
+}
+
+.social-media a{
+	color: white;
+	margin: 0;
+	text-decoration: none
+}
+
+.social-media a:hover{
+	color: #ff0000;
+	transition: 0.6s;
+}
+
+
+.modal-content form input{
+	padding: 2%;
+	margin: 1%;
+}
+
+.modal-title{
+	text-align: center;
+	font-size: 30px;
+}
+
+#carousel-example-generic{
+	position: fixed; 
+	margin: 0; 
+	z-index: -1; 
+	margin-top: -5%
+}
+
+.carousel-caption{
+	margin-bottom: 30%; 
+	z-index: 10;
+}
+
+footer ul li{
+	display: inline-block;
+	list-style-type: none;
+	margin: 0% 2% 0% 2%;
+	color: white;
+}
+
+footer ul{
+	margin: 0;
+	padding: 0;
+}
+
+footer{
+	padding: 2%;
+	position: fixed;
+  	margin-top: 25%;
+  	width: 100%;
+}
+
+footer ul a:hover{
+	text-decoration: underline;
+	color: #ff0000;
+}
+
+
+/*Formulaire de contact*/
+
+.contact{
+	border-radius:10px;
+	margin: 5% auto 0% auto;
+	padding: 2%;
+	background-color: white;
+}
+
+.contact input, .contact select{
+	padding: 0.5%;
+	margin: 1%;
+}
+
+.contact h1{
+	color: black;
+	border-bottom: 1px black solid;
+}
+
+
+
+
+/* L'équipe */
+
+.profil{ 
+	padding: 1%; 
+	border: 1px black solid; 
+	margin-bottom: 5%
+}
+
+.member img{
+	width: 100%; 
+	border: 1px black solid;
+	border-radius: 5px;
+}
+
+.profil img:hover{
+	transition: 0.4s
+}
+
+.team{
+	text-align: center; 
+	border-top: 1px black solid; 
+	margin-top: 2%
+}
+
+.team h1{
+	margin: 3%;
+}
+
+.team span{
+	display: none
+}
+
+.team span:hover{
+	display: block;
+  	padding: 10%; 
+	font-size: 20px
+}
+
+.team-info{
+	width: 90%;
+	display: none; 
+	position: absolute; 
+	background-color: black; 
+	opacity: 0.8; 
+	color: white; 
+	z-index: 10; 
+	padding: 2%;
+}
+
+.team-info ul li{
+	list-style-type: none
+}
+
+.team-info ul{
+	padding: 0;
+	margin: 0
+}
+
+.team-info .light-coral{
+	color: #1c94a3
+}
+
+.lorem{
+	margin-top: 50%
+}
+
+.contact_us{
+	margin-top: 5%;
+	border-top: 1px black solid; 
+	padding: 2%; 
+	background-color: black; 
+	color: white;
+}
+
+.contact_us h1 a{
+	color: #1c94a3;
+}
+
+.social ul li{
+	list-style-type: none; 
+	display: inline-block; 
+	margin: 2% 2% 0% 2%
+}
+
+.social ul li a{
+	color: white;
+}
+
+.social ul li a:hover{
+	color: #1C94A3; 
+	transition: 0.4s
+}
+
+
+/*Formulaire de création d'une offre*/
+
+.offer{
+	margin: 15% 0% 0% 0%;
+	padding: 5%;
+	border-radius: 5px;
+	max-height: 500px;
+	min-height: 500px;
+	background-color: white;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+
+.profil_entreprise{
+	margin: 5% 0% 0% 0%;
+	padding: 5%;
+	border-radius: 5px;
+}
+
+.offer span, .profil_entreprise span{
+	color: #ff0000;
+}
+
+textarea{
+	max-width: 50%;
+  max-height: 20%;
+}
+
+.poster{
+	margin-left: 80%;
+	padding: 0;
+}
+
+.remove{
+	margin-left: 90%;
+}
+
+.offer input, .offer textarea, .profil_entreprise input, .profil_entreprise textarea, .profil_entreprise select{
+	padding: 0.5%;
+	margin: 0% 2% 2% 2%;
+	background-color: #fff;
+}
+
+.offer button, .profil_entreprise button{
+	padding: 0.5%;
+	margin: 0% 2% 2% 2%;
+	background-color: #1C94A3;
+	border: 2px #1C94A3 solid;
+	color: white;
+}
+
+.offer button:hover, .profil_entreprise button:hover{
+	transition: 0.6s;
+	color: #1C94A3;
+	border: 2px #1C94A3 solid;
+	background-color: rgba(0,0,0,0);
+}
+
+.offer label, .profil_entreprise label{
+	margin: 0.5% 0% 0% 0%;
+}
+
+
+/* Barre latérale */
+
+.lateral{
+	background-color: black;
+	width: 5%;
+	margin: 0;
+	padding: 0.5%;
+	position: fixed;
+	overflow-x: hidden;
+	z-index: 100;
+	height: 100%;
+	border: 1px white solid;
+}
+
+.lateral ul li{
+	border: 1px white solid;
+	color: white;
+}
+
+.lateral ul li:hover{
+	transition: 0.4s;
+	color: #1c94a3;
+}
+
+.lateral .fa{
+	color: #1c94a3;
+}
+
+.lateral-aside{
+	display: none;
+}
+
+.span-hide{
+	margin-top: 100%;
+}
+
+.lateral .logout{
+	margin-top: 50%;
+}
+
+.lateral:hover{
+	padding: 0.5%;
+	width: 15%;
+	transition: 0.6s;
+}
+
+
+/*Résumé de l'offre*/
+
+.offer_submit{
+	padding: 2%;
+	background-color: white;
+	border-top: 1px #1C94A3 solid;
+	border-bottom: 1px #555 solid;
+	border-right: 1px #555 solid;
+	border-left: 1px #555 solid;
+	width: 410;
+	overflow-x: scroll;
+	word-wrap: break-word;
+	color: black;
+}
+
+.offer_list{
+	padding: 2%;
+	background-color: white;
+	border-top: 1px #1C94A3 solid;
+	border-bottom: 1px #555 solid;
+	border-right: 1px #555 solid;
+	border-left: 1px #555 solid;
+	overflow-x: scroll;
+	word-wrap: break-word;
+	color: black;
+	margin-top: 5%;
+}
+
+.offer_submit .user{
+	color: #ff0000;
+	margin-bottom: 4%;
+	width: 100%;
+}
+
+.user{
+	color: #1C94A3;
+	text-decoration: underline;
+}
