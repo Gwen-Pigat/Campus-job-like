@@ -16,10 +16,42 @@
 
 <h1 class="text-center" style="margin-top: 5%; font-family: Inconsolata">Profil de <strong><?php echo $_SESSION['email']; ?></strong></h1>
 
+<?php 
+
+if (isset($_POST['upload'])){
+    
+    $image_name = $_FILES['image']['name'];
+    $image_type = $_FILES['image']['type'];
+    $image_size = $_FILES['image']['size'];
+    $image_tmp = $_FILES['image']['tmp_name'];
+
+    $random = "img-profil-$row[id]-$_SESSION[email]";
+
+    if ($image_name == "") {
+        echo "<script>alert('Vous devez sélectionner une image !')</script>";
+    }
+
+    else{
+        move_uploaded_file($image_tmp, "../img/ProfilPicture/$random.jpg");
+        echo "<script>alert('Image mise à jour')</script>";
+    }
+}
+
+ ?>
+
+<form class="profil_entreprise_logo col-md-12" action="" method="POST" enctype="multipart/form-data">
+    <label class="col-md-5 text-right">Votre logo :</label>
+    <?php echo "<img class='col-md-5' src=../img/ProfilPicture/img-profil-$row[id]-$_SESSION[email].jpg style='width: 25%'>"; ?><br>
+    <div class="col-md-5"></div>
+    <input class="btn col-md-5" type="file" name="image" size="25" value="test">
+     <div class="col-md-5"></div>
+    <input class="col-md-5" type="submit" name="upload" value="Envoyer">
+</form>
+
 <form class="profil_entreprise col-md-12" action="job_submit.php" method="POST">
 
-<label class="col-md-5 text-right" for="entreprise_name">Nom de l'entreprise <span>*</span></label>
-<textarea rows="1" class="col-md-5" name="entreprise_name"><?php echo $_SESSION['email']; ?></textarea>
+<!-- <label class="col-md-5 text-right" for="entreprise_name">Nom de l'entreprise <span>*</span></label>
+<textarea rows="1" class="col-md-5" name="entreprise_name"><?php echo $_SESSION['email']; ?></textarea> -->
 
 <label class="col-md-5 text-right" for="secteur">Secteur d'activité <span>*</span></label>
 <textarea rows="1" class="col-md-5" name="secteur"><?php echo $row['Secteur']; ?></textarea>
@@ -51,7 +83,7 @@ if (isset($_POST['entreprise_name']) || isset($_POST['entreprise_site']) || isse
 
 		extract($_POST);
 
-		mysqli_query($link, "UPDATE EntrepriseProfil SET Entreprise='$entreprise_name', Secteur='$secteur', Site='$entreprise_site', Description='$qui_sommes_nous', Employers='$nombre_employers' WHERE Entreprise='$_SESSION[email]'");
+		mysqli_query($link, "UPDATE EntrepriseProfil SET Secteur='$secteur', Site='$entreprise_site', Description='$qui_sommes_nous', Employers='$nombre_employers' WHERE Entreprise='$_SESSION[email]'");
         mysqli_query($link, "UPDATE Offre SET Employeur='$entreprise_name' WHERE Employeur='$_SESSION[email]'"); ?>
 
 		<script type="text/javascript">

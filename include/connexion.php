@@ -4,7 +4,6 @@ session_start();
 
 $link = mysqli_connect("localhost","root","motdepasselocalhostgwen","JobFinder");
 
-
 if (empty($_SESSION['email'])) {
 	header('Location: logout.php');	
 }
@@ -14,20 +13,13 @@ if (isset($_POST) && isset($_POST['email']) && isset($_POST['password'])) {
 		
 		$row = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM EntrepriseProfil WHERE Email='$_POST[email]' AND Password='$_POST[password]'"));
 
-		if ($row) {
+		if ($row){
 			$_SESSION['email'] = $row['Entreprise'];
 			header('Location: ../php/job_submit.php');
 		}
 
 		else{ 
 			header('Location: ../index.php?Employeur&erreur_connexion');	
-		}
-
-
-		$row = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM Offre WHERE Statut='En attente' AND Employeur='$_SESSION[email]'"));
-
-		if ($row) {
-			echo "<a href=''<h3>Quête en attente</h3>"
 		}
 	}
 }

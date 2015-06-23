@@ -66,6 +66,7 @@ if (isset($_GET) && isset($_GET['offre'])) {
 
 	mysqli_query($link, "INSERT INTO Offre(Employeur,Titre,Remunere,Debut,Taches,Qualifications,Competences, Ajout) VALUES ('$_SESSION[email]','$offre_name','$remuneration','$date','$tasks','$qualifications','$competences', '$ajout')");
 	echo "<div class='offer_submit container'>
+	<img class='col-md-5' src=../img/ProfilPicture/img-profil-$row[id]-$_SESSION[email].jpg style='width: 50%'>
 			<h1><span class='user'>$_SESSION[email]</span></h1>
 			<p>Résumé de votre anonce :</p><br>
 			<p><span class='user'>Nom : </span>$offre_name<p>
@@ -94,6 +95,7 @@ if (isset($_GET) && isset($_GET['validation_offre']) && isset($_GET['employeur']
 		mysqli_query($link, "UPDATE EntrepriseProfil SET Offres='$add' WHERE Entreprise='$_SESSION[email]'");
 
 	echo "<div class='container'>
+	<img class='col-md-5' src=../img/ProfilPicture/img-profil-$row[id]-$_SESSION[email].jpg style='width: 25%'><br>
 	<h1 class='user'>$_SESSION[email]</h1>
 	<h3>Votre offre à bien été validé, cliquez <a class='user' href='offre_submit.php?liste_offres=$_SESSION[email]'>ici</a> pour y accèder</h3>
 	</div>";

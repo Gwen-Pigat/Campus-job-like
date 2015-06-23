@@ -53,7 +53,7 @@ if (isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['entreprise'
 
 		extract($_POST);
 
-		mysqli_query($link, "INSERT INTO Entreprise (Nom, Prenom, Entreprise, Telephone, Email, Password) VALUES ('$nom', '$prenom', '$entreprise', '$telephone', '$email', '$password')") or die("Erreur lors de la requête");
+		mysqli_query($link, "INSERT INTO EntrepriseProfil (Nom, Prenom, Entreprise, Telephone, Email, Password) VALUES ('$nom', '$prenom', '$entreprise', '$telephone', '$email', '$password')") or die("Erreur lors de la requête");
 
 	    // Instantiate it
 	    $mail = new phpmailer();

@@ -1,15 +1,36 @@
+/*Scrollbar perso*/
+
+::-webkit-scrollbar {
+    width: 16px;
+    background-color: white
+}
+ 
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px black;
+    background-color: white; 
+    border-radius: 10px;
+}
+ 
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 0 1px #1c94a3; 
+    background-color: #1c94a3;
+}
+
+/*Fin scrollar*/
+
 body{
 	margin: 0;
 	/*background: url(../img/babysitter.jpg) no-repeat;*/
 	font-weight: 700;
-	font-family: "Montserrat";
+	font-family: "Open Sans";
 }
 
 .header{
-  height: auto;
+  height: 100%;
   padding: 1% 0% 15% 0%;
   margin: 0px;
-  background: url('../img/babysitter.jpg');
+  background: url('../img/babysitter.jpg') no-repeat center;
 }
 
 .step-section{
@@ -163,7 +184,8 @@ body{
 }
 
 .carousel-caption{
-	margin-bottom: 30%; 
+	margin-bottom: 28%;
+	margin-top: 5%; 
 	z-index: 10;
 }
 
@@ -182,7 +204,7 @@ footer ul{
 footer{
 	padding: 2%;
 	position: fixed;
-  	margin-top: 25%;
+  	margin-top: 20%;
   	width: 100%;
 }
 
@@ -323,6 +345,12 @@ footer ul a:hover{
 
 .profil_entreprise{
 	margin: 5% 0% 0% 0%;
+	padding: 0%;
+	border-radius: 5px;
+}
+
+.profil_entreprise_logo{
+	margin: 5% 0% 0% 0%;
 	padding: 5%;
 	border-radius: 5px;
 }
@@ -386,7 +414,8 @@ textarea{
 }
 
 .lateral ul li{
-	border: 1px white solid;
+	border-top: 1px white solid;
+	border-bottom: 1px white solid;
 	color: white;
 }
 
@@ -427,7 +456,7 @@ textarea{
 	border-bottom: 1px #555 solid;
 	border-right: 1px #555 solid;
 	border-left: 1px #555 solid;
-	width: 410;
+	width: 50%;
 	overflow-x: scroll;
 	word-wrap: break-word;
 	color: black;

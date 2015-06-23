@@ -15,12 +15,12 @@
 
 <?php
 
-session_destroy();
-
 //Partie employeur
 
-if (isset($_GET['Employeur'])) { ?>
-  <?php if (isset($_GET['erreur_connexion'])) { ?>
+if (isset($_GET['Employeur'])) { 
+    if (isset($_GET['erreur_connexion'])) { 
+    session_destroy();
+    ?>
   <script type="text/javascript">
     $(document).ready(function(){
       alert("Mauvais mot de passe ou nom d'utilisateur");
@@ -38,7 +38,7 @@ if (isset($_GET['Employeur'])) { ?>
 
 <div class='container text-center'>
   <div class="logo">
-  <i class="fa fa-university fa-5x"></i><br>
+  <img src="img/icon.png"><br>
   <span class='title'>SpeedJob</span>
   </div>
     <h1 class="main">Trouvez les meilleurs étudiants pour votre entreprise</h1>
@@ -231,7 +231,7 @@ if (isset($_GET['Employeur'])) { ?>
         </center>
       </div>
       <div class="member col-md-3">
-        <img class="member-4" src="img/user.png" onmouseover="this.src='img/user.gif'" onmouseout="this.src='img/user.png'" style="transition: 0.6s">
+        <img class="member-4" src="img/user.png" onmouseover="this.src='img/user.gif'" onmouseout="this.src='img/user.png'">
         <center>
         <div class="team-info team-info-4">
           <ul class="team-info-list">
@@ -248,7 +248,7 @@ if (isset($_GET['Employeur'])) { ?>
   </section>
 
 <section class="contact_us text-center col-md-12">
- <h1>Des questions ? <a href="contact.php">Contactez-nous</a></h1>
+ <h2>Des questions ? <a href="contact.php">Contactez-nous</a></h2>
 
  <div class="social">
         <ul class="social-list">
@@ -293,16 +293,14 @@ else{
 <button class='btn-login'>Se connecter</button>"; ?>
 </section>
 
-
 <div class='container text-center'>
 <div class="logo">
-<i class="fa fa-university fa-5x"></i><br>
+<img src="img/icon.png"><br>
 <span class='title'>SpeedJob</span>
 </div>
 <h1 class="main">Etudiant :<br>  trouve un stage ou un job</h1>
 
 <!-- Test de slider -->
-
 
 	<br><br><br>
 
@@ -338,7 +336,8 @@ else{
 
 <?php } ?>
 </div>
-</body>
-</html>
 
 <?php include "include/footer.php"; ?>
+
+</body>
+</html>
