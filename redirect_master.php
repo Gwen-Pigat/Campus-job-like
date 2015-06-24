@@ -4,9 +4,11 @@
 
 <?php 
 
-//Formulaire d'envoi d'une offre
+session_start();
 
-if (isset($_GET["employeur"])) {
+$_SESSION['email'] = $_POST['entreprise'];
+
+// Inscription employeur
 
 	if (isset($_POST) && isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["entreprise"]) && isset($_POST["email"]) && isset($_POST["telephone"]) && isset($_POST["password"])) {
 		if (!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['entreprise']) && !empty($_POST['email']) && !empty($_POST['telephone']) && !empty($_POST['password'])) {
@@ -16,39 +18,44 @@ if (isset($_GET["employeur"])) {
 
 			if ($row) {
 			echo "<h1 class='text-center'>L'adresse e-mail, le téléphone ou le nom de l'entreprise est déja utilisée !!</h1>";
-			header('Refresh: 5; url=index.php?Employeur');
+			header('Refresh: 2; url=index.php?Employeur');
 			}
 
 			else{
 
 			include "include/pre-formulaire.php";
 
-			session_start();
-
-			$_SESSION['email'] = $_POST['entreprise'];
 			header('Location: php/job_submit.php');
 			}	
 		}
 	}
-}
 
-else{
 
-	if (isset($_POST) && isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["email"]) && isset($_POST["password"])) {
-		if (!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['email']) && !empty($_POST['password'])) {
+
+$_SESSION['email_e'] = $_POST['prenom'];
+
+// Inscription étudiant
+
+	if (isset($_POST) && isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["email_e"]) && isset($_POST["password_e"])) {
+		if (!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['email_e']) && !empty($_POST['password_e'])) {
 
 		extract($_POST);
 		$statut = "En attente";
 
 		$link = mysqli_connect("localhost","root","motdepasselocalhostgwen","JobFinder");
-		mysqli_query($link, "INSERT INTO Etudiant(Nom,Prenom,Email,Password,Statut) VALUES ('$nom', '$prenom', '$email', '$password', '$statut')");
+		$row = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM Etudiant WHERE Email='$_POST[email_e]'"));
 
-		echo "<script>alert('Vous êtes inscrit sur la liste d'attente')</script>";
+			if ($row){
+				echo "<h1>L'adresse e-mail est déja utilisée !!</h1>";
+				header('Refresh: 2; url=index.php');
+			}	
+			else{
 
-		header("Refresh: 1; url=index.php");
+			include "include/pre-formulaire.php";
 
+			header("Location: php/student.php");
+			}
 		}
 	}
-}
 
 ?>

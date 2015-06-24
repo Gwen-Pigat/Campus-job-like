@@ -78,7 +78,7 @@ body{
 	font-size: 24px;
 	margin-top: 5%;
 	/*width: 36%;*/
-	border: 1px #1c94a3 solid;
+	border: 2px #1c94a3 solid;
 	font-family: 'Inconsolata';
 }
 
@@ -103,7 +103,7 @@ body{
 
 .btn-custom:hover{
 	background-color: white;
-	border : 1px #1c94a3 solid;
+	border : 2px #1c94a3 solid;
 	color: #1c94a3; 
 	transition: 0.4s;
 }
@@ -484,4 +484,39 @@ textarea{
 .user{
 	color: #1C94A3;
 	text-decoration: underline;
+}
+
+
+/* Redirection pour création du profil étudiant*/
+
+
+.redirection{
+	color: #1C94A3;
+	text-align: center;
+	margin-top: 15%;
+}
+
+
+/*Formulaire création du compte étudiant*/
+
+.creation_etudiant{
+	padding: 2%;
+	margin-top: 8%;
+}
+
+.creation_etudiant select{
+	background-color: #1C94A3;
+	color: white;
+	border: 1px #1C94A3 solid;
+}
+
+.creation_etudiant input{
+	padding: 0.5%;
+	border: 1px #1C94A3 solid;
+	margin: 0.5%;
+}
+
+.creation_etudiant p{
+	font-size: 1.2em;
+	margin-top: 2%;
 }

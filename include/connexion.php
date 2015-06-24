@@ -5,8 +5,8 @@ session_start();
 $link = mysqli_connect("localhost","root","motdepasselocalhostgwen","JobFinder");
 
 if (empty($_SESSION['email'])) {
-	header('Location: logout.php');	
-}
+			header('Location: ../php/logout.php');	
+		}
 
 if (isset($_POST) && isset($_POST['email']) && isset($_POST['password'])) {
 	if (!empty($_POST['email']) && !empty($_POST['password'])) {
@@ -21,6 +21,7 @@ if (isset($_POST) && isset($_POST['email']) && isset($_POST['password'])) {
 		else{ 
 			header('Location: ../index.php?Employeur&erreur_connexion');	
 		}
+
 	}
 }
 

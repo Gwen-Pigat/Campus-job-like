@@ -27,7 +27,8 @@ if (isset($_GET['Employeur'])) {
     });
   </script>
   <?php } ?>
-<title>Projet Employeur</title>
+
+<title>JobFinder | Employeur</title>
 
 <div class="header">
 
@@ -118,7 +119,7 @@ if (isset($_GET['Employeur'])) {
         <div class="modal-body">
           <p>Veuilez remplir tout les champs ci-dessous afin de valider votre inscription.</p>
           <center>
-          <form method="POST" action="redirect_master.php?employeur">
+          <form method="POST" action="redirect_master.php">
             <input type="text" name="nom" placeholder="Votre nom" required>
             <input type="text" name="prenom" placeholder="Votre prénom" required><br>
             <input type="text" name="entreprise" placeholder="Nom de l'entreprise" required>
@@ -276,8 +277,8 @@ if (isset($_GET['Employeur'])) {
     </div>
 
 </section>
-<?php }
 
+<?php }
 
 
 //Partie étudiant
@@ -286,7 +287,7 @@ else{
 
   include "include/carousel.php" ?>
 
-<title>Projet Etudiant</title>
+<title>JobFinder | Etudiant</title>
 
 <section class="categorie">
 <?php echo "<a href='index.php?Employeur'><button class='btn-employeur'>Employeur</button></a>
@@ -321,8 +322,8 @@ else{
           <form method="POST" action="redirect_master.php">
             <input type="text" name="nom" placeholder="Votre nom" required>
             <input type="text" name="prenom" placeholder="Votre prénom" required><br>
-            <input type="email" name="email" placeholder="E-mail" required>
-            <input type="password" name="password" placeholder="Mot de passe"  required><br>
+            <input type="email" name="email_e" placeholder="E-mail" required>
+            <input type="password" name="password_e" placeholder="Mot de passe"  required><br>
             <input class="btn btn-danger" type="submit" value="Valider">
           </form>
           </center>
@@ -335,9 +336,10 @@ else{
   </div>
 
 <?php } ?>
+
 </div>
 
 <?php include "include/footer.php"; ?>
 
-</body>
+  </body>
 </html>

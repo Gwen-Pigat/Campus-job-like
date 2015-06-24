@@ -8,9 +8,14 @@
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../js/slider.js"></script>
 
+
+
 <?php include "lateral.php"; include "../include/connexion.php"; ?>
 
 <?php $row = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM EntrepriseProfil WHERE Entreprise='$_SESSION[email]'")); ?>
+
+
+<title><?php echo $_SESSION['email']; ?></title>
 
 <div class="container">
 
@@ -96,34 +101,4 @@ if (isset($_POST['entreprise_name']) || isset($_POST['entreprise_site']) || isse
 	}
 }
 
-?>
-
-<section class="contact_us text-center col-md-12">
- <h1>Des questions ? <a href="contact.php">Contactez-nous</a></h1>
-
- <div class="social">
-        <ul class="social-list">
-            <li>
-                <a href="https://www.linkedin.com/company/5304501?trk=prof-0-ovw-curr_pos" target="_blank">
-                    <i class="fa fa-linkedin-square fa-5x"></i>
-                </a>
-            </li>
-            <li>
-                <a href="https://facebook.com/thecampusjob" target="_blank">
-                    <i class="fa fa-facebook-square fa-5x"></i>
-                </a>
-            </li>
-            <li>
-                <a href="https://twitter.com/thecampusjob" target="_blank">
-                    <i class="fa  fa-twitter-square fa-5x"></i>
-                </a>
-            </li>
-            <li>
-                <a target="_blank" href="https://www.youtube.com/user/thecampusjob">
-                    <i class="fa fa-youtube-square fa-5x"></i>
-                </a>
-            </li>
-        </ul>
-    </div>
-
-</section>
+include "../include/footer_profil.php";

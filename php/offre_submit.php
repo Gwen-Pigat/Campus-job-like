@@ -12,7 +12,6 @@
 
 include "lateral.php"; include "../include/connexion.php"; 
 
-
 if (isset($_GET) && isset($_GET['poste_offre'])) { 
 	$date = date("d/m/Y_H:i:s");
 	
@@ -144,32 +143,6 @@ if (isset($_GET) && isset($_GET['remove'])) {
 
 ?>
 </div>
-<section class="contact_us text-center col-md-12" style="margin-top: 15%">
- <h1>Des questions ? <a href="contact.php">Contactez-nous</a></h1>
 
- <div class="social">
-        <ul class="social-list">
-            <li>
-                <a href="https://www.linkedin.com/company/5304501?trk=prof-0-ovw-curr_pos" target="_blank">
-                    <i class="fa fa-linkedin-square fa-5x"></i>
-                </a>
-            </li>
-            <li>
-                <a href="https://facebook.com/thecampusjob" target="_blank">
-                    <i class="fa fa-facebook-square fa-5x"></i>
-                </a>
-            </li>
-            <li>
-                <a href="https://twitter.com/thecampusjob" target="_blank">
-                    <i class="fa  fa-twitter-square fa-5x"></i>
-                </a>
-            </li>
-            <li>
-                <a target="_blank" href="https://www.youtube.com/user/thecampusjob">
-                    <i class="fa fa-youtube-square fa-5x"></i>
-                </a>
-            </li>
-        </ul>
-    </div>
 
-</section>
+<?php include "../include/footer_profil.php"; ?>

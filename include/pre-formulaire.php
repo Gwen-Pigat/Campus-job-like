@@ -8,14 +8,14 @@ $link = mysqli_connect("localhost","root","motdepasselocalhostgwen","JobFinder")
 
 //Etudiant
 
-if (isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['email']) && isset($_POST['password'])) {
-	if (!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['email']) && !empty($_POST['password'])) {
+if (isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['email_e']) && isset($_POST['password_e'])) {
+	if (!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['email_e']) && !empty($_POST['password_e'])) {
 
 		$statut = "En attente";
 		
 		extract($_POST);
 
-		mysqli_query($link, "INSERT INTO Etudiant (Nom, Prenom, Email, Password, Statut) VALUES ('$nom', '$prenom', '$email', '$password', '$statut')") or die("Erreur lors de la requête");
+		mysqli_query($link, "INSERT INTO Etudiant (Nom, Prenom, Email, Password, Statut) VALUES ('$nom', '$prenom', '$email_e', '$password_e', '$statut')") or die("Erreur lors de la requête");
 
 	    // Instantiate it
 	    $mail = new phpmailer();
@@ -30,7 +30,7 @@ if (isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['email']) &&
 	    $body = "Les informations suivantes ont été enregistrées :\n\n\n
 	    Nom :           $nom \n
 	    Prenom :        $prenom \n
-	    Email :         $email";
+	    Email :         $email_e";
 
 	    $mail->Body = $body;
 
