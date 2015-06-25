@@ -12,14 +12,14 @@
 
 <?php include "lateral.php"; include "../include/connexion.php"; ?>
 
-<?php $row = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM EntrepriseProfil WHERE Entreprise='$_SESSION[email]'")); ?>
+<?php $row = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM EntrepriseProfil WHERE Email='$_SESSION[email]'")); ?>
 
 
-<title><?php echo $_SESSION['email']; ?></title>
+<title><?php echo $row['Entreprise']; ?></title>
 
 <div class="container">
 
-<h1 class="text-center" style="margin-top: 5%; font-family: Inconsolata">Profil de <strong><?php echo $_SESSION['email']; ?></strong></h1>
+<h1 class="text-center" style="margin-top: 5%; font-family: Inconsolata">Profil de <strong><?php echo $row['Entreprise']; ?></strong></h1>
 
 <?php 
 
@@ -55,11 +55,11 @@ if (isset($_POST['upload'])){
 
 <form class="profil_entreprise col-md-12" action="job_submit.php" method="POST">
 
-<!-- <label class="col-md-5 text-right" for="entreprise_name">Nom de l'entreprise <span>*</span></label>
-<textarea rows="1" class="col-md-5" name="entreprise_name"><?php echo $_SESSION['email']; ?></textarea> -->
+<label class="col-md-5 text-right" for="entreprise_name">Nom de l'entreprise <span>*</span></label>
+<input class="col-md-5" name="entreprise_name" value="<?php echo $row[Entreprise]; ?>" />
 
 <label class="col-md-5 text-right" for="secteur">Secteur d'activité <span>*</span></label>
-<textarea rows="1" class="col-md-5" name="secteur"><?php echo $row['Secteur']; ?></textarea>
+<input class="col-md-5" name="secteur" value="<?php echo $row[Secteur]; ?>" />
 
 <label class="col-md-5 text-right" for="entreprise_site">Site de l'entreprise</label>
 <input class="col-md-5" type="text" name="entreprise_site" value=<?php echo $row['Site'] ?> />
@@ -88,8 +88,8 @@ if (isset($_POST['entreprise_name']) || isset($_POST['entreprise_site']) || isse
 
 		extract($_POST);
 
-		mysqli_query($link, "UPDATE EntrepriseProfil SET Secteur='$secteur', Site='$entreprise_site', Description='$qui_sommes_nous', Employers='$nombre_employers' WHERE Entreprise='$_SESSION[email]'");
-        mysqli_query($link, "UPDATE Offre SET Employeur='$entreprise_name' WHERE Employeur='$_SESSION[email]'"); ?>
+		mysqli_query($link, "UPDATE EntrepriseProfil SET Entreprise='$entreprise_name', Secteur='$secteur', Site='$entreprise_site', Description='$qui_sommes_nous', Employers='$nombre_employers' WHERE Email='$_SESSION[email]'");
+        mysqli_query($link, "UPDATE Offre SET Employeur='$entreprise_name' WHERE Entreprise='$row[Entreprise]'"); ?>
 
 		<script type="text/javascript">
 			$(document).ready(function(){

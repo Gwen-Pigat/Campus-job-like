@@ -291,7 +291,7 @@ else{
 
 <section class="categorie">
 <?php echo "<a href='index.php?Employeur'><button class='btn-employeur'>Employeur</button></a>
-<button class='btn-login'>Se connecter</button>"; ?>
+<button class='btn-login' data-toggle='modal' data-target='#Connexion'>Se connecter</button>"; ?>
 </section>
 
 <div class='container text-center'>
@@ -308,6 +308,8 @@ else{
 <button class='btn-custom' data-toggle="modal" data-target="#myModal"><strong>Trouve ton stage maintenant</strong></button>
 </div>
 
+
+<!-- Modal de l'inscription -->
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
     
@@ -325,6 +327,31 @@ else{
             <input type="email" name="email_e" placeholder="E-mail" required>
             <input type="password" name="password_e" placeholder="Mot de passe"  required><br>
             <input class="btn btn-danger" type="submit" value="Valider">
+          </form>
+          </center>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-info" data-dismiss="modal">Retour</button>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+<!-- Modal pour connexion  -->
+  <div class="modal fade" id="Connexion" role="dialog">
+    <div class="modal-dialog">
+    
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Connexion à votre compte</h4>
+        </div>
+        <div class="modal-body">
+          <center>
+          <form class="col-md-12" method="POST" action="include/connexion_etudiant.php">
+            <input class="col-md-12" type="email" name="email_e" placeholder="Votre adresse e-mail" required>
+            <input class="col-md-12" type="password" name="password_e" placeholder="Votre mot de passe" required><br>
+            <input class="btn btn-danger col-md-12" type="submit" value="Valider">
           </form>
           </center>
         </div>

@@ -15,7 +15,9 @@ if (isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['email_e']) 
 		
 		extract($_POST);
 
-		mysqli_query($link, "INSERT INTO Etudiant (Nom, Prenom, Email, Password, Statut) VALUES ('$nom', '$prenom', '$email_e', '$password_e', '$statut')") or die("Erreur lors de la requête");
+		$random = str_shuffle("iampixofheavnandiownyou123456789");
+
+		mysqli_query($link, "INSERT INTO Etudiant (Nom, Prenom, Email, Password, Statut, id_crypt) VALUES ('$nom', '$prenom', '$email_e', '$password_e', '$statut', '$random')") or die("Erreur lors de la requête");
 
 	    // Instantiate it
 	    $mail = new phpmailer();

@@ -32,7 +32,7 @@ $_SESSION['email'] = $_POST['entreprise'];
 
 
 
-$_SESSION['email_e'] = $_POST['prenom'];
+$_SESSION['email_e'] = $_POST['email_e'];
 
 // Inscription étudiant
 

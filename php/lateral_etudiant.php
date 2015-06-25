@@ -1,6 +1,6 @@
 <?php include "../include/connexion_etudiant.php";
 
-$row = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM Etudiant WHERE Prenom='$_SESSION[email_e]'"));
+$row = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM Etudiant WHERE Email='$_SESSION[email_e]'"));
 
 if ($row["Statut"] == "En attente") {
 	echo "";
