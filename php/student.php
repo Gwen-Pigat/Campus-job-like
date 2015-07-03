@@ -94,7 +94,7 @@ if (isset($_POST['upload'])){
     $image_size = $_FILES['image']['size'];
     $image_tmp = $_FILES['image']['tmp_name'];
 
-    $random = "img-profil-$row[id]";
+    $random = "img-profil-$row[id]-$row[id_crypt]";
 
     if ($image_name == "") {
         echo "<script>alert('Vous devez sélectionner une image !')</script>";
@@ -110,7 +110,7 @@ if (isset($_POST['upload'])){
 
  <form class="profil_entreprise_logo col-md-12" action="" method="POST" enctype="multipart/form-data">
     <label class="col-md-5 text-right">Votre logo :</label>
-    <?php echo "<img class='col-md-5' src=../img/ProfilPicture/img-profil-$row[id].jpg style='width: 25%'>"; ?><br>
+    <?php echo "<img class='col-md-5' src=../img/ProfilPicture/img-profil-$row[id]-$row[id_crypt].jpg style='width: 25%'>"; ?><br>
     <div class="col-md-5"></div>
     <input class="btn col-md-5" type="file" name="image" size="25" value="test">
      <div class="col-md-5"></div>
@@ -201,7 +201,7 @@ if (isset ($_POST) && isset($_POST['prenom']) && isset($_POST['nom']) && isset($
 
 		extract($_POST);
 
-		mysqli_query($link, "UPDATE Etudiant SET Prenom='$prenom', Nom='$nom', Statut='Validé', Sexe='$sexe', Etudes='$etudes', Ecole='$ecole', Specialisation='$specialisation', Langues='$langues', Langues_sup='$langues_sup', Recherche='$recherche', Recherche_sup='$recherche_sup', Lieu_importance='$lieu', Distance='$distance' WHERE Prenom='$row[Prenom]'") or die("Erreur : ".mysqli_errno($link));
+		mysqli_query($link, "UPDATE Etudiant SET Prenom='$prenom', Nom='$nom', Statut='Validé', Sexe='$sexe', Etudes='$etudes', Ecole='$ecole', Specialisation='$specialisation', Langues='$langues', Langues_sup='$langues_sup', Recherche='$recherche', Recherche_sup='$recherche_sup', Lieu_importance='$lieu', Distance='$distance' WHERE Email='$_SESSION[email]' AND Prenom='$row[Prenom]'") or die("Erreur : ".mysqli_errno($link));
 	}
 }
 

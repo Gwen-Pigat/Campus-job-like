@@ -17,9 +17,9 @@ if (isset($_GET) && isset($_GET['poste_offre'])) {
 	
 	?>
 
-	<div class="container">
+	<div class="container slide-profil">
 
-	<h1 class="text-center"><span><strong><?php echo $_SESSION['email']; ?></strong></span><br>- Poster une offre -</h1>
+	<h1 class="text-center"><span><strong><?php echo $row['Entreprise']; ?></strong></span><br>- Poster une offre -</h1>
 
 	<form class="profil_entreprise col-md-12" action=<?php echo "offre_submit.php?offre=$_SESSION[email]&date=$date" ?> method="POST">
 	<label class="col-md-5 text-right" for="offre_name">Titre de l'offre <span>*</span></label>
@@ -85,20 +85,20 @@ if (isset($_GET) && isset($_GET['offre'])) {
 // Validation de l'offre
 
 if (isset($_GET) && isset($_GET['validation_offre']) && isset($_GET['employeur'])) {
-	if (!empty($_GET['validation_offre']) && !empty($_GET['employeur']))
+	if (!empty($_GET['validation_offre']) && !empty($_GET['employeur'])){
 		mysqli_query($link, "UPDATE Offre SET Statut='Validé' WHERE Employeur='$_SESSION[email]' AND id='$_GET[validation_offre]'");
 
-		$row = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM EntrepriseProfil WHERE Entreprise='$_SESSION[email]'"));
+		$row = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM EntrepriseProfil WHERE Email='$_SESSION[email]'"));
 
 		$add = $row['Offres'] + 1;
-		mysqli_query($link, "UPDATE EntrepriseProfil SET Offres='$add' WHERE Entreprise='$_SESSION[email]'");
+		mysqli_query($link, "UPDATE EntrepriseProfil SET Offres='$add' WHERE Email='$_SESSION[email]'");
 
 	echo "<div class='container'>
-	<img class='col-md-5' src=../img/ProfilPicture/img-profil-$row[id]-$_SESSION[email].jpg style='width: 25%'><br>
-	<h1 class='user'>$_SESSION[email]</h1>
-	<h3>Votre offre à bien été validé, cliquez <a class='user' href='offre_submit.php?liste_offres=$_SESSION[email]'>ici</a> pour y accèder</h3>
+	<img class='col-md-5' src=../img/ProfilPicture/img-profil-$row[id]-$row[email].jpg style='width: 25%'><br>
+	<h1 class='user'>$row[Entreprise]</h1>
+	<h3>Votre offre à bien été validée, cliquez <a class='user' href='offre_submit.php?liste_offres=$row[Entreprise]'>ici</a> pour y accèder</h3>
 	</div>";
-
+	}
 }
 
 
@@ -109,7 +109,7 @@ if (isset($_GET) && isset($_GET['liste_offres'])) {
 
 	<div class="container">
 	<?php echo "<span class='poster text-center'><a href='offre_submit.php?poste_offre=$_SESSION[email]'>Poster une offre</a></span>"; ?>
-	<h1 class="text-center" style="margin-top: 5%; font-family: Inconsolata"><strong><?php echo $_SESSION['email']; ?></strong><br>Liste de vos offres</h1> 
+	<h1 class="text-center" style="margin-top: 5%; font-family: Inconsolata"><strong><?php echo $row['Entreprise']; ?></strong><br>Liste de vos offres</h1> 
 
 <?php
 
@@ -133,12 +133,39 @@ if (isset($_GET) && isset($_GET['liste_offres'])) {
 if (isset($_GET) && isset($_GET['remove'])) {
 	mysqli_query($link, "DELETE FROM Offre WHERE id='$_GET[remove]'");
 
-	$row = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM EntrepriseProfil WHERE Entreprise='$_SESSION[email]'"));
+	$row = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM EntrepriseProfil WHERE Email='$_SESSION[email]'"));
 	$remove = $row['Offres'] - 1;
 
-	mysqli_query($link, "UPDATE EntrepriseProfil SET Offres='$remove' WHERE Entreprise='$_SESSION[email]'");
+	mysqli_query($link, "UPDATE EntrepriseProfil SET Offres='$remove' WHERE Email='$_SESSION[email]'");
 
 	header("Location: offre_submit.php?liste_offres=$_SESSION[email]");
+}
+
+
+// Liste des étudiants
+
+if (isset($_GET) && isset($_GET['liste_etudiant'])) {
+	if (!empty($_GET['liste_etudiant'])) { ?>
+	<div class="container">
+	<?php echo "<span class='poster text-center'><a href='offre_submit.php?poste_offre=$_SESSION[email]'>Poster une offre</a></span>"; ?>
+	<h1 class="text-center" style="margin-top: 5%; font-family: Inconsolata"><strong><?php echo $row['Entreprise']; ?></strong><br>Liste des étudiants</h1> 
+
+		<?php	$result = mysqli_query($link, "SELECT * FROM Etudiant"); 
+
+		while ($row = mysqli_fetch_assoc($result)) {
+			echo "<div class='col-md-6 offer_list'>
+			<img class='col-md-4' src='../img/ProfilPicture/img-profil-$row[id]-$row[id_crypt].jpg'>
+			<p><span class='user'>Nom</span> : $row[Nom]<p>
+			<p><span class='user'>Prénom</span> : $row[Prenom]<p>
+			<p><span class='user'>Email</span> : $row[Email]<p>
+			<p><span class='user'>Sexe</span> : $row[Sexe]<p>
+			<p><span class='user'>Etudes</span> : $row[Etudes]<p>
+			<p><span class='user'>Ecole</span> : $row[Ecole]<p>
+			<p><span class='user'>Spécialisation</span> : $row[Specialisation]<p>
+			<p><span class='user'>langues</span> : $row[Langues]<p>
+			</div>";		
+		}
+	}
 }
 
 ?>

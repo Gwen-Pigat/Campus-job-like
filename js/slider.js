@@ -21,5 +21,7 @@ $(document).ready(function(){
 	$(".lateral").hover(function(){
 		$(".lateral-aside").toggle(100);
 	});
+
+	$(".container").show(1000);
 	
 });
