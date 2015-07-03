@@ -1,9 +1,9 @@
-# Campus-Job-like
+<h1>Campus-Job-like</h1>
 
-Création d'une plateforme pour les entreprises et pour les étudiants.
-Le but principal sera de permettre aux entreprises de pouvoir envoyer des offres d'emploi ou de stage; et permettre aux étudiants d'y postuler.
+<p>Création d'une plateforme pour les entreprises et pour les étudiants.</p>
+<p>Le but principal sera de permettre aux entreprises de pouvoir envoyer des offres d'emploi ou de stage; et permettre aux étudiants d'y postuler.</p>
 
-L'intéret est de favoriser et simplifier l'échange entre les deux parties.
+<p>L'intéret est de favoriser et simplifier l'échange entre les deux parties.</p>
 
-Téchnologies :
-HTML5, CSS3, Bootstrap, PHP5, Mysql
+Téchnologies :<br>
+<strong>HTML5, CSS3, Bootstrap, PHP5, Mysql</strong>
