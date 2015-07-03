@@ -12,7 +12,7 @@ else{ ?>
 <nav class="lateral">
 	<div class="logo text-center">
 		<?php $row = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM Etudiant WHERE Email='$_SESSION[email_e]'")); ?>
- <?php echo "<img src=../img/ProfilPicture/img-profil-$row[id]-$row[id_crypt].jpg style='width: 75px'>"; ?><br><br>
+ <?php echo "<img src=../img/ProfilPicture/img-profil-$row[id]-$row[id_crypt].jpg>"; ?><br><br>
   </div>
 	<ul class="nav nav-stacked span-hide">
 		<?php echo "<a href='job_submit.php'>" ?><li><i class="fa fa-user fa-3x"></i> <span class="lateral-aside">Mon profil</span></li></a>

@@ -405,7 +405,7 @@ textarea{
 /* Barre latérale */
 
 .lateral{
-	background-color: black;
+	background-color: #3C3C3C;
 	width: 5%;
 	margin: 0;
 	padding: 0.5%;
@@ -440,11 +440,15 @@ textarea{
 }
 
 .span-hide{
-	margin-top: 100%;
+	margin-top: 50%;
 }
 
 .lateral .logout{
 	margin-top: 50%;
+}
+
+.lateral .logo img{
+	width: 100%;
 }
 
 .lateral:hover{
