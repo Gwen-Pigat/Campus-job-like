@@ -22,6 +22,8 @@ $(document).ready(function(){
 		$(".lateral-aside").toggle(100);
 	});
 
-	$(".container").show(1000);
+	$(".container").fadeIn(1000);
+	$(".carousel").fadeIn(1000);
+	$(".box").delay(2000).fadeOut(1000);
 	
 });

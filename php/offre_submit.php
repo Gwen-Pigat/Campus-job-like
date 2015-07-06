@@ -89,6 +89,7 @@ if (isset($_GET) && isset($_GET['validation_offre']) && isset($_GET['employeur']
 		mysqli_query($link, "UPDATE Offre SET Statut='Validé' WHERE Employeur='$_SESSION[email]' AND id='$_GET[validation_offre]'");
 
 		$row = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM EntrepriseProfil WHERE Email='$_SESSION[email]'"));
+		$row_1 = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM Offre WHERE Employeur='$_SESSION[email]'"));
 
 		$add = $row['Offres'] + 1;
 		mysqli_query($link, "UPDATE EntrepriseProfil SET Offres='$add' WHERE Email='$_SESSION[email]'");
@@ -98,9 +99,72 @@ if (isset($_GET) && isset($_GET['validation_offre']) && isset($_GET['employeur']
 	<h1 class='user'>$row[Entreprise]</h1>
 	<h3>Votre offre à bien été validée, cliquez <a class='user' href='offre_submit.php?liste_offres=$row[Entreprise]'>ici</a> pour y accèder</h3>
 	</div>";
-	}
-}
 
+
+	// Mail envoyé à l'entreprise
+
+    require 'PHPMailer/class.phpmailer.php';
+
+    // Instantiate it
+    $mail = new phpmailer();
+
+    // Define who the message is from
+    $mail->FromName = "JobFinder - nouvelle offre";
+
+    // Set the subject of the message
+    $mail->Subject = "$row[Entreprise] - $row_1[Titre]";
+
+    // Add the body of the message
+    $body = "Voici ci-dessous le résumé de l'offre que vous venez d'ajouter :\n
+    Titre : $row_1[Titre]\n
+    Remunéré : $row_1[Remunere]\n
+    Date de début : $row_1[Debut]\n\n\n
+    Les tâches à effectuées : $row_1[Taches]\n
+    Qualifications exigées : $row_1[Qualifications]\n\n
+    Compétences demandées : $row_1[Competences]\n\n\n
+    Date d'ajout de l'offre : $row_1[Ajout]\n\n\n\n\n
+    PS: Ceci est un mail automatique, merci de na pas y répondre";
+    
+    $mail->AddAddress("$row[Email]");
+
+    if(!$mail->Send())
+        echo ('');
+    else
+        echo ('');
+
+
+    // Mail envoyé à l'admin
+
+    require 'PHPMailer/class.phpmailer.php';
+
+    // Instantiate it
+    $mail = new phpmailer();
+
+    // Define who the message is from
+    $mail->FromName = "JobFinder - nouvelle offre";
+
+    // Set the subject of the message
+    $mail->Subject = "$row[Entreprise] - $row_1[Titre]";
+
+    // Add the body of the message
+    $body = "L'entreprise $row[Entreprise] a ajouté une nouvelle offre, voici ses détails :\n
+    Titre : $row_1[Titre]\n
+    Remunéré : $row_1[Remunere]\n
+    Date de début : $row_1[Debut]\n\n\n
+    Les tâches à effectuées : $row_1[Taches]\n
+    Qualifications exigées : $row_1[Qualifications]\n\n
+    Compétences demandées : $row_1[Competences]\n\n\n
+    Date d'ajout de l'offre : $row_1[Ajout]\n\n\n\n\n";
+    
+    $mail->AddAddress("pixofheaven@gmail.com");
+
+    if(!$mail->Send())
+        echo ('');
+    else
+        echo ('');
+
+    }
+}
 
 // Liste de mes offres
 

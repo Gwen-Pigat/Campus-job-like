@@ -9,6 +9,10 @@ session_start();
 
 $link = mysqli_connect("localhost","root","motdepasselocalhostgwen","JobFinder");
 
+if (empty($_SESSION['email_e'])) {
+			header('Location: ../php/logout.php');	
+		}
+
 if (isset($_POST) && isset($_POST['email_e']) && isset($_POST['password_e'])) {
 	if (!empty($_POST['email_e']) && !empty($_POST['password_e'])) {
 		

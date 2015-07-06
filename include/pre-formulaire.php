@@ -19,25 +19,40 @@ if (isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['email_e']) 
 
 		mysqli_query($link, "INSERT INTO Etudiant (Nom, Prenom, Email, Password, Statut, id_crypt) VALUES ('$nom', '$prenom', '$email_e', '$password_e', '$statut', '$random')") or die("Erreur lors de la requête");
 
-	    // Instantiate it
+	    
+		// Mail envoyé à l'admin
+
 	    $mail = new phpmailer();
-
-	    // Define who the message is from
 	    $mail->FromName = "Inscription d'un étudiant";
-
-	    // Set the subject of the message
 	    $mail->Subject = "$nom - $prenom";
 
-	    // Add the body of the message
 	    $body = "Les informations suivantes ont été enregistrées :\n\n\n
 	    Nom :           $nom \n
 	    Prenom :        $prenom \n
 	    Email :         $email_e";
 
 	    $mail->Body = $body;
-
-	    // Add a recipient address
 	    $mail->AddAddress('pixofheaven@gmail.com');
+
+	    if(!$mail->Send())
+	        echo ('');
+	    else
+	        echo ('');
+
+
+	    // Mail envoyé à l'étudiant
+
+	    $mail = new phpmailer();
+	    $mail->FromName = "Inscription sur JobFinder";
+	    $mail->Subject = "$nom - $prenom";
+	    $body = "Bonjour $prenom ! Merci de votre inscription sur notre site, vous pouvez dès à présent vous connecter avec l'adresse e-mail et le mot de passe que vous avez laissé lors de votre inscription :\n\n\n
+	    Nom :           $nom \n
+	    Prenom :        $prenom \n
+	    Email :         $email_e";
+
+	    $mail->Body = $body;
+
+	    $mail->AddAddress('$email_e');
 
 	    if(!$mail->Send())
 	        echo ('');
@@ -47,7 +62,6 @@ if (isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['email_e']) 
 }
 
 
-
 //Employeur
 
 if (isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['entreprise']) && isset($_POST['telephone']) && isset($_POST['email']) && isset($_POST['password'])) {
@@ -55,18 +69,17 @@ if (isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['entreprise'
 
 		extract($_POST);
 
-		mysqli_query($link, "INSERT INTO EntrepriseProfil (Nom, Prenom, Entreprise, Telephone, Email, Password) VALUES ('$nom', '$prenom', '$entreprise', '$telephone', '$email', '$password')") or die("Erreur lors de la requête");
+		$random = str_shuffle("iampixofheavnandiownyou123456789");
 
-	    // Instantiate it
+		mysqli_query($link, "INSERT INTO EntrepriseProfil (Nom, Prenom, Entreprise, Telephone, Email, Password, id_crypt) VALUES ('$nom', '$prenom', '$entreprise', '$telephone', '$email', '$password', '$random')") or die("Erreur lors de la requête");
+
+
+		// Mail pour l'admin
+
 	    $mail = new phpmailer();
-
-	    // Define who the message is from
 	    $mail->FromName = "Inscription d'une entreprise";
-
-	    // Set the subject of the mail
 	    $message->Subject = "$nom, $prenom - $entreprise";
 
-	    // Add the body of the message
 	    $body = "Une entreprise s'est inscrite sur le site :\n\n\n
 	    Nom :           $nom \n
 	    Prenom :        $prenom \n
@@ -76,13 +89,36 @@ if (isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['entreprise'
 
 	    $mail->Body = $body;
 
-	    // Add a recipient address
 	    $mail->AddAddress('pixofheaven@gmail.com');
 
 	    if(!$mail->Send())
 	        echo ('');
 	    else
 	        echo ('');
+
+
+	    // Mail envoyé à l'entreprise
+
+	    $mail = new phpmailer();
+	    $mail->FromName = "Inscription sur JobFinder";
+	    $message->Subject = "$nom, $prenom - $entreprise";
+
+	    $body = "Bonjour $prenom et merci votre inscription sur notre site. Vous pouvez dès à présent vous connecter avec les identifiants que vous avez renseigné lors de votre inscription :\n\n\n
+	    Nom :           $nom \n
+	    Prenom :        $prenom \n
+	    Nom de l'entreprise :        $entreprise \n
+	    Numéro de téléphone :        $telephone \n
+	    Email :         $email";
+
+	    $mail->Body = $body;
+
+	    $mail->AddAddress('$email');
+
+	    if(!$mail->Send())
+	        echo ('');
+	    else
+	        echo ('');
+
 
 	}
 }

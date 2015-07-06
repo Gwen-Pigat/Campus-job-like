@@ -15,6 +15,8 @@
 
 <?php
 
+ $random = str_shuffle("1234567890azertyuiop");
+
 //Partie employeur
 
 if (isset($_GET['Employeur'])) { 
@@ -51,7 +53,6 @@ if (isset($_GET['Employeur'])) {
 <a class="tarifs" data-toggle="modal" data-target="#Modal-pricing">Voir les tarifs</a>
 </div>
 
-
 <!-- Modal pour pricing  -->
   <div class="modal fade" id="Modal-pricing" role="dialog">
     <div class="modal-dialog">
@@ -85,8 +86,7 @@ if (isset($_GET['Employeur'])) {
 <!-- Modal pour connexion  -->
   <div class="modal fade" id="Connexion" role="dialog">
     <div class="modal-dialog">
-    
-      <div class="modal-content">
+      <div class="modal-content col-md-12">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Connexion à votre compte</h4>
@@ -96,7 +96,10 @@ if (isset($_GET['Employeur'])) {
           <form class="col-md-12" method="POST" action="include/connexion.php">
             <input class="col-md-12" type="email" name="email" placeholder="Votre adresse e-mail" required>
             <input class="col-md-12" type="password" name="password" placeholder="Votre mot de passe" required><br>
-            <input class="btn btn-danger col-md-12" type="submit" value="Valider">
+            <a href="" data-toggle="modal" data-target="#password">
+              <p class="col-md-12 password_send">Mot de passe oublié ?</p>
+            </a>
+            <input class="btn btn-custom col-md-12" type="submit" value="Valider">
           </form>
           </center>
         </div>
@@ -106,6 +109,78 @@ if (isset($_GET['Employeur'])) {
       </div>    
     </div>
   </div>
+
+  <!-- Modal pour mot de passe  -->
+  <div class="modal fade" id="password" role="dialog">
+    <div class="modal-dialog">
+    
+      <div class="modal-content col-md-12">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Mot de passe oublié ?</h4>
+          <p class="text-center" style="margin-top: 4%">Pas d'inquiétude<br>
+Donnez nous votre e-mail et nous vous enverrons un lien afin de ré-initialiser votre mot de passe.</p>
+        </div>
+        <div class="modal-body">
+          <center>
+            <?php
+          echo "<form class='col-md-12' action='' method='POST'>
+            <input class='col-md-12' type='text' placeholder='Votre e-mail' name='email_send'><br>
+            <input class='btn btn-custom col-md-12' type='submit' value='Valider'>
+          </form>"; ?>
+          </center>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-info" data-dismiss="modal">Retour</button>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+<?php 
+
+// Envoi du mail pour ré-initialiser le mot de passe employeur
+
+  if (isset($_POST) && isset($_POST['email_send'])) {
+      if (!empty($_POST['email_send'])) {
+
+        extract($_POST);
+
+        $row = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM EntrepriseProfil WHERE Email='$_POST[email_send]'"));
+
+      require 'PHPMailer/class.phpmailer.php';
+
+      // Instantiate it
+      $mail = new phpmailer();
+
+      // Define who the message is from
+      $mail->FromName = 'JobFinder - Mot de passe';
+
+      // Set the subject of the message
+      $mail->Subject = "$row[Entreprise]";
+
+      // Add the body of the message
+      $body = "Bonjour $row[Entreprise] !\n
+      Suite à votre demande de ré-initilisaton du mot de passe, nous vous prions de bien vouloir cliquez sur le lien suivant :\n
+      http://localhost/PHP/ProjetEtudiant/index.php?Employeur&$row[id_crypt]&$random&email=$row[Email]";
+      // Add a recipient address
+      $mail->AddAddress("$row[Email]");
+
+      if(!$mail->Send())
+          echo ('');
+      else
+          echo ('');
+
+          echo "<div class='col-md-4 col-md-offset-4 box'>Un e-mail vous a été envoyé <br><i class='fa fa-spinner fa-pulse fa-3x'></i></div>";
+      }
+  }
+
+
+
+      }
+  }
+
+ ?>
 
 <!-- Modal pour inscription  -->
   <div class="modal fade" id="myModal" role="dialog">
@@ -340,8 +415,7 @@ else{
 <!-- Modal pour connexion  -->
   <div class="modal fade" id="Connexion" role="dialog">
     <div class="modal-dialog">
-    
-      <div class="modal-content">
+      <div class="modal-content col-md-12">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Connexion à votre compte</h4>
@@ -351,7 +425,10 @@ else{
           <form class="col-md-12" method="POST" action="include/connexion_etudiant.php">
             <input class="col-md-12" type="email" name="email_e" placeholder="Votre adresse e-mail" required>
             <input class="col-md-12" type="password" name="password_e" placeholder="Votre mot de passe" required><br>
-            <input class="btn btn-danger col-md-12" type="submit" value="Valider">
+            <a href="" data-toggle="modal" data-target="#password">
+              <p class="col-md-12 password_send">Mot de passe oublié ?</p>
+            </a>
+            <input class="btn btn-custom col-md-12" type="submit" value="Valider">
           </form>
           </center>
         </div>
@@ -362,7 +439,73 @@ else{
     </div>
   </div>
 
-<?php } ?>
+  <!-- Modal pour mot de passe  -->
+  <div class="modal fade" id="password" role="dialog">
+    <div class="modal-dialog">
+    
+      <div class="modal-content col-md-12">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Mot de passe oublié ?</h4>
+          <p class="text-center" style="margin-top: 4%">Pas d'inquiétude<br>
+Donnez nous votre e-mail et nous vous enverrons un lien afin de ré-initialiser votre mot de passe.</p>
+        </div>
+        <div class="modal-body">
+          <center>
+            <?php $random = str_shuffle("1234567890azertyuiop");
+          echo "<form class='col-md-12' action='' method='POST'>
+            <input class='col-md-12' type='text' placeholder='Votre e-mail' name='email_send_etudiant'><br>
+            <input class='btn btn-custom col-md-12' type='submit' value='Valider'>
+          </form>"; ?>
+          </center>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-info" data-dismiss="modal">Retour</button>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+<?php 
+
+// Envoi du mail pour ré-initialiser le mot de passe étudiant
+
+  if (isset($_POST) && isset($_POST['email_send_etudiant'])) {
+      if (!empty($_POST['email_send_etudiant'])) {
+
+        extract($_POST);
+
+        $row = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM Etudiant WHERE Email='$_POST[email_send_etudiant]'"));
+
+      require 'PHPMailer/class.phpmailer.php';
+
+      // Instantiate it
+      $mail = new phpmailer();
+
+      // Define who the message is from
+      $mail->FromName = 'JobFinder - Mot de passe';
+
+      // Set the subject of the message
+      $mail->Subject = "$row[Prenom]";
+
+      // Add the body of the message
+      $body = "Bonjour $row[Prenom].\n
+      Suite à votre demande de ré-initilisaton du mot de passe, nous vous prions de bien vouloir cliquez sur le lien suivant :\n
+      http://localhost/PHP/ProjetEtudiant/index.php?Etudiant$row[id_crypt]&$random&email=$row[Email]";
+      // Add a recipient address
+      $mail->AddAddress("$row[Email]");
+
+      if(!$mail->Send())
+          echo ('');
+      else
+          echo ('');
+
+          echo "<div class='col-md-4 col-md-offset-4 box'>Un e-mail vous a été envoyé <br><i class='fa fa-spinner fa-pulse fa-3x'></i></div>";
+      }
+  }
+} 
+
+?>
 
 </div>
 

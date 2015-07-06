@@ -168,6 +168,7 @@ body{
 	transition: 0.6s;
 }
 
+.modal-content{background-color: white; color: #1C94A3; text-shadow: 0 0 1px #1C94A3;border-radius: 0px;}
 
 .modal-content form input{
 	padding: 2%;
@@ -177,7 +178,13 @@ body{
 .modal-title{
 	text-align: center;
 	font-size: 30px;
+	border: 0px;
 }
+
+.modal-body{padding: 0; border: 0px;}
+
+.modal-header{border: 0px;}
+.modal-header p {color: black; text-shadow: 0 0 0 white;}
 
 #carousel-example-generic{
 	position: fixed; 
@@ -448,7 +455,9 @@ textarea{
 }
 
 .lateral .logo img{
-	width: 100%;
+	width: 80%;
+	height: auto;
+	max-height: 50px;
 }
 
 .lateral:hover{
@@ -535,3 +544,25 @@ textarea{
 	font-size: 1.2em;
 	margin-top: 2%;
 }
+
+
+/* Reset du mot de passe */
+
+.password_send{
+	color: #ff0000;
+	text-decoration: underline;
+}
+
+.box{
+	background-color: white;
+	text-align: center;
+	color: #146E7A;
+	padding: 2%;
+	border: 4px #146E7A solid;
+	margin-top: -10%;
+	font-size: 2em;
+}
+
+/* Fade pour js */
+
+/*.carousel, .container{display: none}*/

@@ -1,5 +1,5 @@
 <section class="contact_us text-center col-md-12">
- <h1>Des questions ? <a href="contact.php">Contactez-nous</a></h1>
+ <h1>Des questions ? <a href="../contact.php">Contactez-nous</a></h1>
 
  <div class="social">
         <ul class="social-list">

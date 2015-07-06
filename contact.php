@@ -12,10 +12,10 @@
 </div>
 
 <div class='container text-center'>
-<div class="logo">
-<i class="fa fa-university fa-5x"></i><br>
-<span class='title'>SpeedJob</span>
-</div>
+	<div class="logo">
+	  <img src="img/icon.png"><br>
+	  <span class='title'>SpeedJob</span>
+  	</div>
 
 <form class="contact col-md-12" method="POST" action="">
 	<h1>Formulaire de contact</h1>

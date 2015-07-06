@@ -13,7 +13,7 @@
 <?php $row = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM Etudiant WHERE Email='$_SESSION[email_e]'")); ?>
 
 
-<div class="container">
+<div class="container slide-profil">
 
 <?php
 
@@ -172,17 +172,16 @@ if (isset($_POST['upload'])){
 
 else{
 
-
 	if ($row['Statut'] == "En attente") {
 		echo "<div class='redirection col-md-6 col-md-offset-3'><h3>Vous allez être redirigé afin de compléter votre profil</h3><br><i class='fa fa-refresh fa-spin fa-5x text-center'></i></div>";
 
-		header("Refresh: 4; url=student.php?maj_profil=$_SESSION[email_e]");
+		header("Refresh: 4; url=student.php?maj_profil=$row[id_crypt]");
 	}
 
-	if ($row['Statut'] == "Validé") {
+	elseif ($row['Statut'] == "Validé") {
 		echo "<div class='redirection col-md-6 col-md-offset-3'><h3>Mise à jour</h3><br><i class='fa fa-refresh fa-spin fa-5x text-center'></i></div>";
 
-		header("Refresh: 2; url=student.php?maj_profil=$_SESSION[email_e]");
+		header("Refresh: 2; url=student.php?maj_profil=$row[id_crypt]");
 	}
 
 } 
@@ -191,17 +190,16 @@ else{
 
 </div>
 
-
 <?php
 
 // Insertion des infos en BDD
 
-if (isset ($_POST) && isset($_POST['prenom']) && isset($_POST['nom']) && isset($_POST['sexe']) && isset($_POST['etudes']) && isset($_POST['ecole'])&& isset($_POST['specialisation']) && isset($_POST['langues']) && isset($_POST['recherche']) && isset($_POST['lieu'])){
-	if (!empty($_POST['prenom']) && !empty($_POST['nom']) && !empty($_POST['sexe']) && !empty($_POST['etudes']) && !empty($_POST['ecole']) && !empty($_POST['specialisation']) && !empty($_POST['langues']) && !empty($_POST['recherche']) && !empty($_POST['lieu'])){
+if (isset($_POST) && isset($_POST['sexe']) && isset($_POST['etudes']) && isset($_POST['ecole'])&& isset($_POST['specialisation']) && isset($_POST['langues']) && isset($_POST['recherche']) && isset($_POST['lieu'])){
+	if (!empty($_POST['sexe']) && !empty($_POST['etudes']) && !empty($_POST['ecole']) && !empty($_POST['specialisation']) && !empty($_POST['langues']) && !empty($_POST['recherche']) && !empty($_POST['lieu'])){
 
 		extract($_POST);
 
-		mysqli_query($link, "UPDATE Etudiant SET Prenom='$prenom', Nom='$nom', Statut='Validé', Sexe='$sexe', Etudes='$etudes', Ecole='$ecole', Specialisation='$specialisation', Langues='$langues', Langues_sup='$langues_sup', Recherche='$recherche', Recherche_sup='$recherche_sup', Lieu_importance='$lieu', Distance='$distance' WHERE Email='$_SESSION[email]' AND Prenom='$row[Prenom]'") or die("Erreur : ".mysqli_errno($link));
+		mysqli_query($link, "UPDATE Etudiant SET Prenom='$prenom', Nom='$nom', Statut='Validé', Sexe='$sexe', Etudes='$etudes', Ecole='$ecole', Specialisation='$specialisation', Langues='$langues', Langues_sup='$langues_sup', Recherche='$recherche', Recherche_sup='$recherche_sup', Lieu_importance='$lieu', Distance='$distance' WHERE Email='$_SESSION[email_e]'")or die("Erreur : ".mysqli_errno($link));
 	}
 }
 
