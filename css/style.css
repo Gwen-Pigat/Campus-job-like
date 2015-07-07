@@ -457,7 +457,6 @@ textarea{
 .lateral .logo img{
 	width: 80%;
 	height: auto;
-	max-height: 50px;
 }
 
 .lateral:hover{
@@ -470,6 +469,7 @@ textarea{
 /*Résumé de l'offre*/
 
 .offer_submit{
+	margin-top: 10%;
 	padding: 2%;
 	background-color: white;
 	border-top: 1px #1C94A3 solid;
@@ -566,3 +566,15 @@ textarea{
 /* Fade pour js */
 
 /*.carousel, .container{display: none}*/
+
+
+/*Balises de submit CV*/
+
+.cv_submit{
+	color: #1C94A3;
+	text-align: center;
+	margin-top: -17%;
+	background-color: white;
+	padding: 2%;
+	border: 2px #1c94a3 solid;
+}

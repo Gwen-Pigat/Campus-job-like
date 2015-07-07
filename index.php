@@ -175,11 +175,6 @@ Donnez nous votre e-mail et nous vous enverrons un lien afin de ré-initialiser 
       }
   }
 
-
-
-      }
-  }
-
  ?>
 
 <!-- Modal pour inscription  -->
