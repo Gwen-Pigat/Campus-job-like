@@ -199,9 +199,16 @@ else{
 				<p><span class='user'>Remunéré</span> : $row[Remunere]<p>
 				<p><span class='user'>Tâches</span> : $row[Taches]<p>
 				<p><span class='user'>Qualifications requises</span> : $row[Qualifications]<p>
-				<p><span class='user'>Compétences</span> : $row[Competences]<p><br>
-				<a href='student.php?$random&details=$row[id]'><button class='btn btn-success'>Postuler à cette offre</button></a>
+				<p><span class='user'>Compétences</span> : $row[Competences]<p><br>";
+				$row_postulant = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM Postulant WHERE id_offre='$row[id]' AND Postulant='$_SESSION[email_e]'"));
+				if ($row_postulant == 0) {
+				echo "<a href='student.php?$random&details=$row[id]'><button class='btn btn-success'>Postuler à cette offre</button></a>
 				</div>";
+				}
+				else{
+				echo "<button class='btn btn-danger'>Vous avez déja postulé à cette offre</button>
+				</div>";	
+				}
 		}
 	}
 
@@ -272,7 +279,7 @@ else{
 		</div>"; 
 		mysqli_query($link, "INSERT INTO Postulant(Postulant,id_offre,Employeur) VALUES ('$_SESSION[email_e]','$_GET[confirmation]','$row_offre[Employeur]')");
 		}
-		
+
 		else{
 			echo "<div class='container'>
 		<h1 class='text-center'>Erreur ! Il semblerait que votre CV ait déja été envoyé</h1>
