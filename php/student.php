@@ -87,27 +87,27 @@ if (isset($_GET['maj_profil'])) {
 
 <?php 
 
-$extensions_valides = array( 'jpg' , 'jpeg' , 'gif' , 'png' );
+// $extensions_valides = array( 'jpg' , 'jpeg' , 'gif' , 'png' );
 
 
 if (isset($_POST['upload'])){
 
-	mkdir("../img/ProfilPicture/$row[id]-$row[id_crypt]", 0777, true);
-	chmod("../img", 0777);
+	mkdir("../Profil/Etudiant/$row[id]-$row[id_crypt]/Img", 0777, true);
+	chmod("../Profil", 0777);
     
     $image_name = $_FILES['image']['name'];
     $image_type = $_FILES['image']['type'];
     $image_size = $_FILES['image']['size'];
     $image_tmp = $_FILES['image']['tmp_name'];
 
-    $random = "img-profil-$row[id]-$row[id_crypt]";
+    $random = "img-profil-$row[id]-$row[id_crypt].jpg";
 
     if ($image_name == "") {
         echo "<script>alert('Vous devez sélectionner une image !')</script>";
     }
 
     else{
-        move_uploaded_file($image_tmp, "../img/ProfilPicture/$row[id]-$row[id_crypt]/$random.jpg");
+        move_uploaded_file($image_tmp, "../Profil/Etudiant/$row[id]-$row[id_crypt]/Img/$random");
         echo "<script>alert('Image mise à jour')</script>";
     }
 }
@@ -116,7 +116,7 @@ if (isset($_POST['upload'])){
 
 		<form class="profil_entreprise_logo col-md-12" action="" method="POST" enctype="multipart/form-data">
 		    <label class="col-md-5 text-right">Votre logo :</label>
-		    <?php echo "<img class='col-md-5' src=../img/ProfilPicture/$row[id]-$row[id_crypt]/img-profil-$row[id]-$row[id_crypt].jpg style='width: 25%'>"; ?><br>
+		    <?php echo "<img class='col-md-5' src=../Profil/Etudiant/$row[id]-$row[id_crypt]/Img/$random style='width: 25%'>"; ?><br>
 		    <div class="col-md-5"></div>
 		    <input class="btn col-md-5" type="file" name="image" size="25" value="test">
 		     <div class="col-md-5"></div>
@@ -176,6 +176,7 @@ if (isset($_POST['upload'])){
 
 else{
 
+	$row = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM Offre"));
 	$row_1 = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM EntrepriseProfil WHERE Email='$row[Employeur]'"));
 
 	$random = str_shuffle("iamrandomizer0123456789");
@@ -183,7 +184,7 @@ else{
 	if ($row['Statut'] == "En attente") {
 		echo "<div class='redirection col-md-6 col-md-offset-3'><h3>Vous allez être redirigé afin de compléter votre profil</h3><br><i class='fa fa-refresh fa-spin fa-5x text-center'></i></div>";
 
-		header("Refresh: 4; url=student.php?maj_profil=$row[id_crypt]");
+		header("Refresh: 4; url=student.php?maj_profil=$_SESSION[email_e]");
 	}
 
 	elseif (isset($_GET['offer_list'])) {
@@ -227,34 +228,55 @@ else{
 			<p><span class='user'>Qualifications : </span>$row[Qualifications]<p>
 			<p><span class='user'>Compétences : </span>$row[Competences]<p>
 	<form class='profil_entreprise_logo col-md-12' action='' method='POST' enctype='multipart/form-data'>
-	    <label>Votre CV :</label><br>
-	    <img src='../img/ProfilCV/CV-$row[id]-$row[id_crypt].pdf style='width: 25%'>
-	    <input type='file' name='image' size='25' value='test'><br>
+	    <label>Votre CV : <span class='red'>PDF obligatoire</span></label><br>
+	    <input type='file' name='upload_cv' size='25' value='Upload CV' required><br>
+	    <label>Votre lettre de motivation : <span class='red'>PDF obligatoire</span></label><br>
+	    <input type='file' name='lettre_motivation' size='25' value='Upload lettre de motivation' required><br>
 	    <input type='hidden' name='numero_offre' value='$_GET[details]'><br>
-	    <input class='btn btn-success' type='submit' name='upload_cv' value='Envoyer'>
+	    <input class='btn btn-success' type='submit' name='submit' value='Envoyer'>
 	</form>
 </div>";
 
-		if (isset($_POST['upload_cv']) && isset($_POST['numero_offre'])){
+		if (isset($_POST['submit']) && isset($_POST['numero_offre'])) {
 
-			mkdir("../img/ProfilCV/$row_user[id]-$row_user[id_crypt]", 0777, true);
-			chmod("../img", 0777);
+			// Numero_offre correspond à l'input caché faisant référence a l'id de l'offre
+
+			mkdir("../Profil/Etudiant/$row_user[id]-$row_user[id_crypt]/CV", 0777, true);
+			chmod("../Profil", 0777);
     
-		    $image_name = $_FILES['image']['name'];
-		    $image_type = $_FILES['image']['type'];
-		    $image_size = $_FILES['image']['size'];
-		    $image_tmp = $_FILES['image']['tmp_name'];
+			mkdir("../Profil/Etudiant/$row_user[id]-$row_user[id_crypt]/Lettre_motivation", 0777, true);
+			chmod("../Profil", 0777);
 
-		    $random = "cv-profil-$row_user[id]-$row_user[id_crypt]";
 
-		    if ($image_name == "") {
+			// Propriétés du CV
+		    $cv_name = $_FILES['upload_cv']['name'];
+		    $cv_type = $_FILES['upload_cv']['type'];
+		    $cv_size = $_FILES['upload_cv']['size'];
+		    $cv_tmp = $_FILES['upload_cv']['tmp_name'];
+
+
+		    // Propriétés de la lettre de motivation
+		    $lettre_name = $_FILES['lettre_motivation']['name'];
+		    $lettre_type = $_FILES['lettre_motivation']['type'];
+		    $lettre_size = $_FILES['lettre_motivation']['size'];
+		    $lettre_tmp = $_FILES['lettre_motivation']['tmp_name'];
+
+
+		    $random_cv = "CV-profil-$row_user[id]-$row_user[id_crypt].pdf";
+		    $random_lettre = "Lettre-profil-$row_user[id]-$row_user[id_crypt].pdf";
+
+		    if ($lettre_name == "" || $cv_name == "") {
 		        echo "<script>alert('Vous devez sélectionner un fichier valide !')</script>";
 		    }
 
 		    else{
-		        move_uploaded_file($image_tmp, "../img/ProfilCV/$row_user[id]-$row_user[id_crypt]/$random.pdf");
-		        echo "<div class='cv_submit col-md-6 col-md-offset-3'><h3>Envoi de votre CV</h3><br><i class='fa fa-refresh fa-spin fa-5x text-center'></i></div>";
-		        header("Refresh: 2; url=student.php?confirmation=$_POST[numero_offre]");
+		    	$random =str_shuffle("iamthelaw0123456789");
+		    	$row = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM Offre"));
+		    	$row['id'] = md5($row['id']);
+		        move_uploaded_file($cv_tmp, "../Profil/Etudiant/$row_user[id]-$row_user[id_crypt]/CV/$random_cv");
+		        move_uploaded_file($lettre_tmp, "../Profil/Etudiant/$row_user[id]-$row_user[id_crypt]/Lettre_motivation/$random_lettre");
+		        echo "<div class='cv_lettre_submit col-md-6 col-md-offset-3'><h3>Envoi de votre CV et de votre lettre de motivation</h3><br><i class='fa fa-refresh fa-spin fa-5x text-center'></i></div>";
+		        header("Refresh: 2; url=student.php?confirmation=$_POST[numero_offre]&$row[id]");
 		    }
 		}
 	}
@@ -264,13 +286,16 @@ else{
 		$row = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM Etudiant WHERE Email='$_SESSION[email_e]'"));
 
 		$row_postulant = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM Postulant WHERE Postulant='$_SESSION[email_e]' AND id_offre='$_GET[confirmation]'"));
+
 		$row_offre = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM Offre WHERE id='$_GET[confirmation]'"));
 
 		if ($row_postulant == 0) {
 
-			$offre = $row['nbr_offre'] + 1;
+			$ajout_etudiant = $row['nbr_offre'] + 1;
+			$ajout_offre = $row['nbr_postulant'] + 1;
 
-		mysqli_query($link, "UPDATE Etudiant SET nbr_offre='$offre' WHERE Email='$_SESSION[email_e]'");
+		mysqli_query($link, "UPDATE Etudiant SET nbr_offre='$ajout_etudiant' WHERE Email='$_SESSION[email_e]'");
+		mysqli_query($link, "UPDATE Offre SET nbr_postulant='$ajout_offre' WHERE id='$row_offre[id]'");
 
 			echo "<div class='container'>
 		<h1 class='text-center'>CV envoyé</h1>
@@ -284,16 +309,13 @@ else{
 			echo "<div class='container'>
 		<h1 class='text-center'>Erreur ! Il semblerait que votre CV ait déja été envoyé</h1>
 		</div>"; 
-		header("Refresh: 3; url=student.php");
-		}
-
-		
+		header("Refresh: 3; url=student.php?maj_profil=$_SESSION[email_e]");
+		}	
 	}
 
 	else{
 		echo "<div class='redirection col-md-6 col-md-offset-3'><h3>Mise à jour</h3><br><i class='fa fa-refresh fa-spin fa-5x text-center'></i></div>";
-
-		header("Refresh: 2; url=student.php?maj_profil=$row[id_crypt]");
+		header("Refresh: 2; url=student.php?maj_profil=$_SESSION[email_e]");
 	}
 } 
 

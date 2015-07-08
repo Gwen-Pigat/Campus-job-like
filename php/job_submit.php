@@ -14,7 +14,6 @@
 
 <?php $row = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM EntrepriseProfil WHERE Email='$_SESSION[email]'")); ?>
 
-
 <title><?php echo $row['Entreprise']; ?></title>
 
 <div class="container">
@@ -25,19 +24,22 @@
 
 if (isset($_POST['upload'])){
     
+    mkdir("../img/ProfilPicture/$row[id]-$row[id_crypt]", 0777, true);
+    chmod("../img", 0777);
+    
     $image_name = $_FILES['image']['name'];
     $image_type = $_FILES['image']['type'];
     $image_size = $_FILES['image']['size'];
     $image_tmp = $_FILES['image']['tmp_name'];
 
-    $random = "img-profil-$row[id]-$_SESSION[email]";
+    $random = "img-profil-$row[id]-$row[id_crypt]";
 
     if ($image_name == "") {
         echo "<script>alert('Vous devez sélectionner une image !')</script>";
     }
 
     else{
-        move_uploaded_file($image_tmp, "../img/ProfilPicture/$random.jpg");
+        move_uploaded_file($image_tmp, "../img/ProfilPicture/$row[id]-$row[id_crypt]/$random.jpg");
         echo "<script>alert('Image mise à jour')</script>";
     }
 }
@@ -46,7 +48,7 @@ if (isset($_POST['upload'])){
 
 <form class="profil_entreprise_logo col-md-12" action="" method="POST" enctype="multipart/form-data">
     <label class="col-md-5 text-right">Votre logo :</label>
-    <?php echo "<img class='col-md-5' src=../img/ProfilPicture/img-profil-$row[id]-$_SESSION[email].jpg style='width: 25%'>"; ?><br>
+    <?php echo "<img class='col-md-5' src=../img/ProfilPicture/$row[id]-$row[id_crypt]/img-profil-$row[id]-$row[id_crypt].jpg style='width: 25%'>"; ?><br>
     <div class="col-md-5"></div>
     <input class="btn col-md-5" type="file" name="image" size="25" value="test">
      <div class="col-md-5"></div>

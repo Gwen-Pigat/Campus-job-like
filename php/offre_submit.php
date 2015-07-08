@@ -218,7 +218,7 @@ if (isset($_GET) && isset($_GET['liste_etudiant'])) {
 
 		while ($row = mysqli_fetch_assoc($result)) {
 			echo "<div class='col-md-6 offer_list'>
-			<img class='col-md-4' src='../img/ProfilPicture/img-profil-$row[id]-$row[id_crypt].jpg'>
+			<img class='col-md-4' src='../img/ProfilPicture/$row[id]-$row[id_crypt]/img-profil-$row[id]-$row[id_crypt].jpg'>
 			<p><span class='user'>Nom</span> : $row[Nom]<p>
 			<p><span class='user'>Prénom</span> : $row[Prenom]<p>
 			<p><span class='user'>Email</span> : $row[Email]<p>

@@ -1,3 +1,8 @@
+<html>
+<head>
+	<title><?php echo $title; ?></title>
+</head>
+<body>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">

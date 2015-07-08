@@ -1,18 +1,3 @@
-<html>
-<head>
-<?php include "include/header.php"; ?>
-
-</head>
-<body>
-
-<section class="social-media">
-<a href=""><i class="fa fa-facebook-square fa-3x"></i></a>
-<a href=""><i class="fa fa-linkedin-square fa-3x"></i></a>
-<a href=""><i class="fa fa-twitter-square fa-3x"></i></a>
-<a href=""><i class="fa fa-youtube-square fa-3x"></i></a>
-</section>
-
-
 <?php
 
  $random = str_shuffle("1234567890azertyuiop");
@@ -28,9 +13,18 @@ if (isset($_GET['Employeur'])) {
       alert("Mauvais mot de passe ou nom d'utilisateur");
     });
   </script>
-  <?php } ?>
+  <?php }
+$title = "JobFinder | Partie Employeur";
+include "include/header.php";
 
-<title>JobFinder | Employeur</title>
+  ?>
+
+<section class="social-media">
+<a href=""><i class="fa fa-facebook-square fa-3x"></i></a>
+<a href=""><i class="fa fa-linkedin-square fa-3x"></i></a>
+<a href=""><i class="fa fa-twitter-square fa-3x"></i></a>
+<a href=""><i class="fa fa-youtube-square fa-3x"></i></a>
+</section>
 
 <div class="header">
 
@@ -354,10 +348,19 @@ Donnez nous votre e-mail et nous vous enverrons un lien afin de ré-initialiser 
 //Partie étudiant
 
 else{
+  
+  $title = "JobFinder | Partie Etudiant";
+  include "include/header.php";
+  include "include/carousel.php";
 
-  include "include/carousel.php" ?>
+?>
 
-<title>JobFinder | Etudiant</title>
+<section class="social-media">
+<a href=""><i class="fa fa-facebook-square fa-3x"></i></a>
+<a href=""><i class="fa fa-linkedin-square fa-3x"></i></a>
+<a href=""><i class="fa fa-twitter-square fa-3x"></i></a>
+<a href=""><i class="fa fa-youtube-square fa-3x"></i></a>
+</section>
 
 <section class="categorie">
 <?php echo "<a href='index.php?Employeur'><button class='btn-employeur'>Employeur</button></a>
