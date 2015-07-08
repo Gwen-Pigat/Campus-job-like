@@ -217,9 +217,14 @@ if (isset($_GET) && isset($_GET['liste_etudiant'])) {
 		<?php	$result = mysqli_query($link, "SELECT * FROM Etudiant"); 
 
 		while ($row = mysqli_fetch_assoc($result)) {
-			echo "<div class='col-md-6 offer_list'>
-			<img class='col-md-4' src='../img/ProfilPicture/$row[id]-$row[id_crypt]/img-profil-$row[id]-$row[id_crypt].jpg'>
-			<p><span class='user'>Nom</span> : $row[Nom]<p>
+			echo "<div class='col-md-6 offer_list'>";
+			if(file_exists("../Profil/Etudiant/$row[id]-$row[id_crypt]/Img/img-profil-$row[id]-$row[id_crypt].jpg")) {
+			 echo "<img src=../Profil/Etudiant/$row[id]-$row[id_crypt]/Img/img-profil-$row[id]-$row[id_crypt].jpg>"; 
+			}
+			else{
+			 echo "<img src=../img/user_default.png>"; 
+			}
+			echo "<p><span class='user'>Nom</span> : $row[Nom]<p>
 			<p><span class='user'>Prénom</span> : $row[Prenom]<p>
 			<p><span class='user'>Email</span> : $row[Email]<p>
 			<p><span class='user'>Sexe</span> : $row[Sexe]<p>

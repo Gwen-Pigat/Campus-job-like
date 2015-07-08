@@ -2,6 +2,7 @@
 
 session_start();
 
+$random = str_shuffle("azertyuiopmlkjhgfdsqwxcvbn0123456789");
 $link = mysqli_connect("localhost","root","motdepasselocalhostgwen","JobFinder");
 
 if (empty($_SESSION['email'])) {

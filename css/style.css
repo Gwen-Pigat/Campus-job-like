@@ -314,9 +314,10 @@ footer ul a:hover{
 
 .contact_us{
 	margin-top: 5%;
-	border-top: 1px black solid; 
+	margin-bottom: 0;
+	border-top: 1px white solid; 
 	padding: 2%; 
-	background-color: black; 
+	background-color: #3C3C3C; 
 	color: white;
 }
 
@@ -495,6 +496,10 @@ textarea{
 	margin-top: 5%;
 }
 
+.offer_list img{
+	width: 20%;
+}
+
 .offer_submit .user{
 	color: #ff0000;
 	margin-bottom: 4%;
@@ -523,7 +528,6 @@ textarea{
 
 .creation_etudiant{
 	padding: 2%;
-	margin-top: 8%;
 }
 
 .creation_etudiant select{

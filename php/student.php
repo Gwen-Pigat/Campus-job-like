@@ -1,3 +1,11 @@
+<html>
+<head>
+	<title>Job finder</title>
+</head>
+<body>
+
+</body>
+</html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
@@ -116,7 +124,7 @@ if (isset($_POST['upload'])){
 
 		<form class="profil_entreprise_logo col-md-12" action="" method="POST" enctype="multipart/form-data">
 		    <label class="col-md-5 text-right">Votre logo :</label>
-		    <?php echo "<img class='col-md-5' src=../Profil/Etudiant/$row[id]-$row[id_crypt]/Img/$random style='width: 25%'>"; ?><br>
+		    <?php echo "<img class='col-md-5' src=../Profil/Etudiant/$row[id]-$row[id_crypt]/Img/img-profil-$row[id]-$row[id_crypt].jpg style='width: 25%'>"; ?><br>
 		    <div class="col-md-5"></div>
 		    <input class="btn col-md-5" type="file" name="image" size="25" value="test">
 		     <div class="col-md-5"></div>
@@ -179,12 +187,10 @@ else{
 	$row = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM Offre"));
 	$row_1 = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM EntrepriseProfil WHERE Email='$row[Employeur]'"));
 
-	$random = str_shuffle("iamrandomizer0123456789");
-
 	if ($row['Statut'] == "En attente") {
 		echo "<div class='redirection col-md-6 col-md-offset-3'><h3>Vous allez être redirigé afin de compléter votre profil</h3><br><i class='fa fa-refresh fa-spin fa-5x text-center'></i></div>";
 
-		header("Refresh: 4; url=student.php?maj_profil=$_SESSION[email_e]");
+		header("Refresh: 4; url=student.php?maj_profil=$random&$row[id_crypt]&$_SESSION[email_e]");
 	}
 
 	elseif (isset($_GET['offer_list'])) {
@@ -217,11 +223,11 @@ else{
 
 		$row = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM Offre"));
 		$row_user = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM Etudiant"));
+		$row_entreprise = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM EntrepriseProfil WHERE Email='$row[Employeur]'"));
 
-		echo "<div class='offer_submit container'>
-	<img class='col-md-5' src=../img/user_default.png style='width: 50%'>
-			<h1><span class='user'>$_SESSION[email]</span></h1>
-			<p>L'annonce :</p><br>
+		echo "<h1 class='text-center'>L'annonce</h1><div class='offer_submit container'>
+	<img class='col-md-5' src=../Profil/Employeur/$row_entreprise[id]-$row_entreprise[id_crypt]/Img/img-profil-$row_entreprise[id]-$row_entreprise[id_crypt].jpg style='width: 50%'>
+			<p><span class='user'>l'entreprise : </span>$row_entreprise[Entreprise]<p>
 			<p><span class='user'>Nom : </span>$row[Titre]<p>
 			<p><span class='user'>Rémunération : </span>$row[Remunere]<p>
 			<p><span class='user'>Les tâches : </span>$row[Taches]<p>
@@ -270,12 +276,11 @@ else{
 		    }
 
 		    else{
-		    	$random =str_shuffle("iamthelaw0123456789");
 		    	$row = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM Offre"));
 		    	$row['id'] = md5($row['id']);
 		        move_uploaded_file($cv_tmp, "../Profil/Etudiant/$row_user[id]-$row_user[id_crypt]/CV/$random_cv");
 		        move_uploaded_file($lettre_tmp, "../Profil/Etudiant/$row_user[id]-$row_user[id_crypt]/Lettre_motivation/$random_lettre");
-		        echo "<div class='cv_lettre_submit col-md-6 col-md-offset-3'><h3>Envoi de votre CV et de votre lettre de motivation</h3><br><i class='fa fa-refresh fa-spin fa-5x text-center'></i></div>";
+		        echo "<div class='cv_lettre_submit col-md-6 col-md-offset-3'><h3>Préparation à l'envoi</h3><br><i class='fa fa-refresh fa-spin fa-5x text-center'></i></div>";
 		        header("Refresh: 2; url=student.php?confirmation=$_POST[numero_offre]&$row[id]");
 		    }
 		}
@@ -297,25 +302,25 @@ else{
 		mysqli_query($link, "UPDATE Etudiant SET nbr_offre='$ajout_etudiant' WHERE Email='$_SESSION[email_e]'");
 		mysqli_query($link, "UPDATE Offre SET nbr_postulant='$ajout_offre' WHERE id='$row_offre[id]'");
 
-			echo "<div class='container'>
-		<h1 class='text-center'>CV envoyé</h1>
-		<h3>Votre CV à été envoyé et l'employeur le recevra par e-mail</h3><br>
-		<i class='fa fa-refresh fa-spin fa-5x text-center'></i>
+			echo "<div class='container text-center'>
+		<h1 class='text-center'>CV et lettre de motivation envoyés</h1>
+		<i class='fa fa-refresh fa-spin fa-5x text-center' style='color: #ff0000'></i>
 		</div>"; 
-		mysqli_query($link, "INSERT INTO Postulant(Postulant,id_offre,Employeur) VALUES ('$_SESSION[email_e]','$_GET[confirmation]','$row_offre[Employeur]')");
+		mysqli_query($link, "INSERT INTO Postulant(Postulant,id_offre,Employeur, Envoi) VALUES ('$_SESSION[email_e]','$_GET[confirmation]','$row_offre[Employeur]', 'Non')");
+		header("Refresh: 2; url=student.php?maj_profil='$random&$row[id_crypt]&$_SESSION[email_e]'");
 		}
 
 		else{
 			echo "<div class='container'>
 		<h1 class='text-center'>Erreur ! Il semblerait que votre CV ait déja été envoyé</h1>
 		</div>"; 
-		header("Refresh: 3; url=student.php?maj_profil=$_SESSION[email_e]");
+		header("Refresh: 3; url=student.php?maj_profil=$random&$row[id_crypt]&$_SESSION[email_e]");
 		}	
 	}
 
 	else{
 		echo "<div class='redirection col-md-6 col-md-offset-3'><h3>Mise à jour</h3><br><i class='fa fa-refresh fa-spin fa-5x text-center'></i></div>";
-		header("Refresh: 2; url=student.php?maj_profil=$_SESSION[email_e]");
+		header("Refresh: 2; url=student.php?maj_profil=$random&$row[id_crypt]&$_SESSION[email_e]");
 	}
 } 
 

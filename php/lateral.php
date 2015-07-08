@@ -3,7 +3,15 @@
 <nav class="lateral">
 	<div class="logo text-center">
 		<?php $row = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM EntrepriseProfil WHERE Email='$_SESSION[email]'")); ?>
- <?php echo "<img src=../img/ProfilPicture/$row[id]-$row[id_crypt]/img-profil-$row[id]-$row[id_crypt].jpg>"; ?><br><br>
+ <?php 
+
+if(file_exists("../Profil/Employeur/$row[id]-$row[id_crypt]/Img/img-profil-$row[id]-$row[id_crypt].jpg")) {
+ echo "<img src=../Profil/Employeur/$row[id]-$row[id_crypt]/Img/img-profil-$row[id]-$row[id_crypt].jpg>"; 
+}
+else{
+ echo "<img src=../img/user_default.png>"; 
+}
+ ?><br><br>
   </div>
 	<ul class="nav nav-stacked span-hide">
 		<?php echo "<a href='job_submit.php'>" ?><li><i class="fa fa-user fa-3x"></i> <span class="lateral-aside">Mon profil</span></li></a>
