@@ -231,8 +231,8 @@ elseif (isset($_GET['liste_postulants']) && isset($_GET['for_offer'])) {
 			<p><span class='user'>Ecole</span> : $row[Ecole]<p>
 			<p><span class='user'>Spécialisation</span> : $row[Specialisation]<p>
 			<p><span class='user'>langues</span> : $row[Langues]<p>
-			<p><span class='user_postulant'>CV</span> : ../Profil/Etudiant/$row[id]-$row[id_crypt]//img-profil-$row[id]-$row[id_crypt].jpg<p>
-			<p><span class='user_postulant'>Lettre de motivation</span> : <p>
+			<p><span class='user_postulant'>CV</span> : <span class='download_file'><a target='_blank' href='../Profil/Etudiant/$row[id]-$row[id_crypt]/CV/CV-profil-$row[id]-$row[id_crypt].pdf'><button class='btn btn-danger'>Télécharger</button></a></span><p>
+			<p><span class='user_postulant'>Lettre de motivation</span> : <span class='download_file'><a target='_blank' href='../Profil/Etudiant/$row[id]-$row[id_crypt]/Lettre_motivation/Lettre-profil-$row[id]-$row[id_crypt].pdf'><button class='btn btn-danger'>Télécharger</button></a></span><p>
 			</div>";		
 		}
 	}
