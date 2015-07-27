@@ -222,16 +222,16 @@ else{
 
 		echo "<h1 class='text-center'>L'annonce</h1><div class='offer_submit container'>
 	<img class='col-md-5' src=../Profil/Employeur/$row_entreprise[id]-$row_entreprise[id_crypt]/Img/img-profil-$row_entreprise[id]-$row_entreprise[id_crypt].jpg style='width: 50%'>
-			<p><span class='user'>l'entreprise : </span>$row_entreprise[Entreprise]<p>
-			<p><span class='user'>Nom : </span>$row[Titre]<p>
-			<p><span class='user'>Rémunération : </span>$row[Remunere]<p>
-			<p><span class='user'>Les tâches : </span>$row[Taches]<p>
-			<p><span class='user'>Qualifications : </span>$row[Qualifications]<p>
-			<p><span class='user'>Compétences : </span>$row[Competences]<p>
+			<p><span class='user'>l'entreprise :</span> $row_entreprise[Entreprise]<p>
+			<p><span class='user'>Nom :</span> $row[Titre]<p>
+			<p><span class='user'>Rémunération :</span> $row[Remunere]<p>
+			<p><span class='user'>Les tâches :</span> $row[Taches]<p>
+			<p><span class='user'>Qualifications :</span> $row[Qualifications]<p>
+			<p><span class='user'>Compétences :</span> $row[Competences]<p>
 	<form class='profil_entreprise_logo col-md-12' action='' method='POST' enctype='multipart/form-data'>
-	    <label>Votre CV : <span class='red'>PDF obligatoire</span></label><br>
+	    <label>Votre CV :<span class='red'> PDF obligatoire</span></label><br>
 	    <input type='file' name='upload_cv' size='25' value='Upload CV' required><br>
-	    <label>Votre lettre de motivation : <span class='red'>PDF obligatoire</span></label><br>
+	    <label>Votre lettre de motivation :<span class='red'> PDF obligatoire</span></label><br>
 	    <input type='file' name='lettre_motivation' size='25' value='Upload lettre de motivation' required><br>
 	    <input type='hidden' name='numero_offre' value='$_GET[details]'><br>
 	    <input class='btn btn-success' type='submit' name='submit' value='Envoyer'>
@@ -276,12 +276,12 @@ else{
 		        move_uploaded_file($cv_tmp, "../Profil/Etudiant/$row_user[id]-$row_user[id_crypt]/CV/$random_cv");
 		        move_uploaded_file($lettre_tmp, "../Profil/Etudiant/$row_user[id]-$row_user[id_crypt]/Lettre_motivation/$random_lettre");
 		        echo "<div class='cv_lettre_submit col-md-6 col-md-offset-3'><h3>Préparation à l'envoi</h3><br><i class='fa fa-refresh fa-spin fa-5x text-center'></i></div>";
-		        header("Refresh: 2; url=student.php?confirmation=$_POST[numero_offre]&$row[id]");
+		        header("Refresh: 2; url=student.php?confirmation=$_POST[numero_offre]&$random");
 		    }
 		}
 	}
 
-	elseif (isset($_GET['confirmation'])) {
+	elseif (isset($_GET) && isset($_GET['confirmation'])) {
 
 		$row = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM Etudiant WHERE Email='$_SESSION[email_e]'"));
 		$row_postulant = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM Postulant WHERE Postulant='$_SESSION[email_e]' AND id_offre='$_GET[confirmation]'"));
@@ -299,35 +299,8 @@ else{
 		<h1 class='text-center'>CV et lettre de motivation envoyés</h1>
 		<i class='fa fa-refresh fa-spin fa-5x text-center' style='color: #ff0000'></i>
 		</div>"; 
-		mysqli_query($link, "INSERT INTO Postulant(Postulant,id_offre,Employeur, Envoi) VALUES ('$_SESSION[email_e]','$_GET[confirmation]','$row_offre[Employeur]', 'Non')");
+		mysqli_query($link, "INSERT INTO Postulant(Postulant,id_offre,Employeur, Envoi) VALUES ('$_SESSION[email_e]','$_GET[confirmation]','$row_offre[Employeur]', 'Oui')");
 		header("Refresh: 2; url=student.php?maj_profil='$random&$row[id_crypt]&$_SESSION[email_e]'");
-
-
-		// Envoi du mail à l'employeur
-
-		// require 'PHPMailer/class.phpmailer.php';
-
-		// // Instantiate it
-		// $mail = new phpmailer();
-		// $mail->AddStringAttachment("../Profil/Etudiant/$row[id]-$row[id_crypt]/CV/CV-profil-$row[id]-$row[id_crypt]");
-		// $mail->AddStringAttachment("../Profil/Etudiant/$row[id]-$row[id_crypt]/Lettre_motivation/lettre-profil-$row[id]-$row[id_crypt]");
-
-		// // Define who the message is from
-		// $mail->FromName = "Postulant - Offre "."$row_offre[Titre]";
-
-		// // Set the subject of the message
-		// $mail->Subject = "Un étudiant à postulé à une de vos offres !"
-
-		// //  the body of the message
-		// $body = "L'étudiant $row[Nom] $row[Prenom] a postulé à une de vos offres ($row_offre[Titre]).\n
-		// Vous trouverez ci-desous, en pièce jointe, son CV asinsi que sa lettre de motivation.";
-		// // Add a recipient address
-		// $mail->AddAddress("$row[Employeur]");
-
-		// if(!$mail->Send())
-		//  echo ('');
-		// else
-		//  echo ('');
 
 		}
 
