@@ -194,36 +194,26 @@ if (isset($_GET) && isset($_GET['liste_offres'])) {
 			</div>";
 			}
 			else{
-			echo "<p><span class='user_postulants'>Nombre de postulants</span> : <a href='offre_submit.php?liste_etudiant&offre_identifiant=$row[id]&$random'>$row[nbr_postulant]</a><p>
+			echo "<p><span class='user_postulants'>Nombre de postulants</span> : <a href='offre_submit.php?liste_postulants&for_offer=$row[id]&$random'>$row[nbr_postulant]</a><p>
 			</div>";
 			}
 	}
 }
 
+// Liste des postulants
 
-//Retirer une offre
+elseif (isset($_GET['liste_postulants']) && isset($_GET['for_offer'])) {
+	if (!empty($_GET['for_offer'])) {
 
-if (isset($_GET) && isset($_GET['remove'])) {
-	mysqli_query($link, "DELETE FROM Offre WHERE id='$_GET[remove]'");
+	$row_offre = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM Offre WHERE id='$_GET[for_offer]' AND Employeur='$_SESSION[email]'"));
 
-	$row = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM EntrepriseProfil WHERE Email='$_SESSION[email]'"));
-	$remove = $row['Offres'] - 1;
+	echo "<div class='container'>
+	<span class='poster text-center'><a href='offre_submit.php?poste_offre=$_SESSION[email]'>Poster une offre</a></span>
+	<h1 class='text-center' style='margin-top: 5%; font-family: Inconsolata'><strong>\"$row_offre[Titre]\"</strong><br>Liste des postulants</h1>"; 
 
-	mysqli_query($link, "UPDATE EntrepriseProfil SET Offres='$remove' WHERE Email='$_SESSION[email]'");
+		$row_postulant = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM Postulant WHERE id_offre='$_GET[for_offer]' AND Employeur='$_SESSION[email]'"));
 
-	header("Location: offre_submit.php?liste_offres=$_SESSION[email]");
-}
-
-
-// Liste des étudiants
-
-elseif (isset($_GET['liste_etudiant']) && isset($_GET['offre_identifiant'])) {
-	if (!empty($_GET['offre_identifiant'])) { ?>
-	<div class="container">
-	<?php echo "<span class='poster text-center'><a href='offre_submit.php?poste_offre=$_SESSION[email]'>Poster une offre</a></span>"; ?>
-	<h1 class="text-center" style="margin-top: 5%; font-family: Inconsolata"><strong><?php echo $row['Entreprise']; ?></strong><br>Liste des étudiants</h1> 
-
-		<?php	$result = mysqli_query($link, "SELECT * FROM Etudiant"); 
+		$result = mysqli_query($link, "SELECT * FROM Etudiant WHERE Email='$row_postulant[Postulant]'");
 
 		while ($row = mysqli_fetch_assoc($result)) {
 			echo "<div class='col-md-6 offer_list'>";
@@ -241,9 +231,25 @@ elseif (isset($_GET['liste_etudiant']) && isset($_GET['offre_identifiant'])) {
 			<p><span class='user'>Ecole</span> : $row[Ecole]<p>
 			<p><span class='user'>Spécialisation</span> : $row[Specialisation]<p>
 			<p><span class='user'>langues</span> : $row[Langues]<p>
+			<p><span class='user_postulant'>CV</span> : ../Profil/Etudiant/$row[id]-$row[id_crypt]//img-profil-$row[id]-$row[id_crypt].jpg<p>
+			<p><span class='user_postulant'>Lettre de motivation</span> : <p>
 			</div>";		
 		}
 	}
+}
+
+
+//Retirer une offre
+
+if (isset($_GET) && isset($_GET['remove'])) {
+	mysqli_query($link, "DELETE FROM Offre WHERE id='$_GET[remove]'");
+
+	$row = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM EntrepriseProfil WHERE Email='$_SESSION[email]'"));
+	$remove = $row['Offres'] - 1;
+
+	mysqli_query($link, "UPDATE EntrepriseProfil SET Offres='$remove' WHERE Email='$_SESSION[email]'");
+
+	header("Location: offre_submit.php?liste_offres=$_SESSION[email]");
 }
 
 ?>
