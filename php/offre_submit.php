@@ -65,7 +65,7 @@ if (isset($_GET) && isset($_GET['offre'])) {
 
 	mysqli_query($link, "INSERT INTO Offre(Employeur,Titre,Remunere,Debut,Taches,Qualifications,Competences, Ajout) VALUES ('$_SESSION[email]','$offre_name','$remuneration','$date','$tasks','$qualifications','$competences', '$ajout')");
 	echo "<div class='offer_submit container'>
-	<img class='col-md-5' src=../img/ProfilPicture/img-profil-$row[id]-$_SESSION[email].jpg style='width: 50%'>
+	<img class='col-md-5' src=../Profil/Employeur/$row[id]-$row[id_crypt]/Img/img-profil-$row[id]-$row[id_crypt].jpg style='width: 50%'>
 			<h1><span class='user'>$_SESSION[email]</span></h1>
 			<p>Résumé de votre anonce :</p><br>
 			<p><span class='user'>Nom : </span>$offre_name<p>
@@ -95,7 +95,7 @@ if (isset($_GET) && isset($_GET['validation_offre']) && isset($_GET['employeur']
 		mysqli_query($link, "UPDATE EntrepriseProfil SET Offres='$add' WHERE Email='$_SESSION[email]'");
 
 	echo "<div class='container'>
-	<img class='col-md-5' src=../img/ProfilPicture/img-profil-$row[id]-$row[email].jpg style='width: 25%'><br>
+	<img class='col-md-5' src=../Profil/Employeur/$row[id]-$row[id_crypt]/Img/img-profil-$row[id]-$row[id_crypt].jpg style='width: 25%'><br>
 	<h1 class='user'>$row[Entreprise]</h1>
 	<h3>Votre offre à bien été validée, cliquez <a class='user' href='offre_submit.php?liste_offres=$row[Entreprise]'>ici</a> pour y accèder</h3>
 	</div>";
@@ -187,10 +187,19 @@ if (isset($_GET) && isset($_GET['liste_offres'])) {
 			<p><span class='user'>Date d'ajout</span> : $row[Ajout]<p>
 			<p><span class='user'>Tâches à effectuer</span> : $row[Taches]<p>
 			<p><span class='user'>Qualifications requises</span> : $row[Qualifications]<p>
-			<p><span class='user'>Compétences</span> : $row[Competences]<p>
+			<p><span class='user'>Compétences</span> : $row[Competences]<p>";
+
+			if ($row['nbr_postulant'] == 0) {
+			echo "<p><span class='user'>Nombre de postulants</span> : $row[nbr_postulant]<p>
 			</div>";
+			}
+			else{
+			echo "<p><span class='user_postulants'>Nombre de postulants</span> : <a href='offre_submit.php?liste_etudiant&offre_identifiant=$row[id]&$random'>$row[nbr_postulant]</a><p>
+			</div>";
+			}
 	}
 }
+
 
 //Retirer une offre
 
@@ -208,8 +217,8 @@ if (isset($_GET) && isset($_GET['remove'])) {
 
 // Liste des étudiants
 
-if (isset($_GET) && isset($_GET['liste_etudiant'])) {
-	if (!empty($_GET['liste_etudiant'])) { ?>
+elseif (isset($_GET['liste_etudiant']) && isset($_GET['offre_identifiant'])) {
+	if (!empty($_GET['offre_identifiant'])) { ?>
 	<div class="container">
 	<?php echo "<span class='poster text-center'><a href='offre_submit.php?poste_offre=$_SESSION[email]'>Poster une offre</a></span>"; ?>
 	<h1 class="text-center" style="margin-top: 5%; font-family: Inconsolata"><strong><?php echo $row['Entreprise']; ?></strong><br>Liste des étudiants</h1> 

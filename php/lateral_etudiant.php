@@ -13,6 +13,7 @@ if(file_exists("../Profil/Etudiant/$row[id]-$row[id_crypt]/Img/img-profil-$row[i
 else{
  echo "<img src=../img/user_default.png>"; 
 } 
+
 ?>
 
 		<br><br>

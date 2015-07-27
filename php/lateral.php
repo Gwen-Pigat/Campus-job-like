@@ -17,7 +17,6 @@ else{
 		<?php echo "<a href='job_submit.php'>" ?><li><i class="fa fa-user fa-3x"></i> <span class="lateral-aside">Mon profil</span></li></a>
 		<?php echo "<a href='offre_submit.php?poste_offre=$row[Entreprise]'>" ?><li><i class="fa fa-plus-circle fa-3x"></i> <span class="lateral-aside">Poster une offre</span></li></a>
 		<?php echo "<a href='offre_submit.php?liste_offres=$row[Entreprise]'>" ?><li><i class="fa fa-pencil-square-o fa-3x"></i> <span class="lateral-aside">Liste de mes offres</span></li></a>
-		<?php echo "<a href='offre_submit.php?liste_etudiant=$row[Entreprise]'>" ?><li class="student"><i class="fa fa-university fa-3x"></i> <span class="lateral-aside">Liste des étudiants</span></li></a>
 		<a href="logout.php"><li class="logout"><i class="fa fa-hand-o-left fa-3x"></i> <span class="lateral-aside">Déconnexion</span></li></a>
 	</ul>
 </nav>

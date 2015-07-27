@@ -19,7 +19,7 @@ $(document).ready(function(){
 		$(".team-info-6").toggle(100);
 	});
 	$(".lateral").hover(function(){
-		$(".lateral-aside").toggle(100);
+		$(".lateral-aside").fadeIn(1000);
 	});
 
 	$(".container").fadeIn(1000);

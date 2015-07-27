@@ -1,25 +1,23 @@
 <html>
-<head>
-	<title>Job finder</title>
-</head>
+	<head>
+		<title>Partie Etudiant</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/style.css">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+	</head>
 <body>
 
-</body>
-</html>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="../css/style.css">
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-<link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../js/slider.js"></script>
 
-<?php include "../include/connexion_etudiant.php"; include "lateral_etudiant.php";  ?>
+<?php 
 
-<?php $row = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM Etudiant WHERE Email='$_SESSION[email_e]'")); ?>
+include "../include/connexion_etudiant.php"; include "lateral_etudiant.php";
 
+$row = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM Etudiant WHERE Email='$_SESSION[email_e]'")); 
+
+ ?>
 
 <div class="container slide-profil">
 
@@ -28,6 +26,7 @@
 // Création du compte + actualisation du statut
 
 if (isset($_GET['maj_profil'])) { 
+
 	if (empty($row['Sexe']) && empty($row['Etudes']) && empty($row['Ecole']) && empty($row['Specialisation']) && empty($row['Langues']) && empty($row['Recherche']) && empty($row['Lieu_importance']) && empty($row['Distance'])) { ?>
 
 <title>Etudiant | Création d'un compte</title>
@@ -84,7 +83,6 @@ if (isset($_GET['maj_profil'])) {
 
 <?php }
 
-
 // La fiche du profil + la barre latérale seulement tout les champs ont été remplis
 
 	else{ ?>
@@ -93,32 +91,29 @@ if (isset($_GET['maj_profil'])) {
 
 		<h1 class="text-center"><strong><?php echo $row['Prenom']; ?></strong></h1>
 
-<?php 
+<?php
 
-// $extensions_valides = array( 'jpg' , 'jpeg' , 'gif' , 'png' );
+	if (isset($_POST['upload'])){
 
+		mkdir("../Profil/Etudiant/$row[id]-$row[id_crypt]/Img", 0777, true);
+		chmod("../Profil", 0777);
+	    
+	    $image_name = $_FILES['image']['name'];
+	    $image_type = $_FILES['image']['type'];
+	    $image_size = $_FILES['image']['size'];
+	    $image_tmp = $_FILES['image']['tmp_name'];
 
-if (isset($_POST['upload'])){
+	    $random = "img-profil-$row[id]-$row[id_crypt].jpg";
 
-	mkdir("../Profil/Etudiant/$row[id]-$row[id_crypt]/Img", 0777, true);
-	chmod("../Profil", 0777);
-    
-    $image_name = $_FILES['image']['name'];
-    $image_type = $_FILES['image']['type'];
-    $image_size = $_FILES['image']['size'];
-    $image_tmp = $_FILES['image']['tmp_name'];
+	    if ($image_name == "") {
+	        echo "<script>alert('Vous devez sélectionner une image !')</script>";
+	    }
 
-    $random = "img-profil-$row[id]-$row[id_crypt].jpg";
-
-    if ($image_name == "") {
-        echo "<script>alert('Vous devez sélectionner une image !')</script>";
-    }
-
-    else{
-        move_uploaded_file($image_tmp, "../Profil/Etudiant/$row[id]-$row[id_crypt]/Img/$random");
-        echo "<script>alert('Image mise à jour')</script>";
-    }
-}
+	    else{
+	        move_uploaded_file($image_tmp, "../Profil/Etudiant/$row[id]-$row[id_crypt]/Img/$random");
+	        echo "<script>alert('Image mise à jour')</script>";
+	    }
+	}
 
  ?>
 
@@ -195,7 +190,7 @@ else{
 
 	elseif (isset($_GET['offer_list'])) {
 	echo "<h1 class='text-center'>Liste des offres disponibles</h1>";
-
+	$title = "test1";
 	$result = mysqli_query($link, "SELECT * FROM Offre");
 
 		while ($row = mysqli_fetch_assoc($result)) {
@@ -241,7 +236,7 @@ else{
 	    <input type='hidden' name='numero_offre' value='$_GET[details]'><br>
 	    <input class='btn btn-success' type='submit' name='submit' value='Envoyer'>
 	</form>
-</div>";
+	</div>";
 
 		if (isset($_POST['submit']) && isset($_POST['numero_offre'])) {
 
@@ -289,9 +284,7 @@ else{
 	elseif (isset($_GET['confirmation'])) {
 
 		$row = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM Etudiant WHERE Email='$_SESSION[email_e]'"));
-
 		$row_postulant = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM Postulant WHERE Postulant='$_SESSION[email_e]' AND id_offre='$_GET[confirmation]'"));
-
 		$row_offre = mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM Offre WHERE id='$_GET[confirmation]'"));
 
 		if ($row_postulant == 0) {
@@ -308,6 +301,34 @@ else{
 		</div>"; 
 		mysqli_query($link, "INSERT INTO Postulant(Postulant,id_offre,Employeur, Envoi) VALUES ('$_SESSION[email_e]','$_GET[confirmation]','$row_offre[Employeur]', 'Non')");
 		header("Refresh: 2; url=student.php?maj_profil='$random&$row[id_crypt]&$_SESSION[email_e]'");
+
+
+		// Envoi du mail à l'employeur
+
+		// require 'PHPMailer/class.phpmailer.php';
+
+		// // Instantiate it
+		// $mail = new phpmailer();
+		// $mail->AddStringAttachment("../Profil/Etudiant/$row[id]-$row[id_crypt]/CV/CV-profil-$row[id]-$row[id_crypt]");
+		// $mail->AddStringAttachment("../Profil/Etudiant/$row[id]-$row[id_crypt]/Lettre_motivation/lettre-profil-$row[id]-$row[id_crypt]");
+
+		// // Define who the message is from
+		// $mail->FromName = "Postulant - Offre "."$row_offre[Titre]";
+
+		// // Set the subject of the message
+		// $mail->Subject = "Un étudiant à postulé à une de vos offres !"
+
+		// //  the body of the message
+		// $body = "L'étudiant $row[Nom] $row[Prenom] a postulé à une de vos offres ($row_offre[Titre]).\n
+		// Vous trouverez ci-desous, en pièce jointe, son CV asinsi que sa lettre de motivation.";
+		// // Add a recipient address
+		// $mail->AddAddress("$row[Employeur]");
+
+		// if(!$mail->Send())
+		//  echo ('');
+		// else
+		//  echo ('');
+
 		}
 
 		else{
@@ -334,9 +355,7 @@ else{
 
 if (isset($_POST) && isset($_POST['sexe']) && isset($_POST['etudes']) && isset($_POST['ecole'])&& isset($_POST['specialisation']) && isset($_POST['langues']) && isset($_POST['recherche']) && isset($_POST['lieu'])){
 	if (!empty($_POST['sexe']) && !empty($_POST['etudes']) && !empty($_POST['ecole']) && !empty($_POST['specialisation']) && !empty($_POST['langues']) && !empty($_POST['recherche']) && !empty($_POST['lieu'])){
-
 		extract($_POST);
-
 		mysqli_query($link, "UPDATE Etudiant SET Prenom='$prenom', Nom='$nom', Statut='Validé', Sexe='$sexe', Etudes='$etudes', Ecole='$ecole', Specialisation='$specialisation', Langues='$langues', Langues_sup='$langues_sup', Recherche='$recherche', Recherche_sup='$recherche_sup', Lieu_importance='$lieu', Distance='$distance' WHERE Email='$_SESSION[email_e]'")or die("Erreur : ".mysqli_errno($link));
 	}
 }
