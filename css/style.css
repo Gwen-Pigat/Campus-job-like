@@ -50,9 +50,17 @@ body{
 .main{
 	margin-bottom: 0%;
 	margin-top: 0;
-	font-size: 40px; 
+	font-size: 3vw; 
 	color: white;
 	margin-top: 5%;
+	font-family: 'Inconsolata';
+}
+
+.main-description{
+	margin-top: 0;
+	font-size: 2vw; 
+	color: white;
+	margin-top: 0%;
 	font-family: 'Inconsolata';
 }
 
@@ -67,21 +75,12 @@ body{
 	cursor: pointer;
 }
 
-.main-description{
-	margin-top: 0;
-	font-size: 30px; 
-	color: white;
-	margin-top: 0%;
-	font-family: 'Inconsolata';
-}
-
 .btn-custom{
 	background-color: #1c94a3;
 	color: white;
 	padding: 0.5%;
-	font-size: 24px;
+	font-size: 2vw;
 	margin-top: 5%;
-	/*width: 36%;*/
 	border: 2px #1c94a3 solid;
 	font-family: 'Inconsolata';
 }
@@ -90,19 +89,16 @@ body{
 	background-color: #1c94a3;
 	color: white;
 	padding: 0.6%;
-	font-size: 16px;
+	font-size: 1.2vw;
 	border: 5px #1c94a3 solid;
-	width: 11%;
 }
 
 .btn-login:hover{
 	background-color: rgba(28, 148, 163, 0);
 	color: #1c94a3;
 	padding: 0.6%;
-	font-size: 16px;
 	border: 5px #1c94a3 solid;
 	transition: 0.4s;
-	width: 11%;
 }
 
 .btn-custom:hover{
@@ -118,7 +114,7 @@ body{
 	color: #fff;
 	padding: 0.6%;
 	width: 11%;
-	font-size: 16px;
+	font-size: 1.2vw;
 }
 
 .btn-etudiant:hover, .btn-employeur:hover{
@@ -127,8 +123,6 @@ body{
 	color: white;
 	padding: 0.6%;
 	transition: 0.4s;
-	width: 11%;
-	font-size: 16px;
 }
 
 .categorie{
@@ -140,6 +134,10 @@ body{
 	margin-top: -3%;
 	color: white;
 	font-family: 'Inconsolata';
+}
+
+.logo img{
+	width: 11%;
 }
 
 .title{text-align: center; color: white;}
@@ -183,7 +181,7 @@ body{
 }
 
 .modal-body{padding: 0; border: 0px;}
-
+.modal-body p{text-align: center;}
 .modal-header{border: 0px;}
 .modal-header p {color: black; text-shadow: 0 0 0 white;}
 
@@ -194,10 +192,11 @@ body{
 	margin-top: -5%
 }
 
-.carousel-caption{
-	margin-bottom: 28%;
+.carousel-caption h1{
+	margin-bottom: 20vw;
 	margin-top: 5%; 
 	z-index: 10;
+	font-size: 2vw;
 }
 
 footer ul li{
@@ -239,11 +238,9 @@ footer ul a:hover{
 	margin: 1%;
 }
 
-.contact h1{
-	color: black;
-	border-bottom: 1px black solid;
+.contact h3{
+	
 }
-
 
 
 
