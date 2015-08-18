@@ -17,15 +17,18 @@ $row = $query->fetch_object();
 
 if (isset($_POST['upload'])){
     
-    mkdir("../Profil/Employeur/$row->id-$row->id_crypt/Img", 0777, true);
-    chmod("../Profil", 0777);
+    mkdir("Profil/Employeur/$row->id-$row->id_crypt/Img", 0777, true);
+    chmod("Profil", 0777);
+    chmod("Profil/Employeur", 0777);
+    chmod("Profil/Employeur/$row->id-$row->id_crypt", 0777);
+    chmod("Profil/Employeur/$row->id-$row->id_crypt/Img", 0777);
     
     $image_name = $_FILES['image']['name'];
     $image_type = $_FILES['image']['type'];
     $image_size = $_FILES['image']['size'];
     $image_tmp = $_FILES['image']['tmp_name'];
 
-    $lien = "../Profil/Employeur/$row->id-$row->id_crypt/Img/img-profil-$row->id-$row->id_crypt.jpg";
+    $lien = "Profil/Employeur/$row->id-$row->id_crypt/Img/img-profil-$row->id-$row->id_crypt.jpg";
 
     if ($image_name == "") {
         echo "<script>alert('Vous devez sélectionner une image !')</script>";
@@ -41,29 +44,29 @@ if (isset($_POST['upload'])){
 
 <form class="profil_entreprise_logo col-md-12" action="" method="POST" enctype="multipart/form-data">
     <label class="col-md-5 text-right">Votre logo :</label>
-    <?php echo "<img class='col-md-5' src=../Profil/Employeur/$row->id-$row->id_crypt/Img/img-profil-$row->id-$row->id_crypt.jpg style='width: 25%'>"; ?><br>
+    <?php echo "<img class='col-md-5' src=Profil/Employeur/$row->id-$row->id_crypt/Img/img-profil-$row->id-$row->id_crypt.jpg style='width: 25%'>"; ?><br>
     <div class="col-md-5"></div>
     <input class="btn col-md-5" type="file" name="image" size="25" value="test">
      <div class="col-md-5"></div>
     <input class="col-md-5" type="submit" name="upload" value="Envoyer">
 </form>
 
-<form class="profil_entreprise col-md-12" action="job_submit.php" method="POST">
+<form class="profil_entreprise col-md-12" action="index.php?Profil_employeur" method="POST">
 
 <label class="col-md-5 text-right" for="entreprise_name">Nom de l'entreprise <span>*</span></label>
-<input class="col-md-5" name="entreprise_name" value="<?php echo $row->Entreprise; ?>" />
+<input class="col-md-5" type="varchar" name="entreprise_name" value="<?php echo $row->Entreprise ?>" />
 
 <label class="col-md-5 text-right" for="secteur">Secteur d'activité <span>*</span></label>
-<input class="col-md-5" name="secteur" value="<?php echo $row->Secteur; ?>" />
+<input class="col-md-5" type="varchar" name="secteur" value="<?php echo $row->Secteur ?>" />
 
 <label class="col-md-5 text-right" for="entreprise_site">Site de l'entreprise</label>
-<input class="col-md-5" type="text" name="entreprise_site" value=<?php echo $row->Site ?> />
+<input class="col-md-5" type="text" name="entreprise_site" value="<?php echo $row->Site ?>" />
 
 <label class="col-md-5 text-right" for="qui_sommes_nous">Qui sommes-nous ? <span>*</span></label>
 <textarea rows="10" class="col-md-5" name="qui_sommes_nous"><?php echo $row->Description; ?></textarea>
 
 <label class="col-md-5 text-right" for="nombre_employers">Nombre d'employers <span>*</span></label>
-<input class="col-md-5" type="number" name="nombre_employers" value=<?php echo $row->Employers; ?> />
+<input class="col-md-5" type="number" name="nombre_employers" value="<?php echo $row->Employers; ?>" />
 
 <div class="col-md-5"></div>
 <button class="col-md-2 send" type="submit"><i class="fa fa-envelope fa-2x"></i> Sauvegarder</button>
@@ -76,24 +79,18 @@ if (isset($_POST['upload'])){
 
 //Mise a jour du profil
 
-require '../PHPMailer/class.phpmailer.php';
+// require "PHPMailer/class.phpmailer.php";
 
 if (isset($_POST['entreprise_name']) || isset($_POST['entreprise_site']) || isset($_POST['secteur']) || isset($_POST['qui_sommes_nous']) || isset($_POST['nombre_employers'])) {
-	if(!empty($_POST['entreprise_name']) || !empty($_POST['entreprise_site']) || !empty($_POST['secteur']) || !empty($_POST['qui_sommes_nous']) || !empty($_POST['nombre_employers'])){
 
 		extract($_POST);
 
-		$link->query("UPDATE EntrepriseProfil SET Entreprise='$entreprise_name', Secteur='$secteur', Site='$entreprise_site', Description='$qui_sommes_nous', Employers='$nombre_employers' WHERE id_crypt='$_SESSION[id]'");
-        $link->query("UPDATE Offre SET Employeur='$entreprise_name' WHERE Entreprise='$row->Entreprise'"); ?>
+        echo "TRUE";
 
-		<script type="text/javascript">
-			$(document).ready(function(){
-				alert("Votre profil à bien été mis à jour");
-			});
-		</script>
-<?php 
-		header('Refresh: 0 ;job_submit.php');
-	}
+		$link->query("UPDATE EntrepriseProfil SET Entreprise='$entreprise_name', Secteur='$secteur', Site='$entreprise_site', Description='$qui_sommes_nous', Employers='$nombre_employers', Statut_Profil='Oui' WHERE id_crypt='$_SESSION[id]'")or die("Erreur SQL");
+        $link->query("UPDATE Offre SET Employeur='$entreprise_name' WHERE Entreprise='$row->Entreprise'");
+
+		echo "<script>alert(\"Votre profil à bien été mis à jour\")</script>";
+		header('Refresh: 0 ;index.php?Profil_employeur');
+
 }
-
-// include "../include/footer_profil.php";
