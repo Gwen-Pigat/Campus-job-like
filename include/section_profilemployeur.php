@@ -217,13 +217,18 @@ if (isset($_GET['Profil_employeur']) && isset($_GET['validation_offre']) && !emp
 
 // Liste des offres
 
-
 if (isset($_GET['Profil_employeur']) && isset($_GET['liste_offres'])) { ?>
 
     <div class="container">
     <?php echo "<span class='poster text-center'><a href='index.php?Profil_employeur$poster_offre'>Poster une offre</a></span>";
     $query = $link->query("SELECT * FROM EntrepriseProfil WHERE id_crypt='$_SESSION[id]'");
     $row_1 = $query->fetch_object();
+
+    if ($row_1->Offres == 0) {
+    echo "<script>alert(\"Vous n'avez aucune offre disponible\")</script>";
+    header("refresh: 0; url=index.php?Profil_employeur&poster_offre");
+    }
+
     ?>
     <h1 class="text-center" style="margin-top: 5%; font-family: Inconsolata"><strong><?php echo $row_1->Entreprise; ?></strong><br>Liste de vos offres</h1> 
 
