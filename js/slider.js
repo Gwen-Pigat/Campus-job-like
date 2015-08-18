@@ -19,8 +19,10 @@ $(document).ready(function(){
 		$(".team-info-6").toggle(100);
 	});
 	$(".lateral").hover(function(){
-		$(".lateral-aside").fadeIn(1000);
+		$(".lateral-aside").fadeToggle(100);
 	});
+	
+	$(".enregistrement").fadeOut(2000);
 
 	$(".container").fadeIn(1000);
 	$(".carousel").fadeIn(1000);
