@@ -30,5 +30,8 @@ $(document).ready(function(){
 	
 	$(".container.validation_offre").delay(2500).fadeIn(500);
 	$(".loading").fadeOut(2000);
-
+	$("#section_employeur").fadeIn(500);
+	$("#section_etudiant").fadeIn(500);
+	$("#section_carousel").fadeIn(500);
+	
 });
