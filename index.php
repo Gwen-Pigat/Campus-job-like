@@ -17,11 +17,12 @@ if (isset($_GET['erreur_connexion']) && !empty($_GET['erreur_connexion'])) {
 elseif (isset($_GET['erreur_inscription']) && !empty($_GET['erreur_inscription'])) { 
     $session->sessionDestroy();
     $session->profilWait();
-    echo "<meta charset='utf-8'><script>alert(\"L'adresse e-mail ou le numéro de téléphone est déja utilisé !!\")</script>";
     if (isset($_GET['Employeur'])) {
+    echo "<meta charset='utf-8'><script>alert(\"L'adresse e-mail ou le numéro de téléphone est déja utilisé !!\")</script>";
     echo "<META HTTP-EQUIV='Refresh' CONTENT='0; URL=index.php?Employeur'>";
     }
     elseif (isset($_GET['Etudiant'])) {
+    echo "<meta charset='utf-8'><script>alert(\"L'adresse e-mail est déja utilisé !!\")</script>";
     echo "<META HTTP-EQUIV='Refresh' CONTENT='0; URL=index.php?Etudiant'>";
     }
 }
@@ -75,9 +76,10 @@ elseif (isset($_GET) && isset($_GET['Etudiant'])) {
   $title = "JobFinder | Partie Etudiant";
   
   include "include/header.php";
+  echo "<section id='section_carousel'>";
   include "include/carousel.php"; 
-
-  echo "<section id='section_etudiant'>";
+  echo "</section>
+        <section id='section_etudiant'>";
   include "include/section_etudiant.php";
   echo "</section>";
 
