@@ -2,7 +2,7 @@
 
 extract($_POST);
 
-if (!isset($_GET['poster_offre']) && !isset($_GET['validation_offre']) && !isset($_GET['summary_offre']) && !isset($_GET['liste_offres'])) {
+if (!isset($_GET['poster_offre']) && !isset($_GET['validation_offre']) && !isset($_GET['summary_offre']) && !isset($_GET['liste_offres']) && !isset($_GET['liste_postulants']) && !isset($_GET['for_offer'])) {
 
     $link->query("DELETE FROM Offre WHERE Statut='En attente'");
 
@@ -252,9 +252,40 @@ if (isset($_GET['Profil_employeur']) && isset($_GET['liste_offres'])) { ?>
             </div>";
             }
             else{
-            echo "<p><span class='user_postulants'>Nombre de postulants</span> : <a href='offre_submit.php?liste_postulants&for_offer=$row->id&$random'>$row->nbr_postulant</a><p>
+            echo "<p><span class='user_postulants'>Nombre de postulants</span> : <a href='index.php?Profil_employeur&liste_postulants&for_offer=$row->id&token=$row->id_crypt'>$row->nbr_postulant</a><p>
             </div>";
             }
+    }
+}
+
+
+if (isset($_GET['liste_postulants']) && isset($_GET['for_offer']) && isset($_GET['token']) && !empty($_GET['for_offer']) && !empty($_GET['token'])) {
+
+    echo "TRUE";
+    $query = $link->query("SELECT * FROM Postulant WHERE id_offre='$_GET[for_offer]'"); $row = $query->fetch_object();
+    $query = $link->query("SELECT * FROM Etudiant WHERE Email='$row->Postulant'");
+
+    echo "<h1>Liste des postulants</h1>";
+
+    while ($row = $query->fetch_object()) {
+        echo "<div class='container'><div class='col-md-4 offer_list'>";
+        if(file_exists("Profil/Etudiant/$row->id-$row->id_crypt/Img/img-profil-$row->id-$row->id_crypt.jpg")) {
+         echo "<img src=Profil/Etudiant/$row->id-$row->id_crypt/Img/img-profil-$row->id-$row->id_crypt.jpg>"; 
+        }
+        else{
+         echo "<img src=img/user_default.png>"; 
+        }
+        echo "<p><span class='user'>Nom</span> : $row->Nom<p>
+        <p><span class='user'>Prénom</span> : $row->Prenom<p>
+        <p><span class='user'>Email</span> : $row->Email<p>
+        <p><span class='user'>Sexe</span> : $row->Sexe<p>
+        <p><span class='user'>Etudes</span> : $row->Etudes<p>
+        <p><span class='user'>Ecole</span> : $row->Ecole<p>
+        <p><span class='user'>Spécialisation</span> : $row->Specialisation<p>
+        <p><span class='user'>langues</span> : $row->Langues<p>
+        <p><span class='user_postulant'>CV</span> : <span class='download_file'><a target='_blank' href='Profil/Etudiant/$row->id-$row->id_crypt/CV/CV-profil-$row->id-$row->id_crypt.pdf'><button class='btn btn-danger'>Télécharger</button></a></span><p>
+        <p><span class='user_postulant'>Lettre de motivation</span> : <span class='download_file'><a target='_blank' href='Profil/Etudiant/$row->id-$row->id_crypt/Lettre_motivation/Lettre-profil-$row->id-$row->id_crypt.pdf'><button class='btn btn-danger'>Télécharger</button></a></span><p>
+        </div></div>";        
     }
 }
 
