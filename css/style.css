@@ -1,13 +1,26 @@
+/*Ajout des fonts*/
+
+@font-face{
+	font-family: "Caviar";
+	src: url('../fonts/CaviarDreams.ttf');
+}
+@font-face{
+	font-family: "Stroke";
+	src: url('../fonts/Distant_Stroke.otf');
+}
+
+/*Fin fonts*/
+
 /*Scrollbar perso*/
 
 ::-webkit-scrollbar {
     width: 16px;
-    background-color: white
+    background-color: #fff
 }
  
 ::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px black;
-    background-color: white; 
+    background-color: #fff; 
 }
  
 ::-webkit-scrollbar-thumb {
@@ -17,17 +30,18 @@
     border-radius: 15px;
 }
 
-.slide-profil{display: none;font-family: Caviar Dreams;
+.slide-profil{display: none;font-family: "Caviar";
     padding: 2%;}
 
 
 /*Fin scrollar*/
 
+
 body{
 	margin: 0;
 	/*background: url(../img/babysitter.jpg) no-repeat;*/
 	font-weight: 700;
-	font-family: "Caviar Dreams";
+	font-family: "Caviar";
 }
 
 .header{
@@ -42,7 +56,7 @@ body{
 	padding-top: 1%;
 	color: black;
 	z-index: 10;
-	background-color: white;
+	background-color: #fff;
 }
 
 .step-section .step{width: 80%; margin: auto; text-align: center}
@@ -51,27 +65,27 @@ body{
 	margin-bottom: 0%;
 	margin-top: 0;
 	font-size: 3vw; 
-	color: white;
+	color: #fff;
 	margin-top: 5%;
-	font-family: 'Caviar Dreams';
+	font-family: 'Caviar';
 }
 
 .main-description{
 	margin-top: 0;
 	font-size: 2vw; 
-	color: white;
+	color: #fff;
 	margin-top: 0%;
-	font-family: 'Caviar Dreams';
+	font-family: 'Caviar';
 }
 
 .tarifs{
 	margin-top: 5%;
 	text-decoration: none; 
-	color: white;
+	color: #fff;
 }
 
 .tarifs:hover{
-	color: white; 
+	color: #fff; 
 	cursor: pointer;
 }
 
@@ -82,16 +96,31 @@ body{
 
 .btn-custom{
 	background-color: #1c94a3;
-	color: white;
+	color: #fff;
 	padding: 0.5%;
 	font-size: 2vw;
 	margin-top: 5%;
 	border: 2px #1c94a3 solid;
-	font-family: 'Caviar Dreams';
+	font-family: 'Caviar';
+	transition: 0.4s;
+}
+
+.btn-danger{
+	border-radius: 0px;
+    background-color: #1c94a3;
+    font-size: 1.5vw;
+    padding: 1%;
+    border: 0px;
+    transition: 0.4s;
+}
+
+.btn-danger:hover{
+	transition: 0.4s;
+	border-radius: 10px;
 }
 
 .btn-custom:hover{
-	background-color: white;
+	background-color: #fff;
 	border : 2px #1c94a3 solid;
 	color: #1c94a3; 
 	transition: 0.4s;
@@ -99,16 +128,17 @@ body{
 
 .btn-custom-red{
 	background-color: #ff0000;
-	color: white;
+	color: #fff;
 	padding: 0.5%;
 	font-size: 2vw;
 	margin-top: 5%;
 	border: 2px #ff0000 solid;
-	font-family: 'Caviar Dreams';
+	font-family: 'Caviar';
+	transition: 0.4s;
 }
 
 .btn-custom-red:hover{
-	background-color: white;
+	background-color: #fff;
 	border : 2px #ff0000 solid;
 	color: #ff0000; 
 	transition: 0.4s;
@@ -116,10 +146,11 @@ body{
 
 .btn-login{
 	background-color: #1c94a3;
-	color: white;
+	color: #fff;
 	padding: 0.6%;
 	font-size: 1.2vw;
 	border: 5px #1c94a3 solid;
+	transition: 0.4s;
 }
 
 .btn-login:hover{
@@ -137,12 +168,13 @@ body{
 	padding: 0.6%;
 	width: 11%;
 	font-size: 1.2vw;
+	transition: 0.4s;
 }
 
 .btn-etudiant:hover, .btn-employeur:hover{
 	background-color: #CCCCCC;
 	border: 5px #CCCCCC solid;
-	color: white;
+	color: #fff;
 	padding: 0.6%;
 	transition: 0.4s;
 }
@@ -154,15 +186,16 @@ body{
 
 .logo{
 	margin-top: -3%;
-	color: white;
-	font-family: 'Caviar Dreams';
+	color: #fff;
+	font-family: 'Caviar';
 }
 
 .logo img{
 	width: 11%;
 }
 
-.title{text-align: center; color: white;}
+.title{text-align: center; color: #fff; transition: 0.4s; font-family: "Stroke"; font-size: 3vw; margin :0%;}
+.title:hover{text-shadow: 1px 1px 5px #fff; transition: 0.4s; cursor: pointer;}
 
 .social-media{
 	margin: 0% 0% 0% 2%;
@@ -170,7 +203,8 @@ body{
 }
 
 .social-media .fa{
-	color: white;
+	color: #fff;
+	transition: 0.4s;
 }
 
 .social-media .fa:hover{
@@ -179,9 +213,10 @@ body{
 }
 
 .social-media a{
-	color: white;
+	color: #fff;
 	margin: 0;
-	text-decoration: none
+	text-decoration: none;
+	transition: 0.6s;
 }
 
 .social-media a:hover{
@@ -190,7 +225,7 @@ body{
 }
 
 .modal-content{
-	background-color: white; 
+	background-color: #fff; 
 	color: #1C94A3; 
 	text-shadow: 0 0 1px #1C94A3;
 	border-radius: 0px;
@@ -211,7 +246,7 @@ body{
 .modal-body{padding: 0; border: 0px;}
 .modal-body p{text-align: center;}
 .modal-header{border: 0px;}
-.modal-header p {color: black; text-shadow: 0 0 0 white;}
+.modal-header p {color: black; text-shadow: 0 0 0 #fff;}
 
 #carousel-example-generic{
 	position: fixed; 
@@ -231,7 +266,8 @@ footer ul li{
 	display: inline-block;
 	list-style-type: none;
 	margin: 0% 2% 0% 2%;
-	color: white;
+	color: #fff;
+	transition: 0.4s;
 }
 
 footer ul{
@@ -241,14 +277,14 @@ footer ul{
 
 footer{
 	padding: 2%;
-	position: fixed;
-  	margin-top: 20%;
+  	margin-top: 5%;
   	width: 100%;
 }
 
-footer ul a:hover{
-	text-decoration: underline;
-	color: #ff0000;
+footer ul li:hover{
+	color: #fff;
+	transition: 0.4s;
+	text-shadow: 1px 1px 5px #fff;
 }
 
 
@@ -258,7 +294,7 @@ footer ul a:hover{
 	border-radius:10px;
 	margin: 5% auto 0% auto;
 	padding: 2%;
-	background-color: white;
+	background-color: #fff;
 }
 
 .contact input, .contact select{
@@ -316,7 +352,7 @@ footer ul a:hover{
 	position: absolute; 
 	background-color: black; 
 	opacity: 0.8; 
-	color: white; 
+	color: #fff; 
 	z-index: 10; 
 	padding: 2%;
 }
@@ -341,11 +377,11 @@ footer ul a:hover{
 .contact_us{
 	margin-top: 5%;
 	margin-bottom: 0;
-	border-top: 1px white solid; 
+	border-top: 1px #fff solid; 
 	padding: 2%; 
 	background-color: #3C3C3C; 
-	color: white;
-	font-family: Caviar Dreams;
+	color: #fff;
+	font-family: "Caviar";
 }
 
 .contact_us h1 a{
@@ -359,7 +395,8 @@ footer ul a:hover{
 }
 
 .social ul li a{
-	color: white;
+	color: #fff;
+	transition: 0.4s
 }
 
 .social ul li a:hover{
@@ -385,7 +422,7 @@ footer ul a:hover{
 	border-radius: 5px;
 	max-height: 500px;
 	min-height: 500px;
-	background-color: white;
+	background-color: #fff;
 	overflow-x: hidden;
 	overflow-y: scroll;
 }
@@ -431,7 +468,8 @@ textarea{
 	margin: 0% 2% 2% 2%;
 	background-color: #1C94A3;
 	border: 2px #1C94A3 solid;
-	color: white;
+	color: #fff;
+	transition: 0.6s;
 }
 
 .offer button:hover, .profil_entreprise button:hover{
@@ -457,8 +495,9 @@ textarea{
 	overflow-x: hidden;
 	z-index: 100;
 	height: 100%;
-	border: 1px white solid;
-	font-family: Caviar Dreams;
+	border: 1px #fff solid;
+	font-family: "Caviar";
+	transition: 0.6s;
 }
 
 .lateral:hover{
@@ -472,9 +511,10 @@ textarea{
 }
 
 .lateral ul li{
-	border-top: 1px white solid;
-	border-bottom: 1px white solid;
-	color: white;
+	border-top: 1px #fff solid;
+	border-bottom: 1px #fff solid;
+	color: #fff;
+	transition: 0.4s;
 }
 
 .lateral ul li:hover{
@@ -508,7 +548,7 @@ textarea{
 
 .offer_submit{
 		padding: 2%;
-	background-color: white;
+	background-color: #fff;
 	border-top: 1px #1C94A3 solid;
 	border-bottom: 1px #555 solid;
 	border-right: 1px #555 solid;
@@ -521,7 +561,7 @@ textarea{
 
 .offer_list{
 	padding: 2%;
-	background-color: white;
+	background-color: #fff;
 	border-top: 1px #1C94A3 solid;
 	border-bottom: 1px #555 solid;
 	border-right: 1px #555 solid;
@@ -530,7 +570,7 @@ textarea{
 	word-wrap: break-word;
 	color: black;
 	margin-top: 5%;
-	font-family: Caviar Dreams;
+	font-family: "Caviar";
 }
 
 .offer_list img{
@@ -566,12 +606,11 @@ textarea{
 
 .redirection h3{
 	font-size: 3vw;
-	font-family: Caviar Dreams;
+	font-family: "Caviar";
 }
 
 .redirection .fa{
 	color: #ff0000;
-	transition: ;
 }
 
 
@@ -579,12 +618,12 @@ textarea{
 
 .creation_etudiant{
 	padding: 2%;
-	font-family: Caviar Dreams;
+	font-family: "Caviar";
 }
 
 .creation_etudiant select{
 	background-color: #1C94A3;
-	color: white;
+	color: #fff;
 	border: 2px #1C94A3 solid;
 }
 
@@ -610,7 +649,7 @@ textarea{
 }
 
 .box{
-	background-color: white;
+	background-color: #fff;
 	text-align: center;
 	color: #146E7A;
 	padding: 2%;
@@ -630,7 +669,7 @@ textarea{
 	color: #1C94A3;
 	text-align: center;
 	margin-top: -25%;
-	background-color: white;
+	background-color: #fff;
 	padding: 2%;
 	border: 2px #1c94a3 solid;
 }
