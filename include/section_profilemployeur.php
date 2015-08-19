@@ -6,11 +6,11 @@ if (!isset($_GET['poster_offre']) && !isset($_GET['validation_offre']) && !isset
 
     $link->query("DELETE FROM Offre WHERE Statut='En attente'");
 
-    if (empty($_SESSION)) {
+    if (empty($_SESSION['employeur'])) {
         header("Location: index.php?Employeur");
     }
 
-$query = $link->query("SELECT * FROM EntrepriseProfil WHERE id_crypt='$_SESSION[id]'"); 
+$query = $link->query("SELECT * FROM EntrepriseProfil WHERE id_crypt='$_SESSION[employeur]'"); 
 $row = $query->fetch_object(); 
 
 ?>
@@ -161,7 +161,7 @@ if (isset($_GET['Profil_employeur']) && isset($_GET['summary_offre']) && !empty(
     }
     else{
 
-    $query = $link->query("SELECT * FROM EntrepriseProfil WHERE id_crypt='$_SESSION[id]'");
+    $query = $link->query("SELECT * FROM EntrepriseProfil WHERE id_crypt='$_SESSION[employeur]'");
     $row = $query->fetch_object();
 
     $query = $link->query("SELECT * FROM Offre WHERE Employeur='$row->Entreprise' AND id_crypt='$_GET[summary_offre]'");
@@ -190,7 +190,7 @@ if (isset($_GET['Profil_employeur']) && isset($_GET['summary_offre']) && !empty(
 
 if (isset($_GET['Profil_employeur']) && isset($_GET['validation_offre']) && !empty($_GET['validation_offre'])){
 
-    $query = $link->query("SELECT * FROM EntrepriseProfil WHERE id_crypt='$_SESSION[id]'");
+    $query = $link->query("SELECT * FROM EntrepriseProfil WHERE id_crypt='$_SESSION[employeur]'");
     $row = $query->fetch_object();
 
     $query = $link->query("SELECT * FROM Offre WHERE Employeur='$row->Entreprise' AND id_crypt='$_GET[validation_offre]'");
@@ -221,7 +221,7 @@ if (isset($_GET['Profil_employeur']) && isset($_GET['liste_offres'])) { ?>
 
     <div class="container">
     <?php echo "<span class='poster text-center'><a href='index.php?Profil_employeur$poster_offre'>Poster une offre</a></span>";
-    $query = $link->query("SELECT * FROM EntrepriseProfil WHERE id_crypt='$_SESSION[id]'");
+    $query = $link->query("SELECT * FROM EntrepriseProfil WHERE id_crypt='$_SESSION[employeur]'");
     $row_1 = $query->fetch_object();
 
     if ($row_1->Offres == 0) {
@@ -264,7 +264,7 @@ if (isset($_GET['Profil_employeur']) && isset($_GET['liste_offres'])) { ?>
 if (isset($_GET['Profil_employeur']) && isset($_GET['liste_offres']) && isset($_GET['delete']) && !empty($_GET['delete'])) {
     $link->query("DELETE FROM Offre WHERE id='$_GET[delete]'");
 
-    $query = $link->query("SELECT * FROM EntrepriseProfil WHERE id_crypt='$_SESSION[id]'");
+    $query = $link->query("SELECT * FROM EntrepriseProfil WHERE id_crypt='$_SESSION[employeur]'");
     $row = $query->fetch_object();
 
     $update_value = $row->Offres - 1;
@@ -283,9 +283,7 @@ if (isset($_POST['entreprise_name']) || isset($_POST['entreprise_site']) || isse
 
 		extract($_POST);
 
-        echo "TRUE";
-
-		$link->query("UPDATE EntrepriseProfil SET Entreprise='$entreprise_name', Secteur='$secteur', Site='$entreprise_site', Description='$qui_sommes_nous', Employers='$nombre_employers', Statut_Profil='Oui' WHERE id_crypt='$_SESSION[id]'")or die("Erreur SQL");
+		$link->query("UPDATE EntrepriseProfil SET Entreprise='$entreprise_name', Secteur='$secteur', Site='$entreprise_site', Description='$qui_sommes_nous', Employers='$nombre_employers', Statut_Profil='Oui' WHERE id_crypt='$_SESSION[employeur]'")or die("Erreur SQL");
         $link->query("UPDATE Offre SET Employeur='$entreprise_name' WHERE Entreprise='$row->Entreprise'");
 
 		echo "<script>alert(\"Votre profil à bien été mis à jour\")</script>";
