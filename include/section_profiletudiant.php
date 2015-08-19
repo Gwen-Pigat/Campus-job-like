@@ -169,7 +169,8 @@ if (isset($_GET) && isset($_GET['liste_offres']) && !isset($_GET['postuler']) &&
 <?php
 
 //Boucle qui liste les offres disponibles sur le profil (seulement celles au statut 'Accepté')
-    $query = $link->query("SELECT * FROM Offre WHERE Employeur='$row_1->Entreprise'");
+    $query = $link->query("SELECT * FROM Etudiant WHERE id_crypt='$_SESSION[etudiant]'"); $row_etudiant = $query->fetch_object();
+    $query = $link->query("SELECT * FROM Offre");
 
     while ($row = $query->fetch_object()) {
         echo "<div class='col-md-4 offer_list'>
@@ -179,9 +180,16 @@ if (isset($_GET) && isset($_GET['liste_offres']) && !isset($_GET['postuler']) &&
             <p><span class='user'>Tâches à effectuer</span> : $row->Taches<p>
             <p><span class='user'>Qualifications requises</span> : $row->Qualifications<p>
             <p><span class='user'>Compétences</span> : $row->Competences<p>
-            <p><span class='user'>Nombre de postulants</span> : $row->nbr_postulant<p>
-            <a href='index.php?Profil_etudiant&liste_offres&postuler=$row->id_crypt'><button class='btn btn-success'>Postuler</button></a>
+            <p><span class='user'>Nombre de postulants</span> : $row->nbr_postulant<p>";
+            $query = $link->query("SELECT * FROM Postulant WHERE Postulant='$row_etudiant->Email' AND id_offre='$row->id'"); $row_postulant = $query->fetch_object();
+            if ($row_postulant == 0) {
+            echo "<a href='index.php?Profil_etudiant&liste_offres&postuler=$row->id_crypt'><button class='btn btn-success'>Postuler</button></a>
+            </div>";    
+            }
+            else{
+            echo "<button class='btn btn-danger'>Vous avez déjà postulé à cette offre</button>
             </div>";
+            }
     }
 }
 
