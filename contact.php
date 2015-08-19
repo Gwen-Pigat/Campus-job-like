@@ -8,7 +8,7 @@
 </section>
 
 <div class="categorie">
-	<a href="index.php"><button class='btn-login'>Accueil</button></a>
+	<a href="index.php?Etudiant"><button class='btn-login'>Accueil</button></a>
 </div>
 
 <div class='container text-center'>
@@ -42,30 +42,15 @@ extract($_POST);
 if (isset($select) && isset($prenom) && isset($email) && isset($message)) {
 	if (!empty($select) && !empty($prenom) && !empty($email) && !empty($message)) {
 		
-		$url = "localhost";
-		$user = "root";
-		$password = "motdepasselocalhostgwen";
-		$db_name = "JobFinder";
-		$tbl_name = "Contact";
+		$link = new mysqli("localhost","root","motdepasselocalhostgwen","JobFinder");
+		$link->query("INSERT INTO Contact(Type,Nom,Email,Message) VALUES ('$select', '$prenom', '$email', '$message')")or die(mysqli_errno());
 
-		$link = mysqli_connect($url,$user,$password,$db_name)or die("Erreur");
 
-		mysqli_query($link, "INSERT INTO $tbl_name(Type,Nom,Email,Message) VALUES ('$select', '$prenom', '$email', '$message')")or die(mysqli_errno()); ?>
-
-		<script type="text/javascript">
-		$(document).ready(function(){
-			alert("Message envoyé !!");
-		});
-		</script> 
-		<?php
+		echo "<script>alert(\"Message envoyé !!\")</script>";
+		header("refresh: 0;url=contact.php");
 	}
-	else{ ?>
-	<script type="text/javascript">
-	$(document).ready(function(){
-		alert("Erreur lors de l'envoi de votre message !!");
-	});
-	</script> 
-	<?php 
+	else{
+		echo"<script>alert(\"Erreur lors de l'envoi de votre message !!\")"; 
 	}
 } 
 
