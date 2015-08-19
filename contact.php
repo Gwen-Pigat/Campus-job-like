@@ -1,4 +1,5 @@
-<?php include "include/header.php"; include "include/carousel.php"; ?>
+
+<?php $title = "JobFinder | Formulaire de contact"; include "include/header.php"; include "include/carousel.php"; ?>
 
 <section class="social-media">
 <a href=""><i class="fa fa-facebook-square fa-3x"></i></a>
@@ -39,33 +40,24 @@
 
 extract($_POST);
 
-if (isset($select) && isset($prenom) && isset($email) && isset($message)) {
-	if (!empty($select) && !empty($prenom) && !empty($email) && !empty($message)) {
+if (isset($_POST) && isset($select) && isset($prenom) && isset($email) && isset($message) && !empty($select) && !empty($prenom) && !empty($email) && !empty($message)) {
 		
-		$link = new mysqli("localhost","root","motdepasselocalhostgwen","JobFinder");
-		$link->query("INSERT INTO Contact(Type,Nom,Email,Message) VALUES ('$select', '$prenom', '$email', '$message')")or die(mysqli_errno());
+	$link = new mysqli("localhost","root","motdepasselocalhostgwen","JobFinder");
 
+	$link->query("INSERT INTO Contact(Type,Nom,Email,Message) VALUES ('$select' ,'$prenom' ,'$email' ,'$message')")or die(mysqli_errno());
 
-		echo "<script>alert(\"Message envoyé !!\")</script>";
-		header("refresh: 0;url=contact.php");
-	}
-	else{
-		echo"<script>alert(\"Erreur lors de l'envoi de votre message !!\")"; 
-	}
-} 
+	echo "<script>alert(\"Message envoyé !!\")</script>";
+	// header("refresh: 0;url=contact.php");
 
-require "PHPMailer/class.phpmailer.php";
+	require "PHPMailer/class.phpmailer.php";
 
-//Envoi des données par mail
+	//Envoi des données par mail
 
-
-if (isset($select) && isset($prenom) && isset($email) && isset($message)) {
-	if (!empty($select) && !empty($prenom) && !empty($email) && !empty($message)) {
-
-    // Instantiate it
+    // Envoi à l'admin
     $mail = new phpmailer();
 
     // Define who the message is from
+    $mail->From = str_shuffle(0123456789);
     $mail->FromName = 'Question - JobFinder ';
 
     // Set the subject of the message
@@ -73,9 +65,9 @@ if (isset($select) && isset($prenom) && isset($email) && isset($message)) {
 
     // Add the body of the message
     $body = "Une personne est passé par le formulaire de contact de JobFinder :\n\n\n
-    Cette personne est :           $select \n
-    Son nom :           $prenom \n
-    Son Message :\n     $message\n\n\n";
+    Statut (Etudiant/Employeur ou autre) : $select \n
+    Son nom : $prenom \n
+    Son Message :\n     $message";
 
     $mail->Body = $body;
 
@@ -86,9 +78,39 @@ if (isset($select) && isset($prenom) && isset($email) && isset($message)) {
         echo ('');
     else
         echo ('');
-    }
 
+
+    // Envoi à l'utilisateur
+    $mail = new phpmailer();
+
+    // Define who the message is from
+    $mail->From = str_shuffle(0123456789);
+    $mail->FromName = 'Question - JobFinder ';
+
+    // Set the subject of the message
+    $mail->Subject = "$select $prenom";
+
+    // Add the body of the message
+    $body = "Nous avons bien recu votre demande et celle-ci sera traitée dans les plus brefs délais :\n\n\n
+    Votre statut (Etudiant/Employeur ou autre) : $select \n
+   	Votre nom : $prenom \n
+    Votre message :\n     $message";
+
+    $mail->Body = $body;
+
+    // Add a recipient address
+    $mail->AddAddress($email);
+
+    if(!$mail->Send())
+        echo ('');
+    else
+        echo ('');
 }
+
+else
+	{
+		echo"<script>alert(\"Erreur lors de l'envoi de votre message !!\")"; 
+	}
 
 
 ?>
