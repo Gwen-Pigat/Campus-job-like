@@ -13,7 +13,7 @@ if (!isset($_GET['inscription']) && isset($_POST) && isset($_POST['email']) && i
 	$row = $query->fetch_object();
 
 	if ($row){
-		$_SESSION['id'] = $row->id_crypt;
+		$_SESSION['employeur'] = $row->id_crypt;
 		header("Location: ../index.php?Profil_employeur");
 	}
 	else{ 
@@ -29,7 +29,7 @@ elseif (!isset($_GET['inscription']) && isset($_POST) && isset($_POST['email_e']
 	$row = $query->fetch_object();
 
 	if ($row){
-		$_SESSION['id'] = $row->id_crypt;
+		$_SESSION['etudiant'] = $row->id_crypt;
 		header("Location: ../index.php?Profil_etudiant");
 	}
 	else{ 
@@ -43,7 +43,7 @@ elseif (!isset($_GET['inscription']) && isset($_POST) && isset($_POST['email_e']
 elseif (isset($_GET["inscription"]) && isset($nom) && isset($prenom) && isset($entreprise) && isset($telephone) && isset($email) && isset($password) && !empty($nom) && !empty($prenom) && !empty($entreprise) && !empty($telephone) && !empty($email) && !empty($password)) {
 		
 	// On vérifie que l'adresse e-mail ou le téléphone n'est pas déja utilisé
-	$query = $link->query("SELECT * FROM EntrepriseProfil WHERE Telephone='$telephone' AND Email='$email'");
+	$query = $link->query("SELECT * FROM EntrepriseProfil WHERE Telephone='$telephone' || Email='$email'");
 	$row = $query->fetch_object();
 
 	if ($row == 0){
@@ -54,11 +54,37 @@ elseif (isset($_GET["inscription"]) && isset($nom) && isset($prenom) && isset($e
 		// On selectionne les valeurs que l'on vient d'inscrire afin de créer une session à partir de l'objet id_crypt
 		$query = $link->query("SELECT * FROM EntrepriseProfil WHERE Nom='$nom' AND Prenom='$prenom' AND Entreprise='$entreprise' AND Telephone='$telephone' AND Email='$email' AND Password='$password'");
 		$row = $query->fetch_object();
-		$_SESSION['id'] = $row->id_crypt;
+		$_SESSION['employeur'] = $row->id_crypt;
 		header("Location: ../index.php?Profil_employeur");
 	}
 	else{ 
 		header("Location: ../index.php?Employeur&erreur_inscription=$random");	
+	}
+}
+
+
+// Inscription Etudiant
+
+elseif (isset($_GET["inscription"]) && isset($nom) && isset($prenom) && isset($email_e) && isset($password_e) && !empty($nom) && !empty($prenom) && !empty($email_e) && !empty($password_e)) {
+		
+	// On vérifie que l'adresse e-mail ou le téléphone n'est pas déja utilisé
+	$query = $link->query("SELECT * FROM Etudiant WHERE Email='$email_e'");
+	$row = $query->fetch_object();
+
+	if ($row == 0){
+
+		// On insère les données du formulaire en BDD
+		$link->query("INSERT INTO Etudiant(Nom,Prenom,Email,Password,id_crypt,Statut_profil) VALUES ('$nom','$prenom','$email_e','$password_e','$random','En attente')")or die("Erreur du query");
+
+		// On selectionne les valeurs que l'on vient d'inscrire afin de créer une session à partir de l'objet id_crypt
+		$query = $link->query("SELECT * FROM Etudiant WHERE Nom='$nom' AND Prenom='$prenom' AND Email='$email_e' AND Password='$password_e'");
+		$row = $query->fetch_object();
+		$_SESSION['etudiant'] = $row->id_crypt;
+		header("Location: ../index.php?Profil_etudiant");
+
+	}
+	else{ 
+		header("Location: ../index.php?Etudiant&erreur_inscription=$random");	
 	}
 }
 

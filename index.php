@@ -36,8 +36,12 @@ elseif (isset($_GET['Employeur'])) {
 
   $title = "JobFinder | Partie Employeur";
 
-  include "include/header.php"; 
+  include "include/header.php";
+
+  echo "<section id='section_employeur'>";
   include "include/section_employeur.php";
+  echo "</section>";
+
   include "include/footer.php";
 
 }
@@ -53,7 +57,10 @@ elseif (isset($_GET) && isset($_GET['Profil_employeur'])) {
 
   include "include/header.php";
   include "include/lateral.php";
+
+  echo "<section id='section_profilemployeur'>";
   include "include/section_profilemployeur.php";
+  echo "</section>";
 
 }
 
@@ -69,7 +76,11 @@ elseif (isset($_GET) && isset($_GET['Etudiant'])) {
   
   include "include/header.php";
   include "include/carousel.php"; 
+
+  echo "<section id='section_etudiant'>";
   include "include/section_etudiant.php";
+  echo "</section>";
+
   include "include/footer.php";
 
 }
@@ -85,7 +96,10 @@ elseif (isset($_GET) && isset($_GET['Profil_etudiant'])) {
 
   include "include/header.php";
   include "include/lateral.php";
+
+  echo "<section id='section_profiletudiant'>";
   include "include/section_profiletudiant.php";
+  echo "</section>";
 
 }
 

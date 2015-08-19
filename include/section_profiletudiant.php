@@ -228,10 +228,11 @@ elseif (isset($_GET) && isset($_GET['liste_offres']) && isset($_GET['postuler'])
         // Numero_offre correspond à l'input caché faisant référence a l'id de l'offre
 
         mkdir("Profil/Etudiant/$row_user->id-$row_user->id_crypt/CV", 0777, true);
-        chmod("Profil", 0777);
-
         mkdir("Profil/Etudiant/$row_user->id-$row_user->id_crypt/Lettre_motivation", 0777, true);
+        
         chmod("Profil", 0777);
+        chmod("Profil/Etudiant", 0777);
+        chmod("Profil/Etudiant/$row_user->id-$row_user->id_crypt", 0777);
 
 
         // Propriétés du CV

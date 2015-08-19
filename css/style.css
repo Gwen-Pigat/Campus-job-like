@@ -27,7 +27,7 @@ body{
 	margin: 0;
 	/*background: url(../img/babysitter.jpg) no-repeat;*/
 	font-weight: 700;
-	font-family: "Open Sans";
+	font-family: "Caviar Dreams";
 }
 
 .header{
@@ -53,7 +53,7 @@ body{
 	font-size: 3vw; 
 	color: white;
 	margin-top: 5%;
-	font-family: 'Inconsolata';
+	font-family: 'Caviar Dreams';
 }
 
 .main-description{
@@ -61,7 +61,7 @@ body{
 	font-size: 2vw; 
 	color: white;
 	margin-top: 0%;
-	font-family: 'Inconsolata';
+	font-family: 'Caviar Dreams';
 }
 
 .tarifs{
@@ -75,6 +75,11 @@ body{
 	cursor: pointer;
 }
 
+.validation_offre{
+	display: none;
+	padding-top: 5%;
+}
+
 .btn-custom{
 	background-color: #1c94a3;
 	color: white;
@@ -82,7 +87,31 @@ body{
 	font-size: 2vw;
 	margin-top: 5%;
 	border: 2px #1c94a3 solid;
-	font-family: 'Inconsolata';
+	font-family: 'Caviar Dreams';
+}
+
+.btn-custom:hover{
+	background-color: white;
+	border : 2px #1c94a3 solid;
+	color: #1c94a3; 
+	transition: 0.4s;
+}
+
+.btn-custom-red{
+	background-color: #ff0000;
+	color: white;
+	padding: 0.5%;
+	font-size: 2vw;
+	margin-top: 5%;
+	border: 2px #ff0000 solid;
+	font-family: 'Caviar Dreams';
+}
+
+.btn-custom-red:hover{
+	background-color: white;
+	border : 2px #ff0000 solid;
+	color: #ff0000; 
+	transition: 0.4s;
 }
 
 .btn-login{
@@ -98,13 +127,6 @@ body{
 	color: #1c94a3;
 	padding: 0.6%;
 	border: 5px #1c94a3 solid;
-	transition: 0.4s;
-}
-
-.btn-custom:hover{
-	background-color: white;
-	border : 2px #1c94a3 solid;
-	color: #1c94a3; 
 	transition: 0.4s;
 }
 
@@ -133,7 +155,7 @@ body{
 .logo{
 	margin-top: -3%;
 	color: white;
-	font-family: 'Inconsolata';
+	font-family: 'Caviar Dreams';
 }
 
 .logo img{
@@ -167,9 +189,15 @@ body{
 	transition: 0.6s;
 }
 
-.modal-content{background-color: white; color: #1C94A3; text-shadow: 0 0 1px #1C94A3;border-radius: 0px;}
+.modal-content{
+	background-color: white; 
+	color: #1C94A3; 
+	text-shadow: 0 0 1px #1C94A3;
+	border-radius: 0px;
+}
 
 .modal-content form input{
+	font-size: 1vw;
 	padding: 2%;
 	margin: 1%;
 }
@@ -338,6 +366,15 @@ footer ul a:hover{
 	color: #1C94A3; 
 	transition: 0.4s
 }
+
+
+/*Liste postulants*/
+
+#section_profilemployeur h1{
+	font-size: 4vw;
+	text-align: center;
+}
+
 
 
 /*Formulaire de création d'une offre*/
@@ -524,8 +561,17 @@ textarea{
 	color: #1C94A3;
 	text-align: center;
 	margin-top: 15%;
-	padding: 2%;
-	border: 2px #1c94a3 solid;
+	padding: 1%;
+}
+
+.redirection h3{
+	font-size: 3vw;
+	font-family: Caviar Dreams;
+}
+
+.redirection .fa{
+	color: #ff0000;
+	transition: ;
 }
 
 
@@ -570,7 +616,7 @@ textarea{
 	padding: 2%;
 	border: 4px #146E7A solid;
 	margin-top: -10%;
-	font-size: 2em;
+	font-size: 2vw;
 }
 
 /* Fade pour js */
@@ -596,6 +642,78 @@ textarea{
 	text-shadow: 0 0 1px #ff0000;
 }
 
+/* Animation CSS */
 
-/* Profil postulant */
-
+#loader-wrapper {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80%;
+    z-index: 1000;
+}
+#loader {
+    display: block;
+    position: relative;
+    top: 50%;
+    width: 150px;
+    height: 150px;
+    margin: auto;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #0088cc;
+    -webkit-animation: spin 2s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+    animation: spin 2s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+}
+ 
+#loader:before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #28c223;
+    -webkit-animation: spin 3s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+      animation: spin 3s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+}
+ 
+#loader:after {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #000;
+    -webkit-animation: spin 1.5s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+      animation: spin 1.5s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+}
+ 
+@-webkit-keyframes spin {
+    0%   {
+        -webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(0deg);  /* IE 9 */
+        transform: rotate(0deg);  /* Firefox 16+, IE 10+, Opera */
+    }
+    100% {
+        -webkit-transform: rotate(360deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(360deg);  /* IE 9 */
+        transform: rotate(360deg);  /* Firefox 16+, IE 10+, Opera */
+    }
+}
+@keyframes spin {
+    0%   {
+        -webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(0deg);  /* IE 9 */
+        transform: rotate(0deg);  /* Firefox 16+, IE 10+, Opera */
+    }
+    100% {
+        -webkit-transform: rotate(360deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(360deg);  /* IE 9 */
+        transform: rotate(360deg);  /* Firefox 16+, IE 10+, Opera */
+    }
+}

@@ -28,4 +28,7 @@ $(document).ready(function(){
 	$(".carousel").fadeIn(1000);
 	$(".box").delay(2000).fadeOut(1000);
 	
+	$(".container.validation_offre").delay(2500).fadeIn(500);
+	$(".loading").fadeOut(2000);
+
 });
