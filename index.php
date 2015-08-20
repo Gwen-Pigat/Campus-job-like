@@ -68,7 +68,7 @@ elseif (isset($_GET) && isset($_GET['Profil_employeur'])) {
 
 //Partie étudiant
 
-elseif (isset($_GET) && isset($_GET['Etudiant'])) {
+elseif (isset($_GET) && isset($_GET['Etudiant']) && !isset($_GET['password_reset'])) {
 
   $session->sessionDestroy();
   $session->profilWait();
@@ -93,7 +93,7 @@ elseif (isset($_GET) && isset($_GET['Etudiant'])) {
 elseif (isset($_GET) && isset($_GET['Profil_etudiant'])) {
 
   include "include/connexion.php";
-  
+  $link->query("ALTER TABLE Etudiant ADD token_password NOT NULL DEFAULT $random");
   $title = "Profil Etudiant";
 
   include "include/header.php";
@@ -105,9 +105,35 @@ elseif (isset($_GET) && isset($_GET['Profil_etudiant'])) {
 
 }
 
+
+// Reset du password
+
+elseif (isset($_GET) && isset($_GET['Etudiant']) && isset($_GET['password_reset']) && !empty($_GET['password_reset'])) {
+  
+  include "include/connexion.php"; 
+  $title = "Nouveau mot de passe";
+
+  include "include/header.php";
+
+  $query = $link->query("SELECT * FROM Etudiant WHERE token_password='$_GET[password_reset]'");
+  $row = $query->fetch_object();
+
+  if ($row == 0) {
+  echo "<script>alert(\"Erreur de procédure\")</script>";
+  header("Refresh: 0; url=index.php?Etudiant");
+  }
+  else{
+  echo "<section id='section_resetpassword'>";
+  include "include/section_resetpassword.php";
+  echo "</section>";
+  }
+
+}
+
+
 // Redirection
 
-elseif (($_GET != "Etudiant") || ($_GET != "Employeur") || ($_GET != "erreur_connexion" ) || ($_GET != "erreur_inscription" ) || ($_GET != "Profil_etudiant" ) || ($_GET != "Profil_employeur" ) || empty($_GET) || !isset($_GET)) {
+elseif (($_GET != "password_reset") || ($_GET != "Etudiant") || ($_GET != "Employeur") || ($_GET != "erreur_connexion" ) || ($_GET != "erreur_inscription" ) || ($_GET != "Profil_etudiant" ) || ($_GET != "Profil_employeur" ) || empty($_GET) || !isset($_GET)) {
   $session->sessionDestroy();
   $session->profilWait();
   echo "<META HTTP-EQUIV='Refresh' CONTENT='0; URL=index.php?Etudiant'>";
