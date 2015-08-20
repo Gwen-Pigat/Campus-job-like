@@ -133,7 +133,10 @@ elseif (isset($_GET['password_request']) && !isset($_GET['inscription']) && isse
         echo ('');
     else
         echo ('');
-
+	}
+	else{
+	echo "<script>alert(\"Cette adresse e-mail n'existe pas, veuillez recommencer\")</script>";
+	header("Refresh: 0; url=../index.php?Etudiant");
 	}
 }
 else{
