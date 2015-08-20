@@ -41,6 +41,31 @@
 	display: none;
 }
 
+#section_resetpassword form{
+    border-radius: 10px;
+    margin-top: 10%;
+    padding: 2%;
+    background-color: #fff;
+    display: block;
+    text-align: center;
+}
+
+#section_resetpassword{
+	background-color: black
+}
+
+#section_resetpassword h1{
+	font-size: 7vw;
+	color: #1c94a3;
+	text-shadow: 0 0 1px #000;
+	font-family: "Stroke";
+}
+
+#section_resetpassword input, #section_resetpassword button{
+	margin: 0% 0% 1% 0%;
+	padding: 1%;
+}
+
 body{
 	margin: 0;
 	/*background: url(../img/babysitter.jpg) no-repeat;*/
