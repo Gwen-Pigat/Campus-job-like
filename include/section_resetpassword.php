@@ -24,6 +24,7 @@ if (isset($_POST) && isset($_POST['password']) && isset($_POST['password_confirm
 	elseif ($_POST['password'] == $_POST['password_confirm']) {
 
 	$link->query("UPDATE Etudiant SET Password='$_POST[password]'");
+	$link->query("UPDATE Etudiant SET token_password='' WHERE token_password='$_GET[password_reset]'");
 
 	echo "<script>alert(\"Votre mot de passe à bien été ré_initialisé, vous pouvez à présent vous connecter avec celui-ci\")</script>";
 	header("Refresh: 0; url=index.php?Etudiant");
