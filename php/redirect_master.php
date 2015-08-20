@@ -86,7 +86,7 @@ elseif (isset($_GET["inscription"]) && !isset($_GET['password_request']) && isse
 
 
 
-// Demande d'envoi de mot de passse
+// Demande d'envoi de mot de passse / Etudiant
 
 elseif (isset($_GET['password_request']) && !isset($_GET['inscription']) && isset($_POST['email_send_etudiant']) && !empty($_POST['email_send_etudiant'])) {
 
@@ -139,6 +139,63 @@ elseif (isset($_GET['password_request']) && !isset($_GET['inscription']) && isse
 	header("Refresh: 0; url=../index.php?Etudiant");
 	}
 }
+
+
+// Demande d'envoi de mot de passse / Employeur
+
+elseif (isset($_GET['password_request']) && !isset($_GET['inscription']) && isset($_POST['email_send_employeur']) && !empty($_POST['email_send_employeur'])) {
+
+	$query = $link->query("SELECT * FROM EntrepriseProfil WHERE Email='$_POST[email_send_employeur]'")or die("Erreur query");
+	$row = $query->fetch_object();
+
+	if ($row == 1) {
+
+	$random = sha1(str_shuffle(0123456789)).sha1(str_shuffle("azertyuiopmlkjhgfdsq"));
+	$token = "TOK_//$random//$random";
+
+	$link->query("UPDATE EntrepriseProfil SET token_password='$token'");
+
+	echo "<script>alert(\"Un mail va vous être envoyé afin de taiter votre demande\")</script>";
+	header("Refresh: 0; url=../index.php?Employeur");
+
+	// Envoi du mail
+	require "../PHPMailer/class.phpmailer.php";
+
+	//Envoi des données par mail
+
+    // Envoi à l'admin
+    $mail = new phpmailer();
+
+    // Define who the message is from
+    $mail->From = str_shuffle(0123456789);
+    $mail->FromName = 'JobFinder | Mot de passe';
+
+    // Set the subject of the message
+    $mail->Subject = "$row->Nom - $row->Prenom";
+
+    // Add the body of the message
+    $body = "Chèr $row->Prenom, voici le lien afin de réinitiliser votre mot de passe :\n\n\n
+    <div style='Margin-top: 10%; Border: 1px #000 solid; Padding: 2%'>
+    	<a href='http://bestialsoul.com/TestCampus/index.php?Employeur&token=$row->token_password'>Cliquez ici</a>
+    </div>";
+
+    $mail->Body = $body;
+
+    // Add a recipient address
+    $mail->AddAddress("$row->Email");
+
+    if(!$mail->Send())
+        echo ('');
+    else
+        echo ('');
+	}
+	else{
+	echo "<script>alert(\"Cette adresse e-mail n'existe pas, veuillez recommencer\")</script>";
+	header("Refresh: 0; url=../index.php?Employeur");
+	}
+}
+
+
 else{
 	header("Location: ../include/logout.php");
 }

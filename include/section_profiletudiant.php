@@ -143,7 +143,7 @@ switch ($row->Lieu_importance) {
 
 // Mise à jour du profil
 
-if (isset($_POST) && isset($prenom) && isset($nom) && isset($sexe) && isset($etudes) && isset($ecole) && isset($specialisation) && isset($langues) && isset($recherche) && isset($lieu) && isset($distance) && !empty($prenom) && !empty($nom) && !empty($sexe) && !empty($etudes) && !empty($ecole) && !empty($specialisation) && !empty($langues) && !empty($recherche) && !empty($lieu) && !empty($distance)) {
+if (isset($_POST) && isset($prenom) && isset($nom) && isset($sexe) && isset($etudes) && isset($ecole) && isset($specialisation) && isset($langues) && isset($recherche) && isset($lieu) && !empty($prenom) && !empty($nom) && !empty($sexe) && !empty($etudes) && !empty($ecole) && !empty($specialisation) && !empty($langues) && !empty($recherche) && !empty($lieu)) {
     
     $link->query("UPDATE Etudiant SET Prenom='$prenom', Nom='$nom', Sexe='$sexe', Etudes='$etudes', Ecole='$ecole', Specialisation='$specialisation', Langues='$langues', Langues_sup='$langues_sup', Recherche='$recherche', Recherche_sup='$recherche_sup', Lieu_importance='$lieu', Distance='$distance', Statut_Profil='Oui' WHERE id_crypt='$_SESSION[etudiant]'")or die("Erreur SQL");
 

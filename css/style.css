@@ -55,10 +55,13 @@
 }
 
 #section_resetpassword h1{
-	font-size: 7vw;
+	font-size: 4vw;
+	margin: 0%;
 	color: #1c94a3;
 	text-shadow: 0 0 1px #000;
-	font-family: "Stroke";
+}
+#section_resetpassword h2{
+	margin: 0% 0% 5% 0%;
 }
 
 #section_resetpassword input, #section_resetpassword button{
@@ -234,6 +237,7 @@ body{
 .social-media .fa{
 	color: #fff;
 	transition: 0.4s;
+	font-size: 3vw;
 }
 
 .social-media .fa:hover{

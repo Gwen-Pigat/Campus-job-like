@@ -8,7 +8,7 @@
 <div class="header">
 
 <div class="categorie">
-<?php echo "<a href='index.php'><button class='btn-etudiant'>Etudiant</button></a>
+<?php echo "<a href='index.php?Etudiant'><button class='btn-etudiant'>Etudiant</button></a>
 <button class='btn-login' data-toggle='modal' data-target='#Connexion'>Se connecter</button></a>"; ?>
 </div>
 
@@ -23,7 +23,7 @@
   <br><br><br>
 
 <button class='btn-lg btn-custom' data-toggle="modal" data-target="#myModal">Poster une offre gratuitement</button><br><br><br>
-<a class="tarifs" data-toggle="modal" data-target="#Modal-pricing">Voir les tarifs</a>
+<!-- <a class="tarifs" data-toggle="modal" data-target="#Modal-pricing">Voir les tarifs</a> -->
 </div>
 
 <!-- Modal pour pricing  -->
@@ -36,7 +36,7 @@
           <h4 class="modal-title">Nos offres</h4>
         </div>
         <div class="modal-body">
-          <p>Veuilez &&&remplir tout les champs ci-dessous afin de valider votre inscription.</p>
+          <p>Veuilez remplir tout les champs ci-dessous afin de valider votre inscription.</p>
           <center>
           <form action="php/redirect_master.php">
             <input type="text" name="nom" placeholder="Votre nom" required>
@@ -97,8 +97,8 @@ Donnez nous votre e-mail et nous vous enverrons un lien afin de ré-initialiser 
         <div class="modal-body">
           <center>
             <?php
-          echo "<form class='col-md-12' action='' method='POST'>
-            <input class='col-md-12' type='text' placeholder='Votre e-mail' name='email_send'><br>
+          echo "<form class='col-md-12' action='php/redirect_master.php?password_request' method='POST'>
+            <input class='col-md-12' type='text' placeholder='Votre e-mail' name='email_send_employeur'><br>
             <input class='btn btn-custom col-md-12' type='submit' value='Valider'>
           </form>"; ?>
           </center>
