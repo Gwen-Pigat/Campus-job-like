@@ -37,8 +37,20 @@
 /*Fin scrollar*/
 
 
-#section_employeur, #section_etudiant, #section_carousel{
+#section_employeur, #section_etudiant, #section_carousel, #section_profiletudiant, #section_profilemployeur{
 	display: none;
+}
+
+
+#section_profiletudiant h1, #section_profilemployeur h1{
+	font-size: 4vw;
+	color: #1c94a3;
+	font-family: "Caviar";
+	margin: 0%;
+}
+
+#section_profiletudiant h2, #section_profilemployeur h2{
+	margin: 0%;
 }
 
 #section_resetpassword form{
@@ -137,11 +149,31 @@ body{
 	transition: 0.4s;
 }
 
+.download_file .btn-danger{
+	padding: 2%;
+	float: none;
+	font-size: 1vw;
+}
+
+.btn-success{
+	border-radius: 0px;
+    background-color: #28c223;
+    font-size: 1.5vw;
+    padding: 2%;
+    border: 0px;
+    transition: 0.4s;
+}
+
+.btn-success:hover{
+	transition: 0.4s;
+	border-radius: 10px;
+}
+
 .btn-danger{
 	border-radius: 0px;
-    background-color: #1c94a3;
+    background-color: #ff0000;
     font-size: 1.5vw;
-    padding: 1%;
+    padding: 2%;
     border: 0px;
     transition: 0.4s;
 }
@@ -188,7 +220,6 @@ body{
 .btn-login:hover{
 	background-color: rgba(28, 148, 163, 0);
 	color: #1c94a3;
-	padding: 0.6%;
 	border: 5px #1c94a3 solid;
 	transition: 0.4s;
 }
@@ -207,7 +238,6 @@ body{
 	background-color: #CCCCCC;
 	border: 5px #CCCCCC solid;
 	color: #fff;
-	padding: 0.6%;
 	transition: 0.4s;
 }
 
@@ -294,7 +324,7 @@ body{
 
 .carousel-caption h1{
 	margin-bottom: 20vw;
-	margin-top: 5%; 
+	margin-top: 5vw; 
 	z-index: 10;
 	font-size: 2vw;
 }
@@ -421,6 +451,10 @@ footer ul li:hover{
 	font-family: "Caviar";
 }
 
+.contact_us h3{
+	font-size: 2vw;
+}
+
 .contact_us h1 a{
 	color: #1c94a3;
 }
@@ -428,7 +462,6 @@ footer ul li:hover{
 .social ul li{
 	list-style-type: none; 
 	display: inline-block; 
-	margin: 2% 2% 0% 2%
 }
 
 .social ul li a{
@@ -446,6 +479,10 @@ footer ul li:hover{
 
 #section_profilemployeur h1{
 	text-align: center;
+}
+
+#section_profilemployeur .container.validation_offre h1{
+	text-align: left;
 }
 
 
@@ -579,6 +616,18 @@ textarea{
 	max-height: 100%;
 }
 
+.profil_logo input{
+	background-color: #000;
+	word-break: break-all;
+	width: auto;
+	font-size: 1vw;
+}
+
+.profil_logo{
+	display: none;
+	margin: 1% 0% 20% 0%;
+}
+
 
 /*Résumé de l'offre*/
 
@@ -619,14 +668,16 @@ textarea{
 	width: 100%;
 }
 
+.offer_submit h1{
+	font-size: 1vw;
+}
+
 .user{
 	color: #1C94A3;
-	text-decoration: underline;
 }
 
 .user_postulants{
 	color: #ff0000;
-	text-decoration: underline;
 }
 
 
@@ -717,78 +768,40 @@ textarea{
 	text-shadow: 0 0 1px #ff0000;
 }
 
-/* Animation CSS */
 
-#loader-wrapper {
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 80%;
-    z-index: 1000;
-}
-#loader {
-    display: block;
-    position: relative;
-    top: 50%;
-    width: 150px;
-    height: 150px;
-    margin: auto;
-    border-radius: 50%;
-    border: 3px solid transparent;
-    border-top-color: #0088cc;
-    -webkit-animation: spin 2s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
-    animation: spin 2s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
-}
- 
-#loader:before {
-    content: "";
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    right: 5px;
-    bottom: 5px;
-    border-radius: 50%;
-    border: 3px solid transparent;
-    border-top-color: #28c223;
-    -webkit-animation: spin 3s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
-      animation: spin 3s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
-}
- 
-#loader:after {
-    content: "";
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    right: 15px;
-    bottom: 15px;
-    border-radius: 50%;
-    border: 3px solid transparent;
-    border-top-color: #000;
-    -webkit-animation: spin 1.5s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
-      animation: spin 1.5s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
-}
- 
-@-webkit-keyframes spin {
-    0%   {
-        -webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
-        -ms-transform: rotate(0deg);  /* IE 9 */
-        transform: rotate(0deg);  /* Firefox 16+, IE 10+, Opera */
-    }
-    100% {
-        -webkit-transform: rotate(360deg);  /* Chrome, Opera 15+, Safari 3.1+ */
-        -ms-transform: rotate(360deg);  /* IE 9 */
-        transform: rotate(360deg);  /* Firefox 16+, IE 10+, Opera */
-    }
-}
-@keyframes spin {
-    0%   {
-        -webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
-        -ms-transform: rotate(0deg);  /* IE 9 */
-        transform: rotate(0deg);  /* Firefox 16+, IE 10+, Opera */
-    }
-    100% {
-        -webkit-transform: rotate(360deg);  /* Chrome, Opera 15+, Safari 3.1+ */
-        -ms-transform: rotate(360deg);  /* IE 9 */
-        transform: rotate(360deg);  /* Firefox 16+, IE 10+, Opera */
-    }
+
+/*Query pour téléphone*/
+
+@media screen and (max-width: 768px){
+	#section_etudiant .social-media .fa, #section_employeur .social-media .fa{
+		font-size: 8vw;
+	}
+	.btn-etudiant, .btn-employeur, .btn-login{
+		padding: 1%;
+		width: auto;
+		font-size: 3vw;
+	}
+	.logo{
+		margin-top: 10%;
+	}
+	.logo img{
+		width: 30%;
+	}
+	.title{
+		font-size: 10vw;
+	}
+	.main{
+		font-size: 5vw;
+	}
+	.main-description{
+		font-size: 4vw;
+	}
+	.btn-custom{
+	    padding: 2%;
+    	font-size: 5vw;
+	}
+	.header{
+		height: auto;
+	}
+
 }

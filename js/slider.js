@@ -20,6 +20,7 @@ $(document).ready(function(){
 	});
 	$(".lateral").hover(function(){
 		$(".lateral-aside").fadeToggle(100);
+		$(".profil_logo").fadeToggle(100);
 	});
 	
 	$(".enregistrement").fadeOut(2000);
@@ -33,5 +34,9 @@ $(document).ready(function(){
 	$("#section_employeur").fadeIn(500);
 	$("#section_etudiant").fadeIn(500);
 	$("#section_carousel").fadeIn(500);
+	$("#section_profiletudiant").fadeIn(500);
+	$("#section_profilemployeur").fadeIn(500);
+
+
 	
 });

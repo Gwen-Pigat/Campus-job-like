@@ -18,39 +18,7 @@ $row = $query->fetch_object();
 ?>
 
 <div class="container">
-<h1 class="text-center" style="margin-top: 5%; font-family: Inconsolata">Profil de <strong><?php echo $row->Prenom; ?></strong></h1>
-
-<?php 
-
-    if (isset($_POST['upload'])){
-        
-        mkdir("Profil/Employeur/$row->id-$row->id_crypt/Img", 0777, true);
-        chmod("Profil", 0777);
-        chmod("Profil/Employeur", 0777);
-        chmod("Profil/Employeur/$row->id-$row->id_crypt", 0777);
-        chmod("Profil/Employeur/$row->id-$row->id_crypt/Img", 0777);
-
-        $image_name = $_FILES['image']['name'];
-        $image_type = $_FILES['image']['type'];
-        $image_size = $_FILES['image']['size'];
-        $image_tmp = $_FILES['image']['tmp_name'];
-
-        $lien = "Profil/Employeur/$row->id-$row->id_crypt/Img/img-profil-$row->id-$row->id_crypt.jpg";
-
-        if ($image_name == "") {
-            echo "<script>alert('Vous devez sélectionner une image !')</script>";
-        }
-
-        else{
-            move_uploaded_file($image_tmp, $lien);
-            echo "<script>alert('Image mise à jour')</script>";
-        }
-    }
-
-     ?>
-
-
-<h1 class="text-center"><strong><?php echo $row->Prenom; ?></strong> ,mon compte</h1>
+<h1 class="text-center" style="margin-top: 5%">Profil de <strong><?php echo $row->Prenom; ?></strong></h1>
 
 <form method="POST" action="" class="creation_etudiant col-md-8 col-md-offset-2">
 
@@ -134,7 +102,7 @@ switch ($row->Lieu_importance) {
 </p>
 
 <center>
-<button class="btn btn-custom"><i class='fa fa-check fa-2x'></i></button>
+<button class="btn btn-custom"><i class='fa fa-check fa'></i> Valider</button>
 </center>
 
 </form>
@@ -170,9 +138,9 @@ if (isset($_GET) && isset($_GET['liste_offres']) && !isset($_GET['postuler']) &&
 
 //Boucle qui liste les offres disponibles sur le profil (seulement celles au statut 'Accepté')
     $query = $link->query("SELECT * FROM Etudiant WHERE id_crypt='$_SESSION[etudiant]'"); $row_etudiant = $query->fetch_object();
-    $query = $link->query("SELECT * FROM Offre");
+    $sql = $link->query("SELECT * FROM Offre WHERE Statut='Validé'");
 
-    while ($row = $query->fetch_object()) {
+    while ($row = $sql->fetch_object()) {
         echo "<div class='col-md-4 offer_list'>
             <p><span class='user'>Titre de l'offre</span> : $row->Titre<p>
             <p><span class='user'>Boulot payant</span> : $row->Remunere<p>

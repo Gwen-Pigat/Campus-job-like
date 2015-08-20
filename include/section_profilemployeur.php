@@ -17,45 +17,7 @@ $row = $query->fetch_object();
 
 <div class="container">
 
-<h1 class="text-center" style="margin-top: 5%; font-family: Inconsolata">Profil de <strong><?php echo $row->Entreprise; ?></strong></h1>
-
-<?php 
-
-    if (isset($_POST['upload'])){
-        
-        mkdir("Profil/Employeur/$row->id-$row->id_crypt/Img", 0777, true);
-        chmod("Profil", 0777);
-        chmod("Profil/Employeur", 0777);
-        chmod("Profil/Employeur/$row->id-$row->id_crypt", 0777);
-        chmod("Profil/Employeur/$row->id-$row->id_crypt/Img", 0777);
-
-        $image_name = $_FILES['image']['name'];
-        $image_type = $_FILES['image']['type'];
-        $image_size = $_FILES['image']['size'];
-        $image_tmp = $_FILES['image']['tmp_name'];
-
-        $lien = "Profil/Employeur/$row->id-$row->id_crypt/Img/img-profil-$row->id-$row->id_crypt.jpg";
-
-        if ($image_name == "") {
-            echo "<script>alert('Vous devez sélectionner une image !')</script>";
-        }
-
-        else{
-            move_uploaded_file($image_tmp, $lien);
-            echo "<script>alert('Image mise à jour')</script>";
-        }
-    }
-
-     ?>
-
-    <form class="profil_entreprise_logo col-md-12" action="" method="POST" enctype="multipart/form-data">
-        <label class="col-md-5 text-right">Votre logo :</label>
-        <?php echo "<img class='col-md-5' src=Profil/Employeur/$row->id-$row->id_crypt/Img/img-profil-$row->id-$row->id_crypt.jpg style='width: 25%'>"; ?><br>
-        <div class="col-md-5"></div>
-        <input class="btn col-md-5" type="file" name="image" size="25" value="test">
-         <div class="col-md-5"></div>
-        <input class="col-md-5" type="submit" name="upload" value="Envoyer">
-    </form>
+<h1 class="text-center" style="margin-top: 5%">Profil de <strong><?php echo $row->Entreprise; ?></strong></h1>
 
     <form class="profil_entreprise col-md-12" action="index.php?Profil_employeur" method="POST">
 
@@ -169,10 +131,10 @@ if (isset($_GET['Profil_employeur']) && isset($_GET['summary_offre']) && !empty(
 
     } 
 
-    echo "<div class='offer_submit container'>
+    echo "<h1><span class='user'>$row->Entreprise</span></h1>
+    <div class='offer_submit container'>
             <img class='col-md-5' src=Profil/Employeur/$row->id-$row->id_crypt/Img/img-profil-$row->id-$row->id_crypt.jpg style='width: 50%'>
-            <h1><span class='user'>$row->Entreprise</span></h1>
-            <p>Résumé de votre anonce :</p><br>
+            <p><span class='user'>Résumé de votre anonce :</span></p><br>
             <p><span class='user'>Nom : </span>$row_offre->Titre<p>
             <p><span class='user'>Rémunération : </span>$row_offre->Remunere<p>
             <p><span class='user'>Les tâches : </span>$row_offre->Taches<p>
@@ -230,7 +192,8 @@ if (isset($_GET['Profil_employeur']) && isset($_GET['liste_offres'])) { ?>
     }
 
     ?>
-    <h1 class="text-center" style="margin-top: 5%; font-family: Inconsolata"><strong><?php echo $row_1->Entreprise; ?></strong><br>Liste de vos offres</h1> 
+    <h1 class="text-center" style="margin-top: 5%"><strong><?php echo $row_1->Entreprise; ?></strong></h1>
+    <h2 class="text-center">Liste de vos offres</h2> 
 
 <?php
 
@@ -261,13 +224,11 @@ if (isset($_GET['Profil_employeur']) && isset($_GET['liste_offres'])) { ?>
 
 if (isset($_GET['liste_postulants']) && isset($_GET['for_offer']) && isset($_GET['token']) && !empty($_GET['for_offer']) && !empty($_GET['token'])) {
 
-    echo "TRUE";
-    $query = $link->query("SELECT * FROM Postulant WHERE id_offre='$_GET[for_offer]'"); $row = $query->fetch_object();
-    $query = $link->query("SELECT * FROM Etudiant WHERE Email='$row->Postulant'");
-
+    $query = $link->query("SELECT * FROM Postulant WHERE id_offre='$_GET[for_offer]'")or die("Erreur query"); $row = $query->fetch_object();
+    $sql = $link->query("SELECT * FROM Etudiant WHERE Email='$row->Postulant'")or die("Erreur query");
     echo "<h1>Liste des postulants</h1>";
 
-    while ($row = $query->fetch_object()) {
+    while ($row = $sql->fetch_object()) {
         echo "<div class='container'><div class='col-md-4 offer_list'>";
         if(file_exists("Profil/Etudiant/$row->id-$row->id_crypt/Img/img-profil-$row->id-$row->id_crypt.jpg")) {
          echo "<img src=Profil/Etudiant/$row->id-$row->id_crypt/Img/img-profil-$row->id-$row->id_crypt.jpg>"; 

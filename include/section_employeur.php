@@ -20,9 +20,7 @@
     <h1 class="main">Trouvez les meilleurs étudiants pour votre entreprise</h1>
     <h3 class="main-description">Seuls les étudiants qui correspondent à vos critères peuvent postuler à votre offre</h3>
 
-  <br><br><br>
-
-<button class='btn-lg btn-custom' data-toggle="modal" data-target="#myModal">Poster une offre gratuitement</button><br><br><br>
+<button class='btn-lg btn-custom' data-toggle="modal" data-target="#myModal">Poster une offre gratuitement</button>
 <!-- <a class="tarifs" data-toggle="modal" data-target="#Modal-pricing">Voir les tarifs</a> -->
 </div>
 
