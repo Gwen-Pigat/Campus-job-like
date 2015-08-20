@@ -89,7 +89,7 @@ elseif (isset($_GET["inscription"]) && !isset($_GET['password_request']) && isse
 // Demande d'envoi de mot de passse
 
 elseif (isset($_GET['password_request']) && !isset($_GET['inscription']) && isset($_POST['email_send_etudiant']) && !empty($_POST['email_send_etudiant'])) {
-	echo "$_POST[email_send_etudiant]";
+
 	$query = $link->query("SELECT * FROM Etudiant WHERE Email='$_POST[email_send_etudiant]'")or die("Erreur query");
 	$row = $query->fetch_object();
 
@@ -99,6 +99,9 @@ elseif (isset($_GET['password_request']) && !isset($_GET['inscription']) && isse
 	$token = "TOK_//$random//$random";
 
 	$link->query("UPDATE Etudiant SET token_password='$token'");
+
+	echo "<script>alert(\"Un mail va vous être envoyé afin de taiter votre demande\")</script>";
+	header("Refresh: 0; url=../index.php?Etudiant");
 
 	// Envoi du mail
 	require "../PHPMailer/class.phpmailer.php";
