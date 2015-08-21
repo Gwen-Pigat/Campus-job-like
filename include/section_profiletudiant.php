@@ -116,7 +116,7 @@ if (isset($_POST) && isset($prenom) && isset($nom) && isset($sexe) && isset($etu
     $link->query("UPDATE Etudiant SET Prenom='$prenom', Nom='$nom', Sexe='$sexe', Etudes='$etudes', Ecole='$ecole', Specialisation='$specialisation', Langues='$langues', Langues_sup='$langues_sup', Recherche='$recherche', Recherche_sup='$recherche_sup', Lieu_importance='$lieu', Distance='$distance', Statut_Profil='Oui' WHERE id_crypt='$_SESSION[etudiant]'")or die("Erreur SQL");
 
     echo "<script>alert(\"Votre profil à bien été mis à jour\")</script>";
-    header('Refresh: 0 ;index.php?Profil_etudiant');
+    echo "<META HTTP-EQUIV='Refresh' CONTENT='0; URL='>";
 }
 
 
