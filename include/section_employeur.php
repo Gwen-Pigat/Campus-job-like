@@ -96,7 +96,7 @@ Donnez nous votre e-mail et nous vous enverrons un lien afin de ré-initialiser 
           <center>
             <?php
           echo "<form class='col-md-12' action='php/redirect_master.php?password_request' method='POST'>
-            <input class='col-md-12' type='text' placeholder='Votre e-mail' name='email_send_employeur'><br>
+            <input class='col-md-12' type='email' placeholder='Votre e-mail' name='email_send_employeur' required><br>
             <input class='btn btn-custom col-md-12' type='submit' value='Valider'>
           </form>"; ?>
           </center>
