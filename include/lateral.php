@@ -97,12 +97,12 @@ else{
  ?>
  	<form class="profil_logo col-md-12" action="" method="POST" enctype="multipart/form-data">
         <input type="file" name="image" size="25" value="test" accept=".jpg,.JPG,.jpeg,.JPEG">
-        <input type="submit" name="upload" value="Envoyer">
+        <input type="submit" name="upload_image" value="Envoyer">
     </form>
 
     <?php 
 
-     if (isset($_POST['upload'])){
+     if (isset($_POST['upload_image'])){
         
         mkdir("Profil/Etudiant/$row->id-$row->id_crypt/Img", 0777, true);
         chmod("Profil", 0777);
@@ -119,6 +119,11 @@ else{
 
         if ($image_name == "") {
             echo "<script>alert('Vous devez sélectionner une image !')</script>";
+        }
+
+        if( !strstr($image_type, 'jpg') && !strstr($image_type, 'jpeg') && !strstr($image_type, 'bmp') && !strstr($image_type, 'gif')){
+        echo "<script>alert(\"L'extension n'est pas valide, votre image doit obligatoirement être un fichier de type 'jpg'\")</script>";
+        header("Refresh: 0; url=");
         }
 
         else{
