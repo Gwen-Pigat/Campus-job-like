@@ -22,88 +22,88 @@ $row = $query->fetch_object();
 
 <form method="POST" action="" class="creation_etudiant col-md-8 col-md-offset-2">
 
-<p>Je m'appelle <input name="prenom" placeholder="Votre prénom" value="<?php echo $row->Prenom; ?>" required>
-    <input name="nom" placeholder="Nom" value="<?php echo $row->Nom; ?>" required>
-</p>
+    <p>Je m'appelle <input name="prenom" placeholder="Votre prénom" value="<?php echo $row->Prenom; ?>" required>
+        <input name="nom" placeholder="Nom" value="<?php echo $row->Nom; ?>" required>
+    </p>
 
-<?php 
+    <?php 
 
-switch($row->Sexe){
-    case "Homme";
-        $switch_1 = "Selected";
-        break;
-    case "Femme";
-        $switch_2 = "Selected";
-        break;
-}
-switch ($row->Recherche) {
-    case 'Un job':
-        $switch_3 = "selected";
-        break;
-    case 'Un stage':
-        $switch_4 = "selected";
-        break;
-}
-switch ($row->Recherche_sup) {
-    case 'Non':
-        $switch_5 = "selected";
-        break;
-    case 'Un job':
-        $switch_6 = "selected";
-        break;
-    case 'Un stage':
-        $switch_7 = "selected";
-        break;
-}
-switch ($row->Lieu_importance) {
-    case 'Oui':
-        $switch_8 = "selected";
-        break;
-    case 'Non':
-        $switch_9 = "selected";
-        break;
-}
- ?>
+    switch($row->Sexe){
+        case "Homme";
+            $switch_1 = "Selected";
+            break;
+        case "Femme";
+            $switch_2 = "Selected";
+            break;
+    }
+    switch ($row->Recherche) {
+        case 'Un job':
+            $switch_3 = "selected";
+            break;
+        case 'Un stage':
+            $switch_4 = "selected";
+            break;
+    }
+    switch ($row->Recherche_sup) {
+        case 'Non':
+            $switch_5 = "selected";
+            break;
+        case 'Un job':
+            $switch_6 = "selected";
+            break;
+        case 'Un stage':
+            $switch_7 = "selected";
+            break;
+    }
+    switch ($row->Lieu_importance) {
+        case 'Oui':
+            $switch_8 = "selected";
+            break;
+        case 'Non':
+            $switch_9 = "selected";
+            break;
+    }
+     ?>
 
-<p>Je suis 
-    <select name="sexe" required>
-        <option value="Homme" <?php echo $switch_2; ?> >un homme</option>
-        <option value="Femme" <?php echo $switch_2; ?> >une femme</option>
-    </select>
-</p>
+    <p>Je suis 
+        <select name="sexe" required>
+            <option value="Homme" <?php echo $switch_2; ?> >un homme</option>
+            <option value="Femme" <?php echo $switch_2; ?> >une femme</option>
+        </select>
+    </p>
 
-<p>Mon Niveau d'étude est <input name="etudes" placeholder="Bac +1 , +2 etc..."  value="<?php echo $row->Etudes; ?>"required></p>
+    <p>Mon Niveau d'étude est <input name="etudes" placeholder="Bac +1 , +2 etc..."  value="<?php echo $row->Etudes; ?>"required></p>
 
-<p>Je suis ma scolarité dans l'école <input name="ecole" placeholder="Ecole"  value="<?php echo $row->Ecole; ?>"required></p>
+    <p>Je suis ma scolarité dans l'école <input name="ecole" placeholder="Ecole"  value="<?php echo $row->Ecole; ?>"required></p>
 
-<p>Ma spécialisation est <input name="specialisation" placeholder="la science..."  value="<?php echo $row->Specialisation; ?>"required></p>
+    <p>Ma spécialisation est <input name="specialisation" placeholder="la science..."  value="<?php echo $row->Specialisation; ?>"required></p>
 
-<p>Je parle <input name="langues" placeholder="le francais"  value="<?php echo $row->Langues; ?>"required>, Autre : <input name="langues_sup" placeholder="précisez" value="<?php echo $row->Langues_sup; ?>"></p>
+    <p>Je parle <input name="langues" placeholder="le francais"  value="<?php echo $row->Langues; ?>"required>, Autre : <input name="langues_sup" placeholder="précisez" value="<?php echo $row->Langues_sup; ?>"></p>
 
-<p>Je cherche un 
-    <select name="recherche" required>
-        <option value="Un job" <?php echo $switch_3; ?> >un job</option>
-        <option value="Un stage" <?php echo $switch_4; ?> >un stage</option>
-    </select>, cherchez vous autre chose (en plus)
-    <select name="recherche_sup">
-        <option value="Non" <?php echo $switch_5; ?> >Non</option>
-        <option value="Un job" <?php echo $switch_6; ?> >Un job</option>
-        <option value="Un stage" <?php echo $switch_7; ?> >Un stage</option>
-    </select>
-</p>
+    <p>Je cherche un 
+        <select name="recherche" required>
+            <option value="Un job" <?php echo $switch_3; ?> >un job</option>
+            <option value="Un stage" <?php echo $switch_4; ?> >un stage</option>
+        </select>, cherchez vous autre chose (en plus)
+        <select name="recherche_sup">
+            <option value="Non" <?php echo $switch_5; ?> >Non</option>
+            <option value="Un job" <?php echo $switch_6; ?> >Un job</option>
+            <option value="Un stage" <?php echo $switch_7; ?> >Un stage</option>
+        </select>
+    </p>
 
-<p>Le lieu du poste est-il important ? 
-    <select name="lieu" required>
-        <option value="Oui" <?php echo $switch_8; ?> >Oui</option>
-        <option value="Non" <?php echo $switch_9; ?> >Non</option>
-    </select>
-</p>
-    <p>Si oui, précisez la distance idéale : <input name="distance" placeholder="20km ou 100km max..." value="<?php echo $row->Distance; ?>">
-</p>
+    <p>Le lieu du poste est-il important ? 
+        <select name="lieu" required>
+            <option value="Oui" <?php echo $switch_8; ?> >Oui</option>
+            <option value="Non" <?php echo $switch_9; ?> >Non</option>
+        </select>
+    </p>
+        <p>Si oui, précisez la distance idéale : <input name="distance" placeholder="20km ou 100km max..." value="<?php echo $row->Distance; ?>">
+    </p>
 
-<center>
-<button class="btn btn-custom"><i class='fa fa-check fa'></i> Valider</button>
-</center>
+    <center>
+    <button class="btn btn-custom"><i class='fa fa-check fa'></i> Valider</button>
+    </center>
 
 </form>
 
