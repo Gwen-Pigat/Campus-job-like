@@ -44,7 +44,7 @@ elseif (isset($_GET) && isset($_GET['Employeur']) && !isset($_GET['password_rese
   echo "</section>";
 
   include "include/footer.php";
-
+ 
 }
 
 
@@ -62,6 +62,8 @@ elseif (isset($_GET) && isset($_GET['Profil_employeur'])) {
   echo "<section id='section_profilemployeur'>";
   include "include/section_profilemployeur.php";
   echo "</section>";
+
+  include "include/footer.php";
 
 }
 
@@ -83,8 +85,6 @@ elseif (isset($_GET) && isset($_GET['Etudiant']) && !isset($_GET['password_reset
   include "include/section_etudiant.php";
   echo "</section>";
 
-  include "include/footer.php";
-
 }
 
 
@@ -93,7 +93,7 @@ elseif (isset($_GET) && isset($_GET['Etudiant']) && !isset($_GET['password_reset
 elseif (isset($_GET) && isset($_GET['Profil_etudiant'])) {
 
   include "include/connexion.php";
-  $link->query("ALTER TABLE Etudiant ADD token_password NOT NULL DEFAULT $random");
+
   $title = "Profil Etudiant";
 
   include "include/header.php";
