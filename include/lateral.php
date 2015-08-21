@@ -23,7 +23,7 @@ else{
 }
  ?>
  <form class="profil_logo col-md-12" action="" method="POST" enctype="multipart/form-data">
-        <input type="file" name="image" size="25" value="test">
+        <input type="file" name="image" size="25" value="test" accept=".jpg,.JPG,.jpeg,.JPEG">
         <input type="submit" name="upload" value="Envoyer">
     </form>
 
@@ -47,7 +47,6 @@ else{
         if ($image_name == "") {
             echo "<script>alert('Vous devez sélectionner une image !')</script>";
         }
-
         else{
             move_uploaded_file($image_tmp, $lien);
             echo "<script>alert('Image mise à jour')</script>";
@@ -97,7 +96,7 @@ else{
 }
  ?>
  	<form class="profil_logo col-md-12" action="" method="POST" enctype="multipart/form-data">
-        <input type="file" name="image" size="25" value="test">
+        <input type="file" name="image" size="25" value="test" accept=".jpg,.JPG,.jpeg,.JPEG">
         <input type="submit" name="upload" value="Envoyer">
     </form>
 
