@@ -106,3 +106,12 @@ Donnez nous votre e-mail et nous vous enverrons un lien afin de ré-initialiser 
       </div>    
     </div>
   </div>
+
+  <footer class="col-md-12">
+<ul class="text-center">
+<a href=""><li>A propos de nous</li></a>
+<a href="contact.php"><li>Contactez-nous</li></a>
+<a href=""><li>Presse</li></a>
+<a href=""><li>CGV</li></a>
+</ul>
+</footer>
