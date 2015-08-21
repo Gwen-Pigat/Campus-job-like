@@ -23,7 +23,7 @@ else{
 }
  ?>
  <form class="profil_logo col-md-12" action="" method="POST" enctype="multipart/form-data">
-        <input type="file" name="image" size="25" value="test" accept=".jpg,.JPG,.jpeg,.JPEG">
+        <input type="file" name="image" size="25" value="test" accept=".jpg,.jpeg">
         <input type="submit" name="upload" value="Envoyer">
     </form>
 
@@ -46,11 +46,18 @@ else{
 
         if ($image_name == "") {
             echo "<script>alert('Vous devez sélectionner une image !')</script>";
+            header("Refresh: 0; url=");
         }
         else{
+            if( !strstr($image_type, 'jpg') && !strstr($image_type, 'jpeg') && !strstr($image_type, 'JPEG') && !strstr($image_type, 'JPG')){
+            echo "<script>alert(\"L'extension n'est pas valide, votre image doit obligatoirement être un fichier de type 'jpg' ou 'jpeg' !!\")</script>";
+            header("Refresh: 0; url=");
+            }
+            else{
             move_uploaded_file($image_tmp, $lien);
             echo "<script>alert('Image mise à jour')</script>";
             header("refresh: 0;url=index.php?Profil_employeur");
+            }
         }
     }
 
@@ -96,7 +103,7 @@ else{
 }
  ?>
  	<form class="profil_logo col-md-12" action="" method="POST" enctype="multipart/form-data">
-        <input type="file" name="image" size="25" value="test" accept=".jpg,.JPG,.jpeg,.JPEG">
+        <input type="file" name="image" size="25" value="test" accept=".jpg,.jpeg">
         <input type="submit" name="upload_image" value="Envoyer">
     </form>
 
@@ -118,18 +125,19 @@ else{
         $lien = "Profil/Etudiant/$row->id-$row->id_crypt/Img/img-profil-$row->id-$row->id_crypt.jpg";
 
         if ($image_name == "") {
-            echo "<script>alert('Vous devez sélectionner une image !')</script>";
-        }
-
-        if( !strstr($image_type, 'jpg') && !strstr($image_type, 'jpeg') && !strstr($image_type, 'bmp') && !strstr($image_type, 'gif')){
-        echo "<script>alert(\"L'extension n'est pas valide, votre image doit obligatoirement être un fichier de type 'jpg'\")</script>";
+        echo "<script>alert('Vous devez sélectionner une image !')</script>";
         header("Refresh: 0; url=");
         }
-
         else{
+            if( !strstr($image_type, 'jpg') && !strstr($image_type, 'jpeg') && !strstr($image_type, 'JPEG') && !strstr($image_type, 'JPG')){
+            echo "<script>alert(\"L'extension n'est pas valide, votre image doit obligatoirement être un fichier de type 'jpg' ou 'jpeg' !!\")</script>";
+            header("Refresh: 0; url=");
+            }
+            else{
             move_uploaded_file($image_tmp, $lien);
             echo "<script>alert('Image mise à jour')</script>";
             header("refresh: 0;url=index.php?Profil_etudiant");
+            }
         }
     }
 
