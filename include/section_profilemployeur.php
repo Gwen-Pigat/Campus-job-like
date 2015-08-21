@@ -276,16 +276,18 @@ if (isset($_GET['Profil_employeur']) && isset($_GET['liste_offres']) && isset($_
 
 //Mise a jour du profil
 
-// require "PHPMailer/class.phpmailer.php";
-
 if (isset($_POST['entreprise_name']) || isset($_POST['entreprise_site']) || isset($_POST['secteur']) || isset($_POST['qui_sommes_nous']) || isset($_POST['nombre_employers'])) {
 
 		extract($_POST);
 
+        $query = $link->query("SELECT * FROM EntrepriseProfil WHERE id_crypt='$_SESSION[employeur]'"); $row = $query->fetch_object();
+
 		$link->query("UPDATE EntrepriseProfil SET Entreprise='$entreprise_name', Secteur='$secteur', Site='$entreprise_site', Description='$qui_sommes_nous', Employers='$nombre_employers', Statut_Profil='Oui' WHERE id_crypt='$_SESSION[employeur]'")or die("Erreur SQL");
-        $link->query("UPDATE Offre SET Employeur='$entreprise_name' WHERE Entreprise='$row->Entreprise'");
+
+        $link->query("UPDATE Offre SET Employeur='$entreprise_name' WHERE Employeur='$row->Entreprise'");
+        $link->query("UPDATE Postulant SET Employeur='$entreprise_name' WHERE Employeur='$row->Entreprise'");
 
 		echo "<script>alert(\"Votre profil à bien été mis à jour\")</script>";
-		header('Refresh: 0 ;index.php?Profil_employeur');
+		echo "<META HTTP-EQUIV='Refresh' CONTENT='0; URL='>";
 
 }
