@@ -173,7 +173,7 @@ body{
 	border-radius: 0px;
     background-color: #ff0000;
     font-size: 1.5vw;
-    padding: 2%;
+    /*padding: 2%;*/
     border: 0px;
     transition: 0.4s;
 }
@@ -181,7 +181,13 @@ body{
 .btn-danger:hover{
 	transition: 0.4s;
 	border-radius: 10px;
+	text-decoration: none
 }
+
+a .user_postulants:hover{
+	text-decoration: none
+}
+
 
 .btn-custom:hover{
 	background-color: #fff;
@@ -367,10 +373,6 @@ footer ul li:hover{
 .contact input, .contact select{
 	padding: 0.5%;
 	margin: 1%;
-}
-
-.contact h3{
-	
 }
 
 

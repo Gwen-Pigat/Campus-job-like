@@ -215,7 +215,7 @@ if (isset($_GET['Profil_employeur']) && isset($_GET['liste_offres'])) { ?>
             </div>";
             }
             else{
-            echo "<p><span class='user_postulants'>Nombre de postulants</span> : <a href='index.php?Profil_employeur&liste_postulants&for_offer=$row->id&token=$row->id_crypt'>$row->nbr_postulant</a><p>
+            echo "<p><a href='index.php?Profil_employeur&liste_postulants&for_offer=$row->id&token=$row->id_crypt'><span class='user_postulants'>Nombre de postulants</span> : $row->nbr_postulant</a><p>
             </div>";
             }
     }
@@ -248,6 +248,13 @@ if (isset($_GET['liste_postulants']) && isset($_GET['for_offer']) && isset($_GET
         <p><span class='user_postulant'>Lettre de motivation</span> : <span class='download_file'><a target='_blank' href='Profil/Etudiant/$row->id-$row->id_crypt/Lettre_motivation/Lettre-profil-$row->id-$row->id_crypt.pdf'><button class='btn btn-danger'>Télécharger</button></a></span><p>
         </div></div>";        
     }
+
+    echo "<center>
+            <a href='index.php?Profil_employeur&liste_offres'>
+                <button class='btn btn-danger' style='margin-top: 2%'>Retour</button>
+            </a>
+        </center>";
+
 }
 
 

@@ -2,14 +2,14 @@
 
 extract($_POST);
 
+if (empty($_SESSION['etudiant'])) {
+        header("Location: index.php?Employeur");
+    }
+    
+
 if (!isset($_GET['postuler']) && !isset($_GET['validation_offre']) && !isset($_GET['summary_offre']) && !isset($_GET['liste_offres'])) {
 
     $link->query("DELETE FROM Offre WHERE Statut='En attente'");
-
-    if (empty($_SESSION['etudiant'])) {
-        header("Location: index.php?Employeur");
-    }
-
 
 $query = $link->query("SELECT * FROM Etudiant WHERE id_crypt='$_SESSION[etudiant]'");
 $row = $query->fetch_object();
@@ -155,7 +155,7 @@ if (isset($_GET) && isset($_GET['liste_offres']) && !isset($_GET['postuler']) &&
             </div>";    
             }
             else{
-            echo "<button class='btn btn-danger'>Vous avez déjà postulé à cette offre</button>
+            echo "<button class='btn btn-danger'>Déjà postulé</button>
             </div>";
             }
     }
